@@ -16,6 +16,7 @@ public class Main {
 		Menu menu = new Menu();
 		greetz();
 		menu.test();
+		
 	}
 	private static void greetz() {
 		System.out.println("Test 1.");
