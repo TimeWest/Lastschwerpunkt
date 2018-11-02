@@ -7,11 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.format.TextStyle;
+import java.util.Collection;
 import java.util.Enumeration;
 
 import javax.swing.JSplitPane;
@@ -44,6 +47,7 @@ import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 import java.awt.Panel;
 import java.awt.Frame;
+import java.awt.List;
 import java.awt.Toolkit;
 import javax.swing.JTabbedPane;
 import javax.swing.AbstractAction;
@@ -58,35 +62,12 @@ import java.awt.event.ActionListener;
 public class MainWindow {
 
 	private JFrame Lastschwerpunktberechnung;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow window = new MainWindow();
-					window.Lastschwerpunktberechnung.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public MainWindow() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+		
 		Lastschwerpunktberechnung = new JFrame();
 		Lastschwerpunktberechnung.setMaximumSize(new Dimension(0, 0));
 		Lastschwerpunktberechnung.setIconImage(Toolkit.getDefaultToolkit().getImage("I:\\Vorlagen\\Logos-emutec-GROUP\\Logo GRID SYSTEMS\\Logo_emutec_Grid_System_RGB.jpg"));
@@ -95,20 +76,15 @@ public class MainWindow {
 		Lastschwerpunktberechnung.setTitle("Lastschwerpunktberechnung");
 		Lastschwerpunktberechnung.setBounds(100, 100, 1550, 910);
 		Lastschwerpunktberechnung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		Lastschwerpunktberechnung.setVisible(true);
 		JMenuBar menuBar = new JMenuBar();
 		Lastschwerpunktberechnung.setJMenuBar(menuBar);
+		Lastschwerpunktberechnung.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JMenu menu = new JMenu("Datei");
 		menuBar.add(menu);
 		
 		JMenuItem mntmNewProject = new JMenuItem("Neues Projekt");
-		mntmNewProject.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-			}
-		});
 		menu.add(mntmNewProject);
 		
 		JMenuItem mntmLoadProject = new JMenuItem("Projekt Laden");
@@ -124,11 +100,9 @@ public class MainWindow {
 		menu.add(mntmExit);
 		
 		JMenuItem mntmHelp = new JMenuItem("?");
-		mntmHelp.setHorizontalTextPosition(SwingConstants.RIGHT);
-		mntmHelp.setHorizontalAlignment(SwingConstants.LEFT);
 		menuBar.add(mntmHelp);
-		Lastschwerpunktberechnung.getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		//Left panel for tree and buttons
 		Panel panelNavigation = new Panel();
 		panelNavigation.setMinimumSize(new Dimension(50, 200));
 		panelNavigation.setPreferredSize(new Dimension(250, 0));
@@ -138,12 +112,17 @@ public class MainWindow {
 		JTree tree = new JTree();
 		tree.setDragEnabled(true);
 		tree.setRowHeight(30);
-	
-		panelNavigation.add(tree, BorderLayout.CENTER);
 		tree.setAutoscrolls(true);
 		tree.setMaximumSize(new Dimension(200, 0));
 		tree.setMinimumSize(new Dimension(100, 0));
-		tree.setModel(new DefaultTreeModel(
+		tree.setShowsRootHandles(true);
+		tree.setVisibleRowCount(10);
+		tree.setRootVisible(false);
+		
+		panelNavigation.add(tree, BorderLayout.CENTER);
+		
+		
+		/*tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("JTree") {
 				{
 					DefaultMutableTreeNode node_1;
@@ -176,11 +155,9 @@ public class MainWindow {
 				}
 			}
 		));
-		tree.setShowsRootHandles(true);
-		tree.setVisibleRowCount(10);
-		tree.setRootVisible(false);
-		//Lastschwerpunktberechnung.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{Lastschwerpunktberechnung.getContentPane(), tree, menuBar, menu, mntmExit}));
+		*/		
 		
+		//Panel for building-editing buttons
 		JPanel panelEditBuildings = new JPanel();
 		panelEditBuildings.setPreferredSize(new Dimension(0, 100));
 		panelEditBuildings.setMinimumSize(new Dimension(10, 150));
@@ -189,56 +166,17 @@ public class MainWindow {
 		panelEditBuildings.setLayout(fl_panelEditBuildings);
 		
 		JButton btnGebudeHinzufgen = new JButton("Geb\u00E4ude hinzuf\u00FCgen");
-		btnGebudeHinzufgen.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		btnGebudeHinzufgen.setAutoscrolls(true);
-		buttonGroup.add(btnGebudeHinzufgen);
 		panelEditBuildings.add(btnGebudeHinzufgen);
 		
 		JButton btnGebudeLschen = new JButton("Geb\u00E4ude l\u00F6schen");
-		btnGebudeLschen.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		btnGebudeLschen.setAutoscrolls(true);
-		buttonGroup.add(btnGebudeLschen);
 		panelEditBuildings.add(btnGebudeLschen);
 		
 		JButton btnGebudeBearbeiten = new JButton("Geb\u00E4ude bearbeiten");
-		btnGebudeBearbeiten.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			DefaultMutableTreeNode temp = new DefaultMutableTreeNode(tree.getLastSelectedPathComponent());
-			if(temp.isLeaf()) {
-				System.out.println("Zu bearbeitendes Gebäude: " + temp + temp.getLeafCount());	
-			}
-			else {
-				System.out.println("Zu bearbeitender Sektor: " + temp);
-			}
-			}
-		});
-		btnGebudeBearbeiten.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		btnGebudeBearbeiten.setAutoscrolls(true);
-		buttonGroup.add(btnGebudeBearbeiten);
 		panelEditBuildings.add(btnGebudeBearbeiten);
-		btnGebudeHinzufgen.addMouseListener(new MouseAdapter() {
-			@Override
-			//Methode zum erstellen eines Gebäudes aufrufen
-			public void mouseClicked(MouseEvent arg0) {
-				tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Liegenschaft") {
-					{
-						DefaultMutableTreeNode Section = new DefaultMutableTreeNode("Penis");
-						Section.add(new DefaultMutableTreeNode("Pimmel"));
-						add(Section);						
-					}
-				}));
-				
-				
-				
-				
-				
-			}
-		});
 		
+		//Panel for the Map and editing
 		JPanel panelMap = new JPanel();
 		panelMap.setPreferredSize(new Dimension(0, 0));
-		panelMap.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		Lastschwerpunktberechnung.getContentPane().add(panelMap);
 		panelMap.setLayout(new BorderLayout(5, 5));
 		
@@ -248,20 +186,23 @@ public class MainWindow {
 		
 		JPanel panelImage = new JPanel();
 		panelImage.setForeground(Color.MAGENTA);
-		panelImage.setMaximumSize(new Dimension(0, 0));
 		panelMap.add(panelImage, BorderLayout.CENTER);
 		panelImage.setBackground(Color.PINK);
 		panelImage.setLayout(new BorderLayout(0, 0));
 	}
 
-	private static void addPopup(Component component, final JPopupMenu popup) {
+	protected void editBuilding() {
+		// TODO Auto-generated method stub
 	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+
+	private void createBuilding() {
+		// TODO First set buildings position by clicking on the map
+		try {
+			EditBuilding dialog = new EditBuilding(new Building());
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		public void actionPerformed(ActionEvent e) {
-		}
-	}
+	}	
 }
