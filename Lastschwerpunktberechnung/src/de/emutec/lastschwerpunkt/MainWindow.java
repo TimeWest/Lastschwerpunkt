@@ -1,3 +1,4 @@
+package de.emutec.lastschwerpunkt;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;

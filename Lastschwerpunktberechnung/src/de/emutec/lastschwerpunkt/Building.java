@@ -1,3 +1,4 @@
+package de.emutec.lastschwerpunkt;
 /**
  * 
  */
@@ -15,7 +16,7 @@ public class Building {
 	private double load;
 	private double glf;
 	private Double[] coordinates = new Double[2];
-	
+
 	/**
 	 * Constructor
 	 */
@@ -26,21 +27,17 @@ public class Building {
 		sector = 0;
 		load = 0;
 		glf = 1;
-		//Coordinates will later be inherited by class MainWindow
+		// Coordinates will later be inherited by class MainWindow
 		coordinates[0] = (double) 0;
 		coordinates[1] = (double) 0;
 	}
-	
-	
-	
+
 	/**
 	 * @return the gebName
 	 */
 	public String getGebName() {
 		return gebName;
 	}
-
-
 
 	/**
 	 * @param gebName the gebName to set
@@ -49,16 +46,12 @@ public class Building {
 		this.gebName = gebName;
 	}
 
-
-
 	/**
 	 * @return the gebNumber
 	 */
 	public String getGebNumber() {
 		return gebNumber;
 	}
-
-
 
 	/**
 	 * @param gebNumber the gebNumber to set
@@ -67,16 +60,12 @@ public class Building {
 		this.gebNumber = gebNumber;
 	}
 
-
-
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
 		return description;
 	}
-
-
 
 	/**
 	 * @param description the description to set
@@ -85,16 +74,12 @@ public class Building {
 		this.description = description;
 	}
 
-
-
 	/**
 	 * @return the sector
 	 */
 	public int getSector() {
 		return sector;
 	}
-
-
 
 	/**
 	 * @param sector the sector to set
@@ -103,16 +88,12 @@ public class Building {
 		this.sector = sector;
 	}
 
-
-
 	/**
 	 * @return the glf
 	 */
 	public Double getGlf() {
 		return glf;
 	}
-
-
 
 	/**
 	 * @param glf the glf to set
@@ -121,16 +102,12 @@ public class Building {
 		this.glf = glf;
 	}
 
-
-
 	/**
 	 * @return the coordinates
 	 */
 	public Double[] getCoordinates() {
 		return coordinates;
 	}
-
-
 
 	/**
 	 * @param coordinates the coordinates to set
@@ -140,8 +117,6 @@ public class Building {
 		this.coordinates[1] = y;
 	}
 
-
-
 	/**
 	 * @param load the load to set
 	 */
@@ -149,10 +124,8 @@ public class Building {
 		this.load = load;
 	}
 
-
-
 	public Double getLoad() {
-		return  load;
-		// TODO Auto-generated method stub	
+		return load;
+		// TODO Auto-generated method stub
 	}
 }
