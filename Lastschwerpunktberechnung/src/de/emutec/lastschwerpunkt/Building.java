@@ -28,7 +28,7 @@ public class Building {
 		load = 0;
 		glf = 1;
 		// Coordinates will later be inherited by class MainWindow
-		coordinates[0] = (double) 0;
+		coordinates[0] = 0d;
 		coordinates[1] = (double) 0;
 	}
 
