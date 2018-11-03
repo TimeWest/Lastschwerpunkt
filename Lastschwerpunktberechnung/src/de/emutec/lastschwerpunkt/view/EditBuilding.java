@@ -1,33 +1,27 @@
-package de.emutec.lastschwerpunkt;
+package de.emutec.lastschwerpunkt.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import java.awt.Component;
-import java.awt.Dialog;
+import javax.swing.JOptionPane;
 
+import java.awt.Component;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
+
+import de.emutec.lastschwerpunkt.Building;
+
 import javax.swing.JSpinner;
-import java.awt.Rectangle;
 import javax.swing.border.MatteBorder;
 import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.function.ToDoubleFunction;
 
-import javax.swing.JFormattedTextField;
-import javax.swing.SpinnerNumberModel;
 
 public class EditBuilding extends JDialog {
 
@@ -211,18 +205,20 @@ public class EditBuilding extends JDialog {
 		try {
 			building.setLoad(Double.parseDouble(txtLoad.getText().replace(",", ".")));
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-//			return null;
+			displayNumberError("Bitte eine Zahl eingeben.");
 		}
 		try {
 			building.setGlf(Double.parseDouble(txtGLF.getText().replace(",", ".")));
 		} catch (NumberFormatException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			displayNumberError("Bitte eine Zahl eingeben.");
 		}
 		building.setCoordinates(Double.parseDouble(txtXcoordinate.getText().replace(",", ".")),
 				Double.parseDouble(txtYcoordinate.getText().replace(",", ".")));
 
 	}
+	
+	void displayNumberError(String errorMessage) {
+		JOptionPane.showMessageDialog(this, errorMessage);
+	}
 }
+

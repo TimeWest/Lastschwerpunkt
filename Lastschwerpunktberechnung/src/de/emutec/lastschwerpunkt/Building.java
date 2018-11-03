@@ -126,6 +126,5 @@ public class Building {
 
 	public Double getLoad() {
 		return load;
-		// TODO Auto-generated method stub
 	}
 }

@@ -1,6 +1,4 @@
-package de.emutec.lastschwerpunkt;
-import java.awt.EventQueue;
-
+package de.emutec.lastschwerpunkt.view;
 import javax.swing.JFrame;
 import javax.swing.JTree;
 import java.awt.BorderLayout;
@@ -10,77 +8,36 @@ import javax.swing.JMenuItem;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.time.format.TextStyle;
-import java.util.Collection;
-import java.util.Enumeration;
-
-import javax.swing.JSplitPane;
-import java.awt.Canvas;
-import java.awt.ScrollPane;
-import java.awt.Scrollbar;
 import java.awt.Color;
-import javax.swing.JSeparator;
 import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
-import javax.swing.event.TreeModelListener;
-import javax.swing.Box;
-import java.awt.Dialog.ModalExclusionType;
-import java.awt.Window.Type;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import javafx.stage.Screen;
-
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.ScrollPaneConstants;
+import de.emutec.lastschwerpunkt.Building;
 import java.awt.Dimension;
-import java.awt.ComponentOrientation;
 import java.awt.Panel;
 import java.awt.Frame;
-import java.awt.List;
 import java.awt.Toolkit;
-import javax.swing.JTabbedPane;
-import javax.swing.AbstractAction;
-import java.awt.event.ActionEvent;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
-import java.awt.Button;
-import java.awt.event.KeyEvent;
-import javax.swing.DropMode;
-import java.awt.event.ActionListener;
 
 public class MainWindow {
 
-	private JFrame Lastschwerpunktberechnung;
+	private JFrame lastschwerpunktberechnung;
 
 	/**
 	 * Create the application.
 	 */
 	public MainWindow() {
 		
-		Lastschwerpunktberechnung = new JFrame();
-		Lastschwerpunktberechnung.setMaximumSize(new Dimension(0, 0));
-		Lastschwerpunktberechnung.setIconImage(Toolkit.getDefaultToolkit().getImage("I:\\Vorlagen\\Logos-emutec-GROUP\\Logo GRID SYSTEMS\\Logo_emutec_Grid_System_RGB.jpg"));
-		Lastschwerpunktberechnung.setMinimumSize(new Dimension(800, 600));
-		Lastschwerpunktberechnung.setExtendedState(Frame.MAXIMIZED_BOTH);
-		Lastschwerpunktberechnung.setTitle("Lastschwerpunktberechnung");
-		Lastschwerpunktberechnung.setBounds(100, 100, 1550, 910);
-		Lastschwerpunktberechnung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Lastschwerpunktberechnung.setVisible(true);
+		lastschwerpunktberechnung = new JFrame();
+		lastschwerpunktberechnung.setMaximumSize(new Dimension(0, 0));
+		lastschwerpunktberechnung.setIconImage(Toolkit.getDefaultToolkit().getImage("I:\\Vorlagen\\Logos-emutec-GROUP\\Logo GRID SYSTEMS\\Logo_emutec_Grid_System_RGB.jpg"));
+		lastschwerpunktberechnung.setMinimumSize(new Dimension(800, 600));
+		lastschwerpunktberechnung.setExtendedState(Frame.MAXIMIZED_BOTH);
+		lastschwerpunktberechnung.setTitle("Lastschwerpunktberechnung");
+		lastschwerpunktberechnung.setBounds(100, 100, 1550, 910);
+		lastschwerpunktberechnung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		lastschwerpunktberechnung.setVisible(true);
 		JMenuBar menuBar = new JMenuBar();
-		Lastschwerpunktberechnung.setJMenuBar(menuBar);
-		Lastschwerpunktberechnung.getContentPane().setLayout(new BorderLayout(0, 0));
+		lastschwerpunktberechnung.setJMenuBar(menuBar);
+		lastschwerpunktberechnung.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JMenu menu = new JMenu("Datei");
 		menuBar.add(menu);
@@ -107,7 +64,7 @@ public class MainWindow {
 		Panel panelNavigation = new Panel();
 		panelNavigation.setMinimumSize(new Dimension(50, 200));
 		panelNavigation.setPreferredSize(new Dimension(250, 0));
-		Lastschwerpunktberechnung.getContentPane().add(panelNavigation, BorderLayout.WEST);
+		lastschwerpunktberechnung.getContentPane().add(panelNavigation, BorderLayout.WEST);
 		panelNavigation.setLayout(new BorderLayout(0, 0));
 		
 		JTree tree = new JTree();
@@ -178,7 +135,7 @@ public class MainWindow {
 		//Panel for the Map and editing
 		JPanel panelMap = new JPanel();
 		panelMap.setPreferredSize(new Dimension(0, 0));
-		Lastschwerpunktberechnung.getContentPane().add(panelMap);
+		lastschwerpunktberechnung.getContentPane().add(panelMap);
 		panelMap.setLayout(new BorderLayout(5, 5));
 		
 		JToolBar toolBar = new JToolBar();
@@ -192,9 +149,6 @@ public class MainWindow {
 		panelImage.setLayout(new BorderLayout(0, 0));
 	}
 
-	protected void editBuilding() {
-		// TODO Auto-generated method stub
-	}
 
 	private void createBuilding() {
 		// TODO First set buildings position by clicking on the map
