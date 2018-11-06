@@ -41,6 +41,7 @@ public class EditBuilding extends JDialog{
 	private JButton btnHelp = new JButton("Hilfe");
 
 	private JCheckBox chkbxIsActive = new JCheckBox();
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -128,7 +129,9 @@ public class EditBuilding extends JDialog{
 		buttonPane.add(btnHelp);
 	}
 
-	// Getter & Setter for text fields/checkboxes
+	/** Getter & Setter for text fields/checkboxes
+	 * 
+	 */
 	/**
 	 * @return the name of the building
 	 */
@@ -266,6 +269,13 @@ public class EditBuilding extends JDialog{
 		this.chkbxIsActive.setSelected(isActive);
 	}
 
+	/**
+	 * Action Listener
+	 */
+	/**
+	 * 
+	 * @param listenForOkButton
+	 */
 	void addOkButtonListener(ActionListener listenForOkButton) {
 		okButton.addActionListener(listenForOkButton);
 	}

@@ -1,7 +1,4 @@
 package de.emutec.lastschwerpunkt.model;
-/**
- * 
- */
 
 /**
  * @author Timo.Nordhorn
@@ -10,7 +7,7 @@ package de.emutec.lastschwerpunkt.model;
 public class Building {
 	// Basic Properties of the object type "Building"
 	private String gebName;
-	private int gebNumber;
+	private String gebNumber;
 	private String description;
 	private int sector;
 	private double load;
@@ -47,14 +44,14 @@ public class Building {
 	/**
 	 * @return the gebNumber
 	 */
-	public int getGebNumber() {
+	public String getGebNumber() {
 		return gebNumber;
 	}
 
 	/**
 	 * @param gebNumber the gebNumber to set
 	 */
-	public void setGebNumber(int gebNumber) {
+	public void setGebNumber(String gebNumber) {
 		this.gebNumber = gebNumber;
 	}
 

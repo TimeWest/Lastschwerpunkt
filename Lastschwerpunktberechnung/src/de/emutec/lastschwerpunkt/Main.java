@@ -1,28 +1,26 @@
 package de.emutec.lastschwerpunkt;
 
-import de.emutec.lastschwerpunkt.controller.ControllButtons;
+import de.emutec.lastschwerpunkt.controller.ControllMainButtons;
+import de.emutec.lastschwerpunkt.view.EditBuilding;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 
-/**
- * 
- */
 
 /**
  * @author Timo.Nordhorn
  */
 public class Main {
-	
-	
-	
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 		/**
 		 * Launch the application.
 		 */
 		MainWindow mainWindow = new MainWindow();
-		ControllButtons buttonController = new ControllButtons(mainWindow);
+		ControllMainButtons buttonController = new ControllMainButtons(mainWindow);
+		
+		EditBuilding editBuildingWindow = new EditBuilding();
+		
+		
 		mainWindow.setVisible(true);
+		
 	}	
 }

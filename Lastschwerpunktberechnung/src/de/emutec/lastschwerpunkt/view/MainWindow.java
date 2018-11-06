@@ -2,6 +2,7 @@ package de.emutec.lastschwerpunkt.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class MainWindow extends JFrame{
 	
@@ -90,15 +91,11 @@ public class MainWindow extends JFrame{
 		
 	} //End of constructor
 
-
-	private void createBuilding() {
-		// TODO First set buildings position by clicking on the map
-		try {
-			EditBuilding dialog = new EditBuilding();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}	
+	public void btnGebudeHinzufgenListener(ActionListener listenForAddBuildingButton){
+		btnGebudeHinzufgen.addActionListener(listenForAddBuildingButton);
+	}
+	
+	public void btnGebudeBearbeitenListener(ActionListener listenForEditBuildingButton) {
+		btnGebudeBearbeiten.addActionListener(listenForEditBuildingButton);
+	}
 }
