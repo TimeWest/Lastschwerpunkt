@@ -1,224 +1,276 @@
 package de.emutec.lastschwerpunkt.view;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
-import java.awt.Component;
-import javax.swing.JSeparator;
-import java.awt.Color;
-import javax.swing.SwingConstants;
+public class EditBuilding extends JDialog{
 
-import de.emutec.lastschwerpunkt.Building;
-
-import javax.swing.JSpinner;
-import javax.swing.border.MatteBorder;
-import javax.swing.JTextArea;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-
-public class EditBuilding extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
-	private JTextField txtGebudeName;
-	private JTextField txtGebudeNummer;
-	private JTextField txtLoad;
-	private JTextField txtGLF;
-	private JTextField txtXcoordinate;
-	private JTextField txtYcoordinate;
-	private JSpinner spinnerSector;
-	private JTextArea txtrBeschreibung;
-	private Building building;
 	/**
-	 * Launch the application.
+	 * Every Object (Button, Label etc.) on this interface
 	 */
-	/*
-	 * public static void main(String[] args) { try { EditBuilding dialog = new
-	 * EditBuilding(); dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
-	 */
+	private JPanel contentPanel = new JPanel();
+	private JPanel buttonPane = new JPanel();
 
+	private JTextField txtGebudeName = new JTextField();
+	private JTextField txtGebudeNummer = new JTextField();
+	private JTextField txtLoad = new JTextField();
+	private JTextField txtGLF = new JTextField();
+	private JTextField txtXcoordinate = new JTextField();
+	private JTextField txtYcoordinate = new JTextField();
+
+	private JSpinner spinnerSector = new JSpinner();
+
+	private JTextArea txtrBeschreibung = new JTextArea();
+
+	private JLabel lblGebudeName = new JLabel("Geb\u00E4ude Name");
+	private JLabel lblGebudeNummer = new JLabel("Geb\u00E4ude Nummer");
+	private JLabel lblLastkw = new JLabel("Last [kW]");
+	private JLabel lblGlf = new JLabel("GLF");
+	private JLabel lblPosition = new JLabel("Position");
+	private JLabel lblXkoordinate = new JLabel("X-Koordinate");
+	private JLabel lblYkoordinate = new JLabel("Y-Koordinate");
+	private JLabel lblSektor = new JLabel("Sektor");
+	private JLabel lblActive = new JLabel("Geb\u00E4ude aktiv?");
+
+	private JSeparator separator = new JSeparator();
+
+	private JButton btnNeuSetzen = new JButton("Neu setzen");
+	private JButton okButton = new JButton("OK");
+	private JButton cancelButton = new JButton("Cancel");
+	private JButton btnHelp = new JButton("Hilfe");
+
+	private JCheckBox chkbxIsActive = new JCheckBox();
 	/**
 	 * Create the dialog.
 	 */
-	public EditBuilding(Building building) {
-		this.building = building;
-		setTitle("Geb\u00E4ude bearbeiten");
-		setResizable(false);
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(192, 192, 192)));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		{
-			JLabel lblGebudeName = new JLabel("Geb\u00E4ude Name");
-			lblGebudeName.setBounds(10, 13, 73, 14);
-			contentPanel.add(lblGebudeName);
-		}
-		{
-			txtGebudeName = new JTextField();
-			txtGebudeName.setBounds(103, 10, 120, 20);
-			contentPanel.add(txtGebudeName);
-			txtGebudeName.setColumns(10);
-		}
-		{
-			JLabel lblGebudeNummer = new JLabel("Geb\u00E4ude Nummer");
-			lblGebudeNummer.setBounds(10, 38, 85, 14);
-			contentPanel.add(lblGebudeNummer);
-		}
-		{
-			txtGebudeNummer = new JTextField();
-			txtGebudeNummer.setAlignmentX(Component.RIGHT_ALIGNMENT);
-			txtGebudeNummer.setBounds(103, 35, 43, 20);
-			contentPanel.add(txtGebudeNummer);
-			txtGebudeNummer.setColumns(10);
-		}
+	public EditBuilding() {
 
-		JLabel lblLastkw = new JLabel("Last [kW]");
+		// Setting the main frame
+		this.setTitle("Geb\u00E4ude bearbeiten");
+		this.setResizable(false);
+		this.setBounds(100, 100, 450, 300);
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
+		this.getContentPane().add(buttonPane, BorderLayout.SOUTH);
+
+		// Setting the editing area
+		lblGebudeName.setBounds(10, 13, 73, 14);
+		contentPanel.add(lblGebudeName);
+
+		txtGebudeName.setBounds(103, 10, 120, 20);
+		contentPanel.add(txtGebudeName);
+
+		lblGebudeNummer.setBounds(10, 38, 85, 14);
+		contentPanel.add(lblGebudeNummer);
+
+		txtGebudeNummer.setBounds(103, 35, 43, 20);
+		contentPanel.add(txtGebudeNummer);
+
 		lblLastkw.setBounds(10, 63, 85, 14);
 		contentPanel.add(lblLastkw);
 
-		txtLoad = new JTextField();
-		txtLoad.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		txtLoad.setBounds(103, 60, 43, 20);
 		contentPanel.add(txtLoad);
-		txtLoad.setColumns(10);
 
-		JLabel lblGlf = new JLabel("GLF");
 		lblGlf.setBounds(10, 88, 46, 14);
 		contentPanel.add(lblGlf);
 
-		txtGLF = new JTextField();
-		txtGLF.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		txtGLF.setBounds(103, 85, 43, 20);
 		contentPanel.add(txtGLF);
-		txtGLF.setColumns(10);
 
-		JLabel lblPosition = new JLabel("Position");
+		contentPanel.add(lblActive);
+
+		contentPanel.add(chkbxIsActive);
+
 		lblPosition.setBounds(250, 13, 46, 14);
 		contentPanel.add(lblPosition);
 
-		JLabel lblXkoordinate = new JLabel("X-Koordinate");
 		lblXkoordinate.setBounds(250, 38, 73, 14);
 		contentPanel.add(lblXkoordinate);
 
-		JLabel lblYkoordinate = new JLabel("Y-Koordinate");
 		lblYkoordinate.setBounds(250, 63, 73, 14);
 		contentPanel.add(lblYkoordinate);
 
-		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setOpaque(true);
 		separator.setForeground(new Color(160, 160, 160));
 		separator.setBounds(233, 2, 1, 135);
 		contentPanel.add(separator);
 
-		txtXcoordinate = new JTextField();
 		txtXcoordinate.setBounds(338, 35, 86, 20);
 		contentPanel.add(txtXcoordinate);
-		txtXcoordinate.setColumns(10);
 
-		txtYcoordinate = new JTextField();
 		txtYcoordinate.setBounds(338, 60, 86, 20);
 		contentPanel.add(txtYcoordinate);
-		txtYcoordinate.setColumns(10);
 
-		JButton btnNeuSetzen = new JButton("Neu setzen");
 		btnNeuSetzen.setBounds(250, 85, 174, 20);
 		contentPanel.add(btnNeuSetzen);
 
-		JLabel lblSektor = new JLabel("Sektor");
 		lblSektor.setBounds(10, 113, 46, 14);
 		contentPanel.add(lblSektor);
 
-		spinnerSector = new JSpinner();
-//		spinnerSector.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinnerSector.setBounds(103, 110, 43, 20);
 		contentPanel.add(spinnerSector);
 
-		txtrBeschreibung = new JTextArea();
-		txtrBeschreibung.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.LIGHT_GRAY));
 		txtrBeschreibung.setBounds(10, 138, 414, 80);
 		contentPanel.add(txtrBeschreibung);
 
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						applyChanges();
-						// MainWindow.insertBuilding(building);
-						dispose();
-					}
+		// Setting button area
+		buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						System.out.println("BEENDEN!");
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
+		cancelButton.setActionCommand("Cancel");
+		buttonPane.add(cancelButton);
 
-		/**
-		 * Loading the buildings properties and placing them in the designated fields
-		 */
-		txtGebudeName.setText(building.getGebName());
-		txtGebudeNummer.setText(building.getGebNumber());
-		txtrBeschreibung.setText(building.getDescription());
-		spinnerSector.setValue(building.getSector());
-		txtLoad.setText(building.getLoad().toString());
-		txtGLF.setText(building.getGlf().toString());
-		txtXcoordinate.setText(building.getCoordinates()[0].toString());
-		txtYcoordinate.setText(building.getCoordinates()[1].toString());
-		spinnerSector.getValue();
+		okButton.setActionCommand("OK");
+		buttonPane.add(okButton);
+
+		buttonPane.add(btnHelp);
+	}
+
+	// Getter & Setter for text fields/checkboxes
+	/**
+	 * @return the name of the building
+	 */
+	public String getTxtGebudeName() {
+		return txtGebudeName.getText();
 	}
 
 	/**
-	 * Funktion zum Speichern der Werte, wenn Änderungen vorliegen
+	 * @param name
+	 *            the name of the building
 	 */
-	protected void applyChanges() {
-		building.setGebName(txtGebudeName.getText());
-		building.setGebNumber(txtGebudeNummer.getText());
-		building.setDescription(txtrBeschreibung.getText());
-		building.setSector((int) spinnerSector.getValue());
-		try {
-			building.setLoad(Double.parseDouble(txtLoad.getText().replace(",", ".")));
-		} catch (NumberFormatException e) {
-			displayNumberError("Bitte eine Zahl eingeben.");
-		}
-		try {
-			building.setGlf(Double.parseDouble(txtGLF.getText().replace(",", ".")));
-		} catch (NumberFormatException e) {
-			displayNumberError("Bitte eine Zahl eingeben.");
-		}
-		building.setCoordinates(Double.parseDouble(txtXcoordinate.getText().replace(",", ".")),
-				Double.parseDouble(txtYcoordinate.getText().replace(",", ".")));
+	public void setTxtGebudeName(String name) {
+		this.txtGebudeName.setText(name);
+	}
 
+	/**
+	 * @return the number of the building
+	 */
+	public String getTxtGebudeNummer() {
+		return txtGebudeNummer.getText();
+	}
+
+	/**
+	 * @param buildingNumber
+	 *            the number of the building (house number)
+	 */
+	public void setTxtGebudeNummer(String buildingNumber) {
+		this.txtGebudeNummer.setText(buildingNumber);
+	}
+
+	/**
+	 * @return the load of the specified building
+	 */
+	public double getTxtLoad() {
+		return Double.parseDouble(txtLoad.getText());
+	}
+
+	/**
+	 * @param load
+	 *            the electrical load of the building
+	 */
+	public void setTxtLoad(Double load) {
+		this.txtLoad.setText(load.toString());
+	}
+
+	/**
+	 * @return the "Gleichzeitigkeitsfaktor" (GLF)
+	 */
+	public double getTxtGLF() {
+		return Double.parseDouble(txtGLF.getText());
+	}
+
+	/**
+	 * @param glf
+	 *            the glf of the building
+	 */
+	public void setTxtGLF(Double glf) {
+		this.txtGLF.setText(glf.toString());
+	}
+
+	/**
+	 * @return the xCoordinate of the chosen building
+	 */
+	public double getTxtXcoordinate() {
+		return Double.parseDouble(txtXcoordinate.getText());
+	}
+
+	/**
+	 * @param xCoordinate
+	 *            the x-coordinate to set
+	 */
+	public void setTxtXcoordinate(Double xCoordinate) {
+		this.txtXcoordinate.setText(xCoordinate.toString());
+	}
+
+	/**
+	 * @return the txtYcoordinate
+	 */
+	public double getTxtYcoordinate() {
+		return Double.parseDouble(txtYcoordinate.getText());
+	}
+
+	/**
+	 * @param yCoordinate
+	 *            the y-coordinate to set
+	 */
+	public void setTxtYcoordinate(Double yCoordinate) {
+		this.txtXcoordinate.setText(yCoordinate.toString());
+	}
+
+	/**
+	 * @return the Sector the chosen building is located in
+	 */
+	public int getSpinnerSector() {
+		return (int) spinnerSector.getValue();
+	}
+
+	/**
+	 * @param sector
+	 *            the sector the building is located in
+	 */
+	public void setSpinnerSector(int sector) {
+		this.spinnerSector.setValue(sector);
+	}
+
+	/**
+	 * @return the description of the building
+	 */
+	public String getTxtrBeschreibung() {
+		return txtrBeschreibung.getText();
+	}
+
+	/**
+	 * @param description
+	 *            A string used to describe the building more detailed
+	 */
+	public void setTxtrBeschreibung(String description) {
+		this.txtrBeschreibung.setText(description);
+	}
+
+	/**
+	 * @return the value of the checkbox to determine if a building is active and
+	 *         thus has to be included in the calculation
+	 */
+	public boolean getChkbxIsActive() {
+		return chkbxIsActive.isSelected();
+	}
+
+	/**
+	 * @param isActive
+	 *            set the value of the checkbox that marks a building as active or
+	 *            inactive
+	 */
+	public void setChkbxIsActive(boolean isActive) {
+		this.chkbxIsActive.setSelected(isActive);
+	}
+
+	void addOkButtonListener(ActionListener listenForOkButton) {
+		okButton.addActionListener(listenForOkButton);
 	}
 	
 	void displayNumberError(String errorMessage) {
 		JOptionPane.showMessageDialog(this, errorMessage);
 	}
 }
-
