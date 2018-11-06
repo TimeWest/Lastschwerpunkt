@@ -1,14 +1,48 @@
 package de.emutec.lastschwerpunkt.controller;
 
+import javax.swing.*;
+import java.awt.event.*;
+
+import de.emutec.lastschwerpunkt.view.EditBuilding;
+import de.emutec.lastschwerpunkt.view.EditSector;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 
-public class ControllButtons {
+public class ControllMainButtons {
 
 	private MainWindow mainWindow;
-	
-	public ControllButtons(MainWindow mainWindow) {
+	//Constructor
+	public ControllMainButtons(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
+		this.mainWindow.btnGebudeHinzufgenListener(new addButtonListener());
+	
+	}
+	
+	
+	class addButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO First set buildings position by clicking on the map
+			try {
+				new ControllEditBuilding();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
+	}
+	
+	class editButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO get the selected building from BuildingsCollection and give it to ControllEditBuilding(Building building);
+			try {
+				new ControllEditBuilding();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	/**
@@ -30,22 +64,5 @@ public class ControllButtons {
 	 * }
 	 */
 	
-	/**
-	 * @param string
-	 *            Method to check if the entered value is actually a double and and
-	 *            else catch exception Also replaces "," by "."
-	 * @return double
-	 * 
-	 * @throws NumberFormatException
-	 *             ex
-	 *
-	private double checkForNumberFormatException(String string) {
-		try {
-			return Double.parseDouble(string.replace(",", "."));
-			//return value;
-		} catch (NumberFormatException ex) {
-			displayNumberError(errorMessage);
-		}
-	}
-	*/
+
 }
