@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt;
+package de.emutec.lastschwerpunkt.model;
 /**
  * 
  */
@@ -10,26 +10,24 @@ package de.emutec.lastschwerpunkt;
 public class Building {
 	// Basic Properties of the object type "Building"
 	private String gebName;
-	private String gebNumber;
+	private int gebNumber;
 	private String description;
 	private int sector;
 	private double load;
 	private double glf;
 	private Double[] coordinates = new Double[2];
+	private boolean active;
 
 	/**
 	 * Constructor
 	 */
 	public Building() {
-		gebName = "";
-		gebNumber = "";
-		description = "";
-		sector = 0;
-		load = 0;
-		glf = 1;
-		// Coordinates will later be inherited by class MainWindow
+		setGebName(null);
+		setDescription(null);
+		// Coordinates will later be inherited by clicking on image in main window
 		coordinates[0] = 0d;
-		coordinates[1] = (double) 0;
+		coordinates[1] = 0d;
+		setActive(false);		
 	}
 
 	/**
@@ -49,14 +47,14 @@ public class Building {
 	/**
 	 * @return the gebNumber
 	 */
-	public String getGebNumber() {
+	public int getGebNumber() {
 		return gebNumber;
 	}
 
 	/**
 	 * @param gebNumber the gebNumber to set
 	 */
-	public void setGebNumber(String gebNumber) {
+	public void setGebNumber(int gebNumber) {
 		this.gebNumber = gebNumber;
 	}
 
@@ -126,5 +124,19 @@ public class Building {
 
 	public Double getLoad() {
 		return load;
+	}
+
+	/**
+	 * @return the active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }
