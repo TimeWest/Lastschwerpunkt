@@ -1,5 +1,8 @@
 package de.emutec.lastschwerpunkt;
 
+import de.emutec.lastschwerpunkt.controller.ControllButtons;
+import de.emutec.lastschwerpunkt.view.MainWindow;
+
 /**
  * 
  */
@@ -10,6 +13,7 @@ package de.emutec.lastschwerpunkt;
 public class Main {
 	
 	
+	
 	/**
 	 * @param args
 	 */
@@ -17,6 +21,8 @@ public class Main {
 		/**
 		 * Launch the application.
 		 */
-		
+		MainWindow mainWindow = new MainWindow();
+		ControllButtons buttonController = new ControllButtons(mainWindow);
+		mainWindow.setVisible(true);
 	}	
 }
