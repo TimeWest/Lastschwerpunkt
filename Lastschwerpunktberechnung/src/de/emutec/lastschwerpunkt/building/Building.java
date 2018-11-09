@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.model;
+package de.emutec.lastschwerpunkt.building;
 
 /**
  * @author Timo.Nordhorn

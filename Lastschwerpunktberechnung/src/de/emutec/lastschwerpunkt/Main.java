@@ -1,8 +1,12 @@
 package de.emutec.lastschwerpunkt;
 
-import de.emutec.lastschwerpunkt.controller.ControllMainButtons;
-import de.emutec.lastschwerpunkt.view.EditBuilding;
-import de.emutec.lastschwerpunkt.view.MainWindow;
+import de.emutec.lastschwerpunkt.building.BuildingCollection;
+import de.emutec.lastschwerpunkt.sector.SectorCollection;
+import de.emutec.lastschwerpunkt.workwindow.MainButtonController;
+import de.emutec.lastschwerpunkt.workwindow.MainWindow;
+import de.emutec.lastschwerpunkt.workwindow.MapController;
+import de.emutec.lastschwerpunkt.workwindow.MenuController;
+import de.emutec.lastschwerpunkt.workwindow.TreeController;
 
 
 /**
@@ -15,11 +19,12 @@ public class Main {
 		 * Launch the application.
 		 */
 		MainWindow mainWindow = new MainWindow();
-		ControllMainButtons buttonController = new ControllMainButtons(mainWindow);
-		
-		EditBuilding editBuildingWindow = new EditBuilding();
-		
-		
+		SectorCollection sectorCollection = new SectorCollection();
+		BuildingCollection buildingCollection = new BuildingCollection();
+		new TreeController(mainWindow);
+		new MapController(mainWindow);
+		new MenuController(mainWindow);
+		new MainButtonController(mainWindow);
 		mainWindow.setVisible(true);
 		
 	}	

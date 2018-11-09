@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.view;
+package de.emutec.lastschwerpunkt.sector;
 
 import java.awt.*;
 import javax.swing.*;

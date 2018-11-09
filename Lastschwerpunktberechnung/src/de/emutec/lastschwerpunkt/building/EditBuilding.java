@@ -1,10 +1,10 @@
-package de.emutec.lastschwerpunkt.view;
+package de.emutec.lastschwerpunkt.building;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class EditBuilding extends JDialog{
+public class EditBuilding extends JDialog {
 
 	/**
 	 * Every Object (Button, Label etc.) on this interface
@@ -36,12 +36,12 @@ public class EditBuilding extends JDialog{
 	private JSeparator separator = new JSeparator();
 
 	private JButton btnNeuSetzen = new JButton("Neu setzen");
-	private JButton okButton = new JButton("OK");
-	private JButton cancelButton = new JButton("Cancel");
+	private JButton btnOk = new JButton("OK");
+	private JButton btnCancel = new JButton("Cancel");
 	private JButton btnHelp = new JButton("Hilfe");
 
 	private JCheckBox chkbxIsActive = new JCheckBox();
-	
+
 	/**
 	 * Create the dialog.
 	 */
@@ -50,86 +50,88 @@ public class EditBuilding extends JDialog{
 		// Setting the main frame
 		this.setTitle("Geb\u00E4ude bearbeiten");
 		this.setResizable(false);
-		this.setBounds(100, 100, 450, 300);
+		this.setAlwaysOnTop(true);
+		this.setSize(450, 300);
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
 		this.getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
 		// Setting the editing area
-		lblGebudeName.setBounds(10, 13, 73, 14);
+		// lblGebudeName.setBounds(10, 13, 73, 14);
 		contentPanel.add(lblGebudeName);
 
-		txtGebudeName.setBounds(103, 10, 120, 20);
+		// txtGebudeName.setBounds(103, 10, 120, 20);
 		contentPanel.add(txtGebudeName);
 
-		lblGebudeNummer.setBounds(10, 38, 85, 14);
+		// lblGebudeNummer.setBounds(10, 38, 85, 14);
 		contentPanel.add(lblGebudeNummer);
 
-		txtGebudeNummer.setBounds(103, 35, 43, 20);
+		// txtGebudeNummer.setBounds(103, 35, 43, 20);
 		contentPanel.add(txtGebudeNummer);
 
-		lblLastkw.setBounds(10, 63, 85, 14);
+		// lblLastkw.setBounds(10, 63, 85, 14);
 		contentPanel.add(lblLastkw);
 
-		txtLoad.setBounds(103, 60, 43, 20);
+		// txtLoad.setBounds(103, 60, 43, 20);
 		contentPanel.add(txtLoad);
 
-		lblGlf.setBounds(10, 88, 46, 14);
+		// lblGlf.setBounds(10, 88, 46, 14);
 		contentPanel.add(lblGlf);
 
-		txtGLF.setBounds(103, 85, 43, 20);
+		// txtGLF.setBounds(103, 85, 43, 20);
 		contentPanel.add(txtGLF);
 
 		contentPanel.add(lblActive);
 
 		contentPanel.add(chkbxIsActive);
 
-		lblPosition.setBounds(250, 13, 46, 14);
+		// lblPosition.setBounds(250, 13, 46, 14);
 		contentPanel.add(lblPosition);
 
-		lblXkoordinate.setBounds(250, 38, 73, 14);
+		// lblXkoordinate.setBounds(250, 38, 73, 14);
 		contentPanel.add(lblXkoordinate);
 
-		lblYkoordinate.setBounds(250, 63, 73, 14);
+		// lblYkoordinate.setBounds(250, 63, 73, 14);
 		contentPanel.add(lblYkoordinate);
 
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setOpaque(true);
-		separator.setForeground(new Color(160, 160, 160));
-		separator.setBounds(233, 2, 1, 135);
-		contentPanel.add(separator);
+		// separator.setOrientation(SwingConstants.VERTICAL);
+		// separator.setOpaque(true);
+		// separator.setForeground(new Color(160, 160, 160));
+		// separator.setBounds(233, 2, 1, 135);
+		// contentPanel.add(separator);
 
-		txtXcoordinate.setBounds(338, 35, 86, 20);
+		// txtXcoordinate.setBounds(338, 35, 86, 20);
 		contentPanel.add(txtXcoordinate);
 
-		txtYcoordinate.setBounds(338, 60, 86, 20);
+		// txtYcoordinate.setBounds(338, 60, 86, 20);
 		contentPanel.add(txtYcoordinate);
 
-		btnNeuSetzen.setBounds(250, 85, 174, 20);
+		// btnNeuSetzen.setBounds(250, 85, 174, 20);
 		contentPanel.add(btnNeuSetzen);
 
-		lblSektor.setBounds(10, 113, 46, 14);
+		// lblSektor.setBounds(10, 113, 46, 14);
 		contentPanel.add(lblSektor);
 
-		spinnerSector.setBounds(103, 110, 43, 20);
+		// spinnerSector.setBounds(103, 110, 43, 20);
 		contentPanel.add(spinnerSector);
 
-		txtrBeschreibung.setBounds(10, 138, 414, 80);
+		// txtrBeschreibung.setBounds(10, 138, 414, 80);
 		contentPanel.add(txtrBeschreibung);
 
 		// Setting button area
 		buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		cancelButton.setActionCommand("Cancel");
-		buttonPane.add(cancelButton);
+		btnCancel.setActionCommand("Cancel");
+		buttonPane.add(btnCancel);
 
-		okButton.setActionCommand("OK");
-		buttonPane.add(okButton);
+		btnOk.setActionCommand("OK");
+		buttonPane.add(btnOk);
 
 		buttonPane.add(btnHelp);
 	}
 
-	/** Getter & Setter for text fields/checkboxes
+	/**
+	 * Getter & Setter for text fields/checkboxes
 	 * 
 	 */
 	/**
@@ -166,7 +168,7 @@ public class EditBuilding extends JDialog{
 	 * @return the load of the specified building
 	 */
 	public double getTxtLoad() {
-		return Double.parseDouble(txtLoad.getText());
+		return Double.parseDouble(txtLoad.getText().replace(',', '.'));
 	}
 
 	/**
@@ -181,7 +183,7 @@ public class EditBuilding extends JDialog{
 	 * @return the "Gleichzeitigkeitsfaktor" (GLF)
 	 */
 	public double getTxtGLF() {
-		return Double.parseDouble(txtGLF.getText());
+		return Double.parseDouble(txtGLF.getText().replace(',', '.'));
 	}
 
 	/**
@@ -196,7 +198,7 @@ public class EditBuilding extends JDialog{
 	 * @return the xCoordinate of the chosen building
 	 */
 	public double getTxtXcoordinate() {
-		return Double.parseDouble(txtXcoordinate.getText());
+		return Double.parseDouble(txtXcoordinate.getText().replace(',', '.'));
 	}
 
 	/**
@@ -211,7 +213,7 @@ public class EditBuilding extends JDialog{
 	 * @return the txtYcoordinate
 	 */
 	public double getTxtYcoordinate() {
-		return Double.parseDouble(txtYcoordinate.getText());
+		return Double.parseDouble(txtYcoordinate.getText().replace(',', '.'));
 	}
 
 	/**
@@ -274,13 +276,17 @@ public class EditBuilding extends JDialog{
 	 */
 	/**
 	 * 
-	 * @param listenForOkButton
+	 * @param listenForOkBtn
 	 */
-	void addOkButtonListener(ActionListener listenForOkButton) {
-		okButton.addActionListener(listenForOkButton);
+	public void addOkButtonListener(ActionListener listenForOkBtn) {
+		btnOk.addActionListener(listenForOkBtn);
 	}
-	
-	void displayNumberError(String errorMessage) {
+
+	public void addCancelButtonListener(ActionListener listenForCancelBtn) {
+		btnCancel.addActionListener(listenForCancelBtn);
+	}
+
+	public void displayNumberError(String errorMessage) {
 		JOptionPane.showMessageDialog(this, errorMessage);
 	}
 }

@@ -1,24 +1,24 @@
-package de.emutec.lastschwerpunkt.controller;
+package de.emutec.lastschwerpunkt.workwindow;
 
-import javax.swing.*;
 import java.awt.event.*;
 
-import de.emutec.lastschwerpunkt.view.EditBuilding;
-import de.emutec.lastschwerpunkt.view.EditSector;
-import de.emutec.lastschwerpunkt.view.MainWindow;
+import de.emutec.lastschwerpunkt.building.BuildingCollection;
+import de.emutec.lastschwerpunkt.building.ControllEditBuilding;
 
-public class ControllMainButtons {
+public class MainButtonController {
 
 	private MainWindow mainWindow;
-	//Constructor
-	public ControllMainButtons(MainWindow mainWindow) {
+
+	// Constructor
+	public MainButtonController(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
-		this.mainWindow.btnGebudeHinzufgenListener(new addButtonListener());
-	
+		
+		this.mainWindow.btnGebudeBearbeitenListener(new EditButtonListener());
+		this.mainWindow.btnGebudeEntfernenListener(new DeleteButtonListener());
+		this.mainWindow.btnGebudeHinzufgenListener(new AddButtonListener());
 	}
-	
-	
-	class addButtonListener implements ActionListener{
+
+	class AddButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -29,21 +29,30 @@ public class ControllMainButtons {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	class editButtonListener implements ActionListener{
+
+	class EditButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO get the selected building from BuildingsCollection and give it to ControllEditBuilding(Building building);
+			// TODO get the selected building from BuildingsCollection and give it to
+			// ControllEditBuilding(Building building);
 			try {
 				new ControllEditBuilding();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
+	}
+
+	class DeleteButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Get the selected building and delete it.
+		}
+
 	}
 	/**
 	 * Funktion zum Speichern der Werte, wenn Änderungen vorliegen
@@ -63,6 +72,5 @@ public class ControllMainButtons {
 	 * ",", ".")), Double.parseDouble(txtYcoordinate.getText().replace(",", ".")));
 	 * }
 	 */
-	
 
 }

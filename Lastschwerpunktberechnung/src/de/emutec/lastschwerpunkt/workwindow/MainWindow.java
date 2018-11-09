@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.view;
+package de.emutec.lastschwerpunkt.workwindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,4 +98,10 @@ public class MainWindow extends JFrame{
 	public void btnGebudeBearbeitenListener(ActionListener listenForEditBuildingButton) {
 		btnGebudeBearbeiten.addActionListener(listenForEditBuildingButton);
 	}
+	
+	public void btnGebudeEntfernenListener(ActionListener listenForDeleteBuildingButton) {
+		btnGebudeBearbeiten.addActionListener(listenForDeleteBuildingButton);
+	}
+	
+	
 }
