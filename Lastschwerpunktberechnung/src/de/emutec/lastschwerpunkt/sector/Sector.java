@@ -39,7 +39,7 @@ public class Sector {
 	/**
 	 * @return the number
 	 */
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 

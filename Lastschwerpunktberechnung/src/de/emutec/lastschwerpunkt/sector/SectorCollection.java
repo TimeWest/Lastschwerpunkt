@@ -8,10 +8,10 @@ public class SectorCollection {
 	// sectors until saved away.
 
 	public SectorCollection() {
-		collectionOfSectors = new ArrayList<>(200);
+		collectionOfSectors = new LinkedList<>();
 	}
 
-	public void addBuilding(Sector sector) {
+	public void addSector (Sector sector) {
 		collectionOfSectors.add(sector);
 	}
 

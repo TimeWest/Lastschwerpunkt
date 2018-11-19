@@ -2,45 +2,52 @@ package de.emutec.lastschwerpunkt.building;
 
 import java.awt.*;
 import javax.swing.*;
+
+import javafx.scene.control.Separator;
+
 import java.awt.event.*;
 
 public class EditBuilding extends JDialog {
 
+	private static final int SPINNER_MAX = 10;
 	/**
 	 * Every Object (Button, Label etc.) on this interface
 	 */
 	private JPanel contentPanel = new JPanel();
 	private JPanel buttonPane = new JPanel();
 
-	private JTextField txtGebudeName = new JTextField();
-	private JTextField txtGebudeNummer = new JTextField();
-	private JTextField txtLoad = new JTextField();
-	private JTextField txtGLF = new JTextField();
-	private JTextField txtXcoordinate = new JTextField();
-	private JTextField txtYcoordinate = new JTextField();
+	private JTextField txtGebudeName = new JTextField(10);
+	private JTextField txtGebudeNummer = new JTextField(10);
+	private JTextField txtLoad = new JTextField(5);
+	private JTextField txtGLF = new JTextField(5);
+	private JTextField txtXcoordinate = new JTextField(10);
+	private JTextField txtYcoordinate = new JTextField(10);
 
 	private JSpinner spinnerSector = new JSpinner();
 
-	private JTextArea txtrBeschreibung = new JTextArea();
+	private JTextArea txtrBeschreibung = new JTextArea(5,15);
 
 	private JLabel lblGebudeName = new JLabel("Geb\u00E4ude Name");
-	private JLabel lblGebudeNummer = new JLabel("Geb\u00E4ude Nummer");
-	private JLabel lblLastkw = new JLabel("Last [kW]");
+	private JLabel lblGebudeNummer = new JLabel("Gebäude Nummer");
+	private JLabel lblLastkw = new JLabel("Last [kVA]");
 	private JLabel lblGlf = new JLabel("GLF");
 	private JLabel lblPosition = new JLabel("Position");
 	private JLabel lblXkoordinate = new JLabel("X-Koordinate");
 	private JLabel lblYkoordinate = new JLabel("Y-Koordinate");
 	private JLabel lblSektor = new JLabel("Sektor");
-	private JLabel lblActive = new JLabel("Geb\u00E4ude aktiv?");
-
-	private JSeparator separator = new JSeparator();
-
+	private JLabel lblActive = new JLabel("Gebäude aktiv?");
+	private JLabel lblBeschreibung = new JLabel("Beschreibung");
+	
 	private JButton btnNeuSetzen = new JButton("Neu setzen");
 	private JButton btnOk = new JButton("OK");
+
 	private JButton btnCancel = new JButton("Cancel");
 	private JButton btnHelp = new JButton("Hilfe");
 
 	private JCheckBox chkbxIsActive = new JCheckBox();
+	
+	private JSeparator separator = new JSeparator();
+	
 
 	/**
 	 * Create the dialog.
@@ -48,76 +55,88 @@ public class EditBuilding extends JDialog {
 	public EditBuilding() {
 
 		// Setting the main frame
-		this.setTitle("Geb\u00E4ude bearbeiten");
+		this.setTitle("Gebäude bearbeiten");
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
-		this.setSize(450, 300);
+		this.setLocationByPlatform(true);
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
 		this.getContentPane().add(buttonPane, BorderLayout.SOUTH);
-
+		this.setSpinnerMax(SPINNER_MAX);
+		contentPanel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		// Setting the editing area
-		// lblGebudeName.setBounds(10, 13, 73, 14);
-		contentPanel.add(lblGebudeName);
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(0, 1, 0, 2);
+		contentPanel.add(lblGebudeName, c);
+		
+		c.gridy = GridBagConstraints.RELATIVE;
+		contentPanel.add(lblGebudeNummer, c);
+		
+		contentPanel.add(lblLastkw, c);
 
-		// txtGebudeName.setBounds(103, 10, 120, 20);
-		contentPanel.add(txtGebudeName);
+		contentPanel.add(lblGlf, c);
+		
+		contentPanel.add(lblSektor, c);
+		
+		contentPanel.add(lblActive, c);
 
-		// lblGebudeNummer.setBounds(10, 38, 85, 14);
-		contentPanel.add(lblGebudeNummer);
+		contentPanel.add(lblBeschreibung , c);
 
-		// txtGebudeNummer.setBounds(103, 35, 43, 20);
-		contentPanel.add(txtGebudeNummer);
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		contentPanel.add(txtrBeschreibung, c);
+		
+		c.gridwidth = 1;
+		c.gridx = 1;
+		c.gridy = 0;
+		contentPanel.add(txtGebudeName, c);
 
-		// lblLastkw.setBounds(10, 63, 85, 14);
-		contentPanel.add(lblLastkw);
+		c.gridy = GridBagConstraints.RELATIVE;
+		contentPanel.add(txtGebudeNummer, c);
+		
+		contentPanel.add(txtLoad, c);
 
-		// txtLoad.setBounds(103, 60, 43, 20);
-		contentPanel.add(txtLoad);
+		contentPanel.add(txtGLF, c);
+		
+		contentPanel.add(spinnerSector, c);
 
-		// lblGlf.setBounds(10, 88, 46, 14);
-		contentPanel.add(lblGlf);
+		contentPanel.add(chkbxIsActive, c);
+		
+		c.fill = GridBagConstraints.VERTICAL;
+		c.gridx = 2;
+		c.gridy = 0;
+		c.gridheight = GridBagConstraints.REMAINDER;
+		c.insets = new Insets(0, 5, 0, 5);
+		separator.setOrientation(SwingConstants.VERTICAL);
+		contentPanel.add(separator, c);
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(0, 1, 0, 2);
+		c.gridheight = 1;
+		c.gridx = 3;
+		contentPanel.add(lblPosition, c);
 
-		// txtGLF.setBounds(103, 85, 43, 20);
-		contentPanel.add(txtGLF);
+		c.gridy = GridBagConstraints.RELATIVE;
+		contentPanel.add(lblXkoordinate, c);
+		
+		contentPanel.add(lblYkoordinate, c);
+		
+		c.gridx = 4;
+		c.gridy = 1;
+		contentPanel.add(txtXcoordinate, c);
 
-		contentPanel.add(lblActive);
-
-		contentPanel.add(chkbxIsActive);
-
-		// lblPosition.setBounds(250, 13, 46, 14);
-		contentPanel.add(lblPosition);
-
-		// lblXkoordinate.setBounds(250, 38, 73, 14);
-		contentPanel.add(lblXkoordinate);
-
-		// lblYkoordinate.setBounds(250, 63, 73, 14);
-		contentPanel.add(lblYkoordinate);
-
-		// separator.setOrientation(SwingConstants.VERTICAL);
-		// separator.setOpaque(true);
-		// separator.setForeground(new Color(160, 160, 160));
-		// separator.setBounds(233, 2, 1, 135);
-		// contentPanel.add(separator);
-
-		// txtXcoordinate.setBounds(338, 35, 86, 20);
-		contentPanel.add(txtXcoordinate);
-
-		// txtYcoordinate.setBounds(338, 60, 86, 20);
-		contentPanel.add(txtYcoordinate);
-
-		// btnNeuSetzen.setBounds(250, 85, 174, 20);
-		contentPanel.add(btnNeuSetzen);
-
-		// lblSektor.setBounds(10, 113, 46, 14);
-		contentPanel.add(lblSektor);
-
-		// spinnerSector.setBounds(103, 110, 43, 20);
-		contentPanel.add(spinnerSector);
-
-		// txtrBeschreibung.setBounds(10, 138, 414, 80);
-		contentPanel.add(txtrBeschreibung);
-
+		c.gridy = GridBagConstraints.RELATIVE;
+		contentPanel.add(txtYcoordinate, c);
+		
+		c.gridx = 3;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		contentPanel.add(btnNeuSetzen, c);
+		
+				
+		
+		
 		// Setting button area
 		buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -128,6 +147,7 @@ public class EditBuilding extends JDialog {
 		buttonPane.add(btnOk);
 
 		buttonPane.add(btnHelp);
+		this.pack();
 	}
 
 	/**
@@ -238,6 +258,14 @@ public class EditBuilding extends JDialog {
 	public void setSpinnerSector(int sector) {
 		this.spinnerSector.setValue(sector);
 	}
+	
+	/**
+	 * @param max
+	 * the maximum value of the spinner to allow only available sectors 
+	 */
+	public void setSpinnerMax(int max) {
+		this.spinnerSector.setModel(new SpinnerNumberModel(1,1,max,1));;
+	}
 
 	/**
 	 * @return the description of the building
@@ -289,4 +317,5 @@ public class EditBuilding extends JDialog {
 	public void displayNumberError(String errorMessage) {
 		JOptionPane.showMessageDialog(this, errorMessage);
 	}
+	
 }

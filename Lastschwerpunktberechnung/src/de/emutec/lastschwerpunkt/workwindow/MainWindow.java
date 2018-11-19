@@ -34,7 +34,6 @@ public class MainWindow extends JFrame{
 	//Create the application
 	public MainWindow() {
 		
-		this.setMaximumSize(new Dimension(0, 0));
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage("I:\\Vorlagen\\Logos-emutec-GROUP\\Logo GRID SYSTEMS\\Logo_emutec_Grid_System_RGB.jpg"));
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);

@@ -24,7 +24,7 @@ public class Main {
 		new TreeController(mainWindow);
 		new MapController(mainWindow);
 		new MenuController(mainWindow);
-		new MainButtonController(mainWindow);
+		new MainButtonController(mainWindow, buildingCollection, sectorCollection);
 		mainWindow.setVisible(true);
 		
 	}	

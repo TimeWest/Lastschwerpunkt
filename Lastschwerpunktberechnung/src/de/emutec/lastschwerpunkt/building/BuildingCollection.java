@@ -9,7 +9,7 @@ public class BuildingCollection {
 	// buildings until saved away.
 
 	public BuildingCollection() {
-		collectionOfBuildings = new ArrayList<Building>(200);
+		collectionOfBuildings = new LinkedList<>();
 	}
 
 	public void addBuilding(Building building) {

@@ -1,18 +1,24 @@
 package de.emutec.lastschwerpunkt.workwindow;
 
 import java.awt.event.*;
-
 import de.emutec.lastschwerpunkt.building.BuildingCollection;
 import de.emutec.lastschwerpunkt.building.ControllEditBuilding;
+import de.emutec.lastschwerpunkt.sector.ControllEditSector;
+import de.emutec.lastschwerpunkt.sector.SectorCollection;
 
 public class MainButtonController {
 
 	private MainWindow mainWindow;
+	private BuildingCollection buildingCollection;
+	private SectorCollection sectorCollection;
+	private ControllEditBuilding edit;
 
 	// Constructor
-	public MainButtonController(MainWindow mainWindow) {
+	public MainButtonController(MainWindow mainWindow, BuildingCollection buildingCollection,
+			SectorCollection sectorCollection) {
 		this.mainWindow = mainWindow;
-		
+		this.buildingCollection = buildingCollection;
+		this.sectorCollection = sectorCollection;
 		this.mainWindow.btnGebudeBearbeitenListener(new EditButtonListener());
 		this.mainWindow.btnGebudeEntfernenListener(new DeleteButtonListener());
 		this.mainWindow.btnGebudeHinzufgenListener(new AddButtonListener());
@@ -23,11 +29,7 @@ public class MainButtonController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO First set buildings position by clicking on the map
-			try {
-				new ControllEditBuilding();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			edit = new ControllEditBuilding(buildingCollection);
 		}
 
 	}
@@ -38,11 +40,7 @@ public class MainButtonController {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO get the selected building from BuildingsCollection and give it to
 			// ControllEditBuilding(Building building);
-			try {
-				new ControllEditBuilding();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			new ControllEditBuilding(buildingCollection);
 		}
 	}
 
@@ -54,23 +52,43 @@ public class MainButtonController {
 		}
 
 	}
-	/**
-	 * Funktion zum Speichern der Werte, wenn Änderungen vorliegen
-	 */
-	/*
-	 * protected void applyChanges() { building.setGebName(txtGebudeName.getText());
-	 * building.setGebNumber(txtGebudeNummer.getText());
-	 * building.setDescription(txtrBeschreibung.getText());
-	 * building.setSector((int); spinnerSector.getValue()); try {
-	 * building.setLoad(Double.parseDouble(txtLoad.getText().replace(",", "."))); }
-	 * catch (NumberFormatException e) {
-	 * displayNumberError("Bitte eine Zahl eingeben."); } try {
-	 * building.setGlf(Double.parseDouble(txtGLF.getText().replace(",", "."))); }
-	 * catch (NumberFormatException e) {
-	 * displayNumberError("Bitte eine Zahl eingeben."); }
-	 * building.setCoordinates(Double.parseDouble(txtXcoordinate.getText().replace(
-	 * ",", ".")), Double.parseDouble(txtYcoordinate.getText().replace(",", ".")));
-	 * }
-	 */
 
+	class AddSectorListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			try {
+				new ControllEditSector(sectorCollection);
+			} catch (Exception e) {
+
+			}
+
+		}
+
+	}
+
+	class EditSectorListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			try {
+				new ControllEditSector(sectorCollection);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+
+	}
+
+	class DeleteSectorListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+	}
 }
