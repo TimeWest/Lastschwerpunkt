@@ -9,6 +9,7 @@ public class MainWindow extends JFrame{
 	// Objects to use on this window
 	private JPanel panelNavigation = new JPanel();
 	private JPanel panelEditBuildings = new JPanel();
+	private JPanel panelEditSectors = new JPanel();
 	private JPanel panelMap = new JPanel();
 	private JPanel panelImage = new JPanel();
 	
@@ -28,8 +29,12 @@ public class MainWindow extends JFrame{
 	private JButton btnGebudeHinzufgen = new JButton("Geb\u00E4ude hinzuf\u00FCgen");
 	private JButton btnGebudeLschen = new JButton("Geb\u00E4ude l\u00F6schen");
 	private JButton btnGebudeBearbeiten = new JButton("Geb\u00E4ude bearbeiten");
+	private JButton btnAddSector = new JButton("Sektor hinzufügen");
+	private JButton btnEditSector = new JButton("Sektor bearbeiten");
+	private JButton btnDelSector = new JButton("Sektor löschen");
 	
 	private JToolBar toolBar = new JToolBar();
+
 	
 	//Create the application
 	public MainWindow() {
@@ -59,7 +64,8 @@ public class MainWindow extends JFrame{
 		//Left panel for tree and buttons
 		panelNavigation.setMinimumSize(new Dimension(50, 200));
 		panelNavigation.setPreferredSize(new Dimension(250, 0));
-		panelNavigation.setLayout(new BorderLayout(0, 0));
+		panelNavigation.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 		
 		tree.setDragEnabled(true);
 		tree.setRowHeight(25);
@@ -69,17 +75,36 @@ public class MainWindow extends JFrame{
 		tree.setShowsRootHandles(true);
 		tree.setRootVisible(false);
 		
-		panelNavigation.add(tree, BorderLayout.CENTER);	
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 0;
+		panelNavigation.add(tree, c);	
 		
 		//Panel for building-editing buttons
-		panelEditBuildings.setPreferredSize(new Dimension(0, 100));
-		panelEditBuildings.setMinimumSize(new Dimension(10, 150));
-		panelNavigation.add(panelEditBuildings, BorderLayout.SOUTH);
+		//panelEditBuildings.setPreferredSize(new Dimension(0, 100));
+		//panelEditBuildings.setMinimumSize(new Dimension(10, 150));
+		c.gridy = 1;
+		c.anchor = GridBagConstraints.PAGE_END;
+		panelNavigation.add(panelEditBuildings, c);
 		panelEditBuildings.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		panelEditBuildings.add(btnGebudeHinzufgen);
 		panelEditBuildings.add(btnGebudeLschen);
 		panelEditBuildings.add(btnGebudeBearbeiten);
+		
+		//panel for the sector-editing buttons
+		//panelEditSectors.setPreferredSize(new Dimension(0,100));
+		//panelEditSectors.setMinimumSize(new Dimension(10,150));
+		c.gridy = 2;
+		panelNavigation.add(panelEditSectors,c);
+		panelEditSectors.setLayout(new GridBagLayout());
+		
+		c.gridy = 0;		
+		panelEditSectors.add(btnAddSector,c);
+		c.gridy = 1;
+		panelEditSectors.add(btnEditSector,c);
+		c.gridy = 2;
+		panelEditSectors.add(btnDelSector,c);
 		
 		//Panel for the Map and editing		
 		panelMap.setLayout(new BorderLayout(5, 5));
