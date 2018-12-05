@@ -19,9 +19,9 @@ public class MainButtonController {
 		this.mainWindow = mainWindow;
 		this.buildingCollection = buildingCollection;
 		this.sectorCollection = sectorCollection;
-		this.mainWindow.btnGebudeBearbeitenListener(new EditButtonListener());
-		this.mainWindow.btnGebudeEntfernenListener(new DeleteButtonListener());
-		this.mainWindow.btnGebudeHinzufgenListener(new AddButtonListener());
+		this.mainWindow.btnAddBuildingListener(new EditButtonListener());
+		this.mainWindow.btnDelBuildingListener(new DeleteButtonListener());
+		this.mainWindow.btnAddBuildingListener(new AddButtonListener());
 	}
 
 	class AddButtonListener implements ActionListener {

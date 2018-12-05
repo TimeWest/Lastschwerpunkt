@@ -13,7 +13,8 @@ public class EditSector extends JDialog {
 
 	private JTextField txtSectorName = new JTextField();
 	private JTextField txtSectorNumber = new JTextField();
-
+	private JColorChooser ccSectorColor = new JColorChooser();
+	
 	private JButton btnOk = new JButton("Ok");
 	private JButton btnCancel = new JButton("Abbrechen");
 	private JButton btnHelp = new JButton("Hilfe");
@@ -37,22 +38,15 @@ public class EditSector extends JDialog {
 		
 		// Set contentPane
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
 		pnlMainContent.add(lblSectorName, c);
-		
-		c.gridy++;
 		pnlMainContent.add(lblSectorNumber, c);
-		
-		c.gridy++;
 		pnlMainContent.add(lblSectorColor, c);
-		
 		c.gridx++;
-		c.gridy = 0;
+		c.gridwidth = GridBagConstraints.REMAINDER;
 		pnlMainContent.add(txtSectorName, c);
-		
-		c.gridy++;
 		pnlMainContent.add(txtSectorNumber,c);		
-
+		pnlMainContent.add(ccSectorColor, c);
+		
 		// Setting button area
 		pnlButtons.add(btnHelp);
 		pnlButtons.add(btnOk);
