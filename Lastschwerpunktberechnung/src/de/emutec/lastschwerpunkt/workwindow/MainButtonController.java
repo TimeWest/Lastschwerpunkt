@@ -1,6 +1,7 @@
 package de.emutec.lastschwerpunkt.workwindow;
 
 import java.awt.event.*;
+import javax.swing.tree.*;
 import de.emutec.lastschwerpunkt.building.BuildingCollection;
 import de.emutec.lastschwerpunkt.building.ControllEditBuilding;
 import de.emutec.lastschwerpunkt.sector.ControllEditSector;
@@ -19,12 +20,15 @@ public class MainButtonController {
 		this.mainWindow = mainWindow;
 		this.buildingCollection = buildingCollection;
 		this.sectorCollection = sectorCollection;
-		this.mainWindow.btnAddBuildingListener(new EditButtonListener());
-		this.mainWindow.btnDelBuildingListener(new DeleteButtonListener());
-		this.mainWindow.btnAddBuildingListener(new AddButtonListener());
+		this.mainWindow.btnEditBuildingListener(new EditBuildingListener());
+		this.mainWindow.btnDelBuildingListener(new DeleteBuildingListener());
+		this.mainWindow.btnAddBuildingListener(new AddBuildingListener());
+		this.mainWindow.btnAddSectorListener(new AddSectorListener());
+		this.mainWindow.btnEditSectorListener(new EditSectorListener());
+		this.mainWindow.btnDelSectorListener(new DeleteSectorListener());
 	}
 
-	class AddButtonListener implements ActionListener {
+	class AddBuildingListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -34,17 +38,18 @@ public class MainButtonController {
 
 	}
 
-	class EditButtonListener implements ActionListener {
+	class EditBuildingListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO get the selected building from BuildingsCollection and give it to
 			// ControllEditBuilding(Building building);
+			
 			new ControllEditBuilding(buildingCollection);
 		}
 	}
 
-	class DeleteButtonListener implements ActionListener {
+	class DeleteBuildingListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -91,4 +96,5 @@ public class MainButtonController {
 
 		}
 	}
+	
 }

@@ -1,6 +1,8 @@
 package de.emutec.lastschwerpunkt.workwindow;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionListener;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -23,10 +25,11 @@ public class MainWindow extends JFrame {
 	private JMenuItem mntmHelp = new JMenuItem("?");
 
 	private JTree tree = new JTree();
-	private JScrollPane ScrollPane1 = new JScrollPane(tree);
-	private JButton btnGebudeHinzufgen = new JButton("Geb\u00E4ude hinzuf\u00FCgen");
-	private JButton btnGebudeLschen = new JButton("Geb\u00E4ude l\u00F6schen");
-	private JButton btnGebudeBearbeiten = new JButton("Geb\u00E4ude bearbeiten");
+	private JScrollPane scrollPane1 = new JScrollPane(tree);
+	
+	private JButton btnAddBuilding = new JButton("Geb\u00E4ude hinzuf\u00FCgen");
+	private JButton btnDelBuilding = new JButton("Geb\u00E4ude l\u00F6schen");
+	private JButton btnEditBuilding = new JButton("Geb\u00E4ude bearbeiten");
 	private JButton btnAddSector = new JButton("Sektor hinzufügen");
 	private JButton btnEditSector = new JButton("Sektor bearbeiten");
 	private JButton btnDelSector = new JButton("Sektor löschen");
@@ -66,7 +69,7 @@ public class MainWindow extends JFrame {
 		c.fill = GridBagConstraints.BOTH;
 		c.weighty = 1;
 	
-		panelNavigation.add(ScrollPane1, c);
+		panelNavigation.add(scrollPane1, c);
 		tree.setDragEnabled(true);
 		tree.setRowHeight(25);
 		tree.setAutoscrolls(true);
@@ -76,9 +79,9 @@ public class MainWindow extends JFrame {
 		c.weighty = 0;
 		c.gridwidth = GridBagConstraints.REMAINDER;		
 
-		panelNavigation.add(btnGebudeHinzufgen, c);
-		panelNavigation.add(btnGebudeLschen, c);
-		panelNavigation.add(btnGebudeBearbeiten, c);
+		panelNavigation.add(btnAddBuilding, c);
+		panelNavigation.add(btnEditBuilding, c);
+		panelNavigation.add(btnDelBuilding, c);
 		panelNavigation.add(btnAddSector, c);
 		panelNavigation.add(btnEditSector, c);
 		panelNavigation.add(btnDelSector, c);
@@ -97,15 +100,15 @@ public class MainWindow extends JFrame {
 	} // End of constructor
 
 	public void btnAddBuildingListener(ActionListener listenForAddBuildingButton) {
-		btnGebudeHinzufgen.addActionListener(listenForAddBuildingButton);
+		btnAddBuilding.addActionListener(listenForAddBuildingButton);
 	}
 
 	public void btnEditBuildingListener(ActionListener listenForEditBuildingButton) {
-		btnGebudeBearbeiten.addActionListener(listenForEditBuildingButton);
+		btnEditBuilding.addActionListener(listenForEditBuildingButton);
 	}
 
 	public void btnDelBuildingListener(ActionListener listenForDeleteBuildingButton) {
-		btnGebudeBearbeiten.addActionListener(listenForDeleteBuildingButton);
+		btnDelBuilding.addActionListener(listenForDeleteBuildingButton);
 	}
 	
 	public void btnAddSectorListener(ActionListener listenForAddSectorButton) {
@@ -118,6 +121,10 @@ public class MainWindow extends JFrame {
 
 	public void btnDelSectorListener(ActionListener listenForDeleteSectorButton) {
 		btnDelSector.addActionListener(listenForDeleteSectorButton);
+	}
+	
+	public void treeSelectionListener(TreeSelectionListener listenForChangedTreeSelection) {
+		tree.getSelectionModel().addTreeSelectionListener(listenForChangedTreeSelection);
 	}
 
 }
