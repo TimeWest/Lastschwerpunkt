@@ -1,6 +1,8 @@
 package de.emutec.lastschwerpunkt.workwindow;
 
 import java.awt.event.*;
+
+import javax.swing.JFileChooser;
 import javax.swing.tree.*;
 import de.emutec.lastschwerpunkt.building.BuildingCollection;
 import de.emutec.lastschwerpunkt.building.ControllEditBuilding;
@@ -95,6 +97,40 @@ public class MainButtonController {
 			// TODO Auto-generated method stub
 
 		}
+	}
+	
+	class AddImageListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			JFileChooser searchForImage = new JFileChooser();
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 	
 }

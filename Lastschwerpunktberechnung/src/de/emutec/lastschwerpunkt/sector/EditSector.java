@@ -13,15 +13,16 @@ public class EditSector extends JDialog {
 
 	private JTextField txtSectorName = new JTextField();
 	private JTextField txtSectorNumber = new JTextField();
+	
 	private JColorChooser ccSectorColor = new JColorChooser();
 	
 	private JButton btnOk = new JButton("Ok");
 	private JButton btnCancel = new JButton("Abbrechen");
 	private JButton btnHelp = new JButton("Hilfe");
 
-	private JLabel lblSectorName = new JLabel("Name");
-	private JLabel lblSectorNumber = new JLabel("Nummer");
-	private JLabel lblSectorColor = new JLabel("Farbe");
+	private final JLabel lblSectorName = new JLabel("Name");
+	private final JLabel lblSectorNumber = new JLabel("Nummer");
+	private final JLabel lblSectorColor = new JLabel("Farbe");
 
 	// Constructor
 	public EditSector() {
@@ -39,12 +40,17 @@ public class EditSector extends JDialog {
 		// Set contentPane
 		c.fill = GridBagConstraints.HORIZONTAL;
 		pnlMainContent.add(lblSectorName, c);
-		pnlMainContent.add(lblSectorNumber, c);
-		pnlMainContent.add(lblSectorColor, c);
-		c.gridx++;
+		c.weightx = 1;
 		c.gridwidth = GridBagConstraints.REMAINDER;
 		pnlMainContent.add(txtSectorName, c);
-		pnlMainContent.add(txtSectorNumber,c);		
+		c.weightx = 0;
+		c.gridwidth = GridBagConstraints.RELATIVE;
+		pnlMainContent.add(lblSectorNumber, c);
+		c.weightx = 1;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		pnlMainContent.add(txtSectorNumber,c);
+		
+		pnlMainContent.add(lblSectorColor, c);
 		pnlMainContent.add(ccSectorColor, c);
 		
 		// Setting button area

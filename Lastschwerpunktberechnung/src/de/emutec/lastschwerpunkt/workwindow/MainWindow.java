@@ -26,13 +26,14 @@ public class MainWindow extends JFrame {
 
 	private JTree tree = new JTree();
 	private JScrollPane scrollPane1 = new JScrollPane(tree);
-	
+
 	private JButton btnAddBuilding = new JButton("Geb\u00E4ude hinzuf\u00FCgen");
 	private JButton btnDelBuilding = new JButton("Geb\u00E4ude l\u00F6schen");
 	private JButton btnEditBuilding = new JButton("Geb\u00E4ude bearbeiten");
 	private JButton btnAddSector = new JButton("Sektor hinzufügen");
 	private JButton btnEditSector = new JButton("Sektor bearbeiten");
 	private JButton btnDelSector = new JButton("Sektor löschen");
+	private JButton btnAddImage = new JButton("Bild");
 
 	private JToolBar toolBar = new JToolBar();
 
@@ -68,7 +69,7 @@ public class MainWindow extends JFrame {
 		c.gridx = 0;
 		c.fill = GridBagConstraints.BOTH;
 		c.weighty = 1;
-	
+
 		panelNavigation.add(scrollPane1, c);
 		tree.setDragEnabled(true);
 		tree.setRowHeight(25);
@@ -77,7 +78,7 @@ public class MainWindow extends JFrame {
 		tree.setRootVisible(false);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weighty = 0;
-		c.gridwidth = GridBagConstraints.REMAINDER;		
+		c.gridwidth = GridBagConstraints.REMAINDER;
 
 		panelNavigation.add(btnAddBuilding, c);
 		panelNavigation.add(btnEditBuilding, c);
@@ -85,7 +86,7 @@ public class MainWindow extends JFrame {
 		panelNavigation.add(btnAddSector, c);
 		panelNavigation.add(btnEditSector, c);
 		panelNavigation.add(btnDelSector, c);
-		
+
 		// Panel for the Map and editing
 		panelMap.setLayout(new BorderLayout(5, 5));
 		panelMap.add(toolBar, BorderLayout.NORTH);
@@ -93,11 +94,17 @@ public class MainWindow extends JFrame {
 		toolBar.setBackground(new Color(0, 123, 10));
 		toolBar.add(new JLabel("Toolbar"));
 
+		toolBar.add(btnAddImage);
+
 		panelMap.add(panelImage, BorderLayout.CENTER);
 		panelImage.setBackground(new Color(53, 66, 132));
-		
+
 		this.pack();
 	} // End of constructor
+
+	public void btnAddImage(MouseListener listenForMouseClick) {
+		btnAddImage.addMouseListener(listenForMouseClick);
+	}
 
 	public void btnAddBuildingListener(ActionListener listenForAddBuildingButton) {
 		btnAddBuilding.addActionListener(listenForAddBuildingButton);
@@ -110,7 +117,7 @@ public class MainWindow extends JFrame {
 	public void btnDelBuildingListener(ActionListener listenForDeleteBuildingButton) {
 		btnDelBuilding.addActionListener(listenForDeleteBuildingButton);
 	}
-	
+
 	public void btnAddSectorListener(ActionListener listenForAddSectorButton) {
 		btnAddSector.addActionListener(listenForAddSectorButton);
 	}
@@ -122,7 +129,7 @@ public class MainWindow extends JFrame {
 	public void btnDelSectorListener(ActionListener listenForDeleteSectorButton) {
 		btnDelSector.addActionListener(listenForDeleteSectorButton);
 	}
-	
+
 	public void treeSelectionListener(TreeSelectionListener listenForChangedTreeSelection) {
 		tree.getSelectionModel().addTreeSelectionListener(listenForChangedTreeSelection);
 	}

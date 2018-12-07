@@ -7,6 +7,7 @@ public class MapController {
 	public MapController(MainWindow mainWindow) {
 		// TODO Auto-generated constructor stub
 		this.mainWindow = mainWindow;
+		
 	}
 
 }

@@ -1,5 +1,7 @@
 package de.emutec.lastschwerpunkt;
 
+import javax.swing.tree.TreePath;
+
 import de.emutec.lastschwerpunkt.building.BuildingCollection;
 import de.emutec.lastschwerpunkt.sector.SectorCollection;
 import de.emutec.lastschwerpunkt.workwindow.MainButtonController;
@@ -18,13 +20,15 @@ public class Main {
 		/**
 		 * Launch the application.
 		 */
+		TreePath path = null;
 		MainWindow mainWindow = new MainWindow();
 		SectorCollection sectorCollection = new SectorCollection();
 		BuildingCollection buildingCollection = new BuildingCollection();
-		new TreeController(mainWindow);
+		new TreeController(mainWindow, path);
 		new MapController(mainWindow);
 		new MenuController(mainWindow);
 		new MainButtonController(mainWindow, buildingCollection, sectorCollection);
+	
 		mainWindow.setVisible(true);
 		
 	}	
