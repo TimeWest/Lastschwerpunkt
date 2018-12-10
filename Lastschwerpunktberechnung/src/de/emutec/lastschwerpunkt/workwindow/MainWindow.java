@@ -5,6 +5,9 @@ import javax.swing.event.TreeSelectionListener;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
 
 public class MainWindow extends JFrame {
 
@@ -12,6 +15,8 @@ public class MainWindow extends JFrame {
 	private JPanel panelNavigation = new JPanel();
 	private JPanel panelMap = new JPanel();
 	private JPanel panelImage = new JPanel();
+	
+	private JLabel imageLabel = new JLabel();
 
 	private JMenuBar menuBar = new JMenuBar();
 
@@ -57,10 +62,15 @@ public class MainWindow extends JFrame {
 		menuBar.add(menu);
 		menuBar.add(mntmHelp);
 		menu.add(mntmNewProject);
+		mntmNewProject.setActionCommand("newProject");
 		menu.add(mntmLoadProject);
+		mntmLoadProject.setActionCommand("loadProject");
 		menu.add(mntmSaveProject);
+		mntmSaveProject.setActionCommand("SaveProject");
 		menu.add(mntmSaveProjectAs);
+		mntmSaveProjectAs.setActionCommand("newProjectAs");
 		menu.add(mntmExit);
+		mntmExit.setActionCommand("exit");
 
 		// Left panel for tree and buttons
 		panelNavigation.setLayout(new GridBagLayout());
@@ -80,58 +90,60 @@ public class MainWindow extends JFrame {
 		c.weighty = 0;
 		c.gridwidth = GridBagConstraints.REMAINDER;
 
+		btnAddBuilding.setActionCommand("addBuilding");
 		panelNavigation.add(btnAddBuilding, c);
-		panelNavigation.add(btnEditBuilding, c);
+		btnEditBuilding.setActionCommand("editBuilding");
+		panelNavigation.add(btnEditBuilding, c);	
+		btnDelBuilding.setActionCommand("deleteBuilding");
 		panelNavigation.add(btnDelBuilding, c);
+		
+		btnAddSector.setActionCommand("addSector");
 		panelNavigation.add(btnAddSector, c);
+		btnEditSector.setActionCommand("editSector");
 		panelNavigation.add(btnEditSector, c);
+		btnDelSector.setActionCommand("deleteSector");
 		panelNavigation.add(btnDelSector, c);
+		
 
-		// Panel for the Map and editing
-		panelMap.setLayout(new BorderLayout(5, 5));
+		// Panel for the Map and editingToolbar
+		panelMap.setLayout(new BorderLayout());
 		panelMap.add(toolBar, BorderLayout.NORTH);
 		toolBar.setFloatable(false);
 		toolBar.setBackground(new Color(0, 123, 10));
-		toolBar.add(new JLabel("Toolbar"));
 
+		btnAddImage.setActionCommand("addImage");
 		toolBar.add(btnAddImage);
 
-		panelMap.add(panelImage, BorderLayout.CENTER);
-		panelImage.setBackground(new Color(53, 66, 132));
+		panelMap.add(imageLabel, BorderLayout.CENTER);
 
 		this.pack();
 	} // End of constructor
 
-	public void btnAddImage(MouseListener listenForMouseClick) {
-		btnAddImage.addMouseListener(listenForMouseClick);
+	public void btnChooseImage(ActionListener a) {
+		btnAddImage.addActionListener(a);
+	}
+	
+	public void setImage(BufferedImage image) {
+		imageLabel.setIcon(new ImageIcon(image));		
 	}
 
-	public void btnAddBuildingListener(ActionListener listenForAddBuildingButton) {
-		btnAddBuilding.addActionListener(listenForAddBuildingButton);
+	public void btnListener(ActionListener a) {
+		btnAddBuilding.addActionListener(a);
+		btnEditBuilding.addActionListener(a);
+		btnDelBuilding.addActionListener(a);
+		btnAddSector.addActionListener(a);
+		btnEditSector.addActionListener(a);
+		btnDelSector.addActionListener(a);
 	}
 
-	public void btnEditBuildingListener(ActionListener listenForEditBuildingButton) {
-		btnEditBuilding.addActionListener(listenForEditBuildingButton);
+	public void treeSelectionListener(TreeSelectionListener t) {
+		tree.getSelectionModel().addTreeSelectionListener(t);
 	}
 
-	public void btnDelBuildingListener(ActionListener listenForDeleteBuildingButton) {
-		btnDelBuilding.addActionListener(listenForDeleteBuildingButton);
+	public void mntmExitListener(ActionListener menuActionListener) {
+		mntmExit.addActionListener(menuActionListener);
 	}
-
-	public void btnAddSectorListener(ActionListener listenForAddSectorButton) {
-		btnAddSector.addActionListener(listenForAddSectorButton);
-	}
-
-	public void btnEditSectorListener(ActionListener listenForEditSectorButton) {
-		btnEditSector.addActionListener(listenForEditSectorButton);
-	}
-
-	public void btnDelSectorListener(ActionListener listenForDeleteSectorButton) {
-		btnDelSector.addActionListener(listenForDeleteSectorButton);
-	}
-
-	public void treeSelectionListener(TreeSelectionListener listenForChangedTreeSelection) {
-		tree.getSelectionModel().addTreeSelectionListener(listenForChangedTreeSelection);
-	}
+	
+	
 
 }

@@ -22,115 +22,40 @@ public class MainButtonController {
 		this.mainWindow = mainWindow;
 		this.buildingCollection = buildingCollection;
 		this.sectorCollection = sectorCollection;
-		this.mainWindow.btnEditBuildingListener(new EditBuildingListener());
-		this.mainWindow.btnDelBuildingListener(new DeleteBuildingListener());
-		this.mainWindow.btnAddBuildingListener(new AddBuildingListener());
-		this.mainWindow.btnAddSectorListener(new AddSectorListener());
-		this.mainWindow.btnEditSectorListener(new EditSectorListener());
-		this.mainWindow.btnDelSectorListener(new DeleteSectorListener());
-	}
-
-	class AddBuildingListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO First set buildings position by clicking on the map
-			edit = new ControllEditBuilding(buildingCollection);
-		}
+		this.mainWindow.btnListener(new ButtonListener());
 
 	}
 
-	class EditBuildingListener implements ActionListener {
+	class ButtonListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO get the selected building from BuildingsCollection and give it to
-			// ControllEditBuilding(Building building);
-			
-			new ControllEditBuilding(buildingCollection);
-		}
-	}
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand().equals("addBuilding")) {
+				edit = new ControllEditBuilding(buildingCollection);
+			}
 
-	class DeleteBuildingListener implements ActionListener {
+			if (e.getActionCommand().equals("editBuilding")) {
+				new ControllEditBuilding(buildingCollection);
+			}
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Get the selected building and delete it.
-		}
+			if (e.getActionCommand().equals("deleteBuilding")) {
+				// TODO get the selected Object from tree and ask if sure, then delete
+			}
 
-	}
-
-	class AddSectorListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			try {
+			if (e.getActionCommand().equals("addSector")) {
 				new ControllEditSector(sectorCollection);
-			} catch (Exception e) {
+			}
 
+			if (e.getActionCommand().equals("editSector")) {
+				new ControllEditSector(sectorCollection);
+			}
+
+			if (e.getActionCommand().equals("addSector")) {
+				// TODO get the selected Sector from tree and ask if sure, then delete
 			}
 
 		}
 
 	}
 
-	class EditSectorListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			try {
-				new ControllEditSector(sectorCollection);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-		}
-
-	}
-
-	class DeleteSectorListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-
-		}
-	}
-	
-	class AddImageListener implements MouseListener{
-
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			JFileChooser searchForImage = new JFileChooser();
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
-	
 }
