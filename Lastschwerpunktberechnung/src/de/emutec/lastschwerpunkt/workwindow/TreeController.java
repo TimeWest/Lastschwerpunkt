@@ -2,26 +2,25 @@ package de.emutec.lastschwerpunkt.workwindow;
 
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.TreePath;
+
+import de.emutec.lastschwerpunkt.sector.Collection;
 
 public class TreeController {
-
-	private MainWindow mainWindow;
-	private TreePath path;
-
-	public TreeController(MainWindow mainWindow, TreePath path) {
-		// TODO Auto-generated constructor stub
-		this.mainWindow = mainWindow;
-		this.path = path;
-		this.mainWindow.treeSelectionListener(new TreeSelection());
-	}
 
 	class TreeSelection implements TreeSelectionListener {
 
 		@Override
-		public void valueChanged(TreeSelectionEvent arg0) {
-			// TODO Auto-generated method stub
-			path = arg0.getNewLeadSelectionPath();
+		public void valueChanged(TreeSelectionEvent e) {
+			collection.setPath(e.getNewLeadSelectionPath());
 		}
+	}
+
+	private Collection collection;
+	private MainWindow mainWindow;
+
+	public TreeController(MainWindow mainWindow, Collection collection) {
+		this.mainWindow = mainWindow;
+		this.collection = collection;
+		this.mainWindow.treeSelectionListener(new TreeSelection());
 	}
 }

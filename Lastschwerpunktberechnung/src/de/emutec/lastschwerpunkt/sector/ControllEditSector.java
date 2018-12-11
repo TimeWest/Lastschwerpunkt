@@ -3,51 +3,58 @@ package de.emutec.lastschwerpunkt.sector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
-
 public class ControllEditSector {
 
-	private EditSector window;
-	private SectorCollection collection;
-	private Sector sector;
-
-	public ControllEditSector(SectorCollection collection) {
-		this.window = new EditSector();
-		this.collection = collection;
-		this.sector = new Sector();
-		this.window.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.window.addOkBtnListener(new OkBtnListener());
-		
-		this.window.setVisible(true);
-	}
-
-	public ControllEditSector(SectorCollection collection, Sector sector) {
-		this.window = new EditSector();
-		this.collection = collection;
-		this.sector = sector;
-		this.window.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.window.setTxtSectorName(sector.getName());
-		this.window.setTxtSectorNumber(sector.getNumber().toString());
-		this.window.addOkBtnListener(new OkBtnListener());
-		
-		this.window.setVisible(true);
-	}
-
-	class OkBtnListener implements ActionListener {
+	class BtnListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			try {
-				sector.setName(window.getTxtSectorName());
-				sector.setNumber(Integer.parseInt(window.getTxtSectorNumber()));
-				window.dispose();
-				collection.addSector(sector);
-				
-			} catch (Exception e) {
-				window.displayNumberError("Fehler! Konnte Sektor nicht speichern.\nBitte Eingaben überprüfen");
+		public void actionPerformed(ActionEvent e) {
+
+			if (e.getActionCommand().equals("ok")) {
+				try {
+					sector.setName(window.getTxtSectorName());
+					sector.setNumber(Integer.parseInt(window.getTxtSectorNumber()));
+					sector.setColor(window.getCcSectorColor());
+
+					window.dispose();
+
+				} catch (Exception ex) {
+					window.displayNumberError("Fehler! Konnte Sektor nicht speichern.\nBitte Eingaben überprüfen");
+				}
 			}
+			if (e.getActionCommand().equals("cancel")) {
+				window.dispose();
+			}
+			if (e.getActionCommand().equals("?")) {
+				window.displayNumberError("Hier entsteht ein Hilfe-Fenster.\nCurrently under maintenance. :(");
+			}
+
 		}
 
+	}
+	private Sector sector;
+
+	private EditSector window;
+
+	public ControllEditSector() {
+		this.window = new EditSector();
+		this.window.addButtonListener(new BtnListener());
+	}
+
+	public void deleteSector() {
+		// TODO get the selected sector from TreeController and Collection and delete it after reassuring that the user is sure.
+	}
+
+	public void editSector() {
+		// TODO get the selected sector from TreeController and Collection
+		this.window.setTxtSectorName(sector.getName());
+		this.window.setTxtSectorNumber(sector.getNumber().toString());
+		this.window.setCcSectorColor(sector.getColor());
+		this.window.setVisible(true);
+	}
+
+	public void newSector() {
+		sector = new Sector();
+		this.window.setVisible(true);
 	}
 }

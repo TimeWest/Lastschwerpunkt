@@ -3,36 +3,58 @@ package de.emutec.lastschwerpunkt.building;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
-import javax.swing.event.ChangeEvent;
-
-import de.emutec.lastschwerpunkt.sector.SectorCollection;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-
 public class ControllEditBuilding {
-	private EditBuilding window;
-	private Building building;
-	private BuildingCollection buildingCollection;
-	public boolean finished;
+	class BtnListener implements ActionListener {
 
-	// Constructor for adding a new Building
-	public ControllEditBuilding(BuildingCollection buildingCollection) {
-		this.window = new EditBuilding();
-		this.building = new Building();
-		this.buildingCollection = buildingCollection;
-		this.window.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.window.addOkButtonListener(new OkBtnListener());
-		this.window.addCancelButtonListener(new CancelBtnListener());
-		this.window.setVisible(true);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			if (e.getActionCommand().equals("ok")) {
+				try {
+					building.setGebName(window.getTxtGebudeName());
+					building.setGebNumber(window.getTxtGebudeNummer());
+					building.setGlf(window.getTxtGLF());
+					building.setLoad(window.getTxtLoad());
+					building.setDescription(window.getTxtrBeschreibung());
+					building.setCoordinates(window.getTxtXcoordinate(), window.getTxtYcoordinate());
+					building.setSector(window.getSpinnerSector());
+					building.setActive(window.getChkbxIsActive());
+					window.dispose();
+					buildingCollection.addBuilding(building);
+				} catch (Exception ex) {
+					window.displayNumberError("Fehler! Konnte Gebäude nicht speichern.\nBitte Eingaben überprüfen");
+				}
+			}
+
+			if (e.getActionCommand().equals("cancel")) {
+				// TODO Einfügen, dass bei vorliegenden Änderungen diese wirklich verworfen
+				// werden sollen
+				window.dispose();
+			}
+
+			if (e.getActionCommand().equals("?")) {
+				window.displayNumberError("Hier entsteht ein Hilfefenster!\nCurrently under maintenance!");
+			}
+		}
 	}
 
+	private Building building;
+	private BuildingCollection buildingCollection;
+
+	private EditBuilding window;
+
 	// Constructor for editing an existing building
-	public ControllEditBuilding(BuildingCollection collection, Building building) {
+	public ControllEditBuilding() {
 		this.window = new EditBuilding();
-		this.building = building;
-		this.buildingCollection = collection;
-		this.window.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.window.addButtonListener(new BtnListener());
+	}
+
+	public void deleteBuilding() {
+		// TODO Get selected building from tree and delete it after reassuring the user is sure. 
+	}
+
+	public void editBuilding() {
+		// TODO Get the selected building from tree
 		this.window.setTxtGebudeName(building.getGebName());
 		this.window.setTxtGebudeNummer(building.getGebNumber());
 		this.window.setTxtGLF(building.getGlf());
@@ -45,41 +67,8 @@ public class ControllEditBuilding {
 		this.window.setVisible(true);
 	}
 
-	class OkBtnListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-
-			try {
-				building.setGebName(window.getTxtGebudeName());
-				building.setGebNumber(window.getTxtGebudeNummer());
-				building.setGlf(window.getTxtGLF());
-				building.setLoad(window.getTxtLoad());
-				building.setDescription(window.getTxtrBeschreibung());
-				building.setCoordinates(window.getTxtXcoordinate(), window.getTxtYcoordinate());
-				building.setSector(window.getSpinnerSector());
-				building.setActive(window.getChkbxIsActive());
-				window.dispose();
-				buildingCollection.addBuilding(building);
-				finished = true;
-				wait();
-			} catch (Exception e) {
-				window.displayNumberError("Fehler! Konnte Gebäude nicht speichern.\nBitte Eingaben überprüfen");
-			}
-
-		}
-
+	public void newBuilding() {
+		building = new Building();
+		this.window.setVisible(true);
 	}
-
-	class CancelBtnListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Einfügen, dass bei vorliegenden Änderungen diese wirklich verworfen
-			// werden sollen
-			window.dispose();
-		}
-
-	}
-
 }

@@ -1,6 +1,7 @@
 package de.emutec.lastschwerpunkt.workwindow;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,30 +11,6 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MapController {
-
-	private MainWindow mainWindow;
-	private BufferedImage image = null;
-	private String currentPath = null;
-
-	public MapController(MainWindow mainWindow) {
-		this.mainWindow = mainWindow;
-		this.mainWindow.btnChooseImage(new ToolbarListener());
-	}
-
-	/**
-	 * @return the image
-	 */
-	public BufferedImage getImage() {
-		return image;
-	}
-
-	/**
-	 * @param image
-	 *            the image to set
-	 */
-	public void setImage(BufferedImage image) {
-		this.image = image;
-	}
 
 	class ToolbarListener implements ActionListener {
 
@@ -58,6 +35,31 @@ public class MapController {
 			}
 
 		}
+	}
+
+	private String currentPath = null;
+	private BufferedImage image = null;
+
+	private MainWindow mainWindow;
+
+	public MapController(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+		this.mainWindow.btnChooseImage(new ToolbarListener());
+	}
+
+	/**
+	 * @return the image
+	 */
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image
+	 *            the image to set
+	 */
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
 }

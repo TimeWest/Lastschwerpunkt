@@ -5,24 +5,24 @@ import java.awt.event.ActionListener;
 
 public class MenuController {
 
-	private MainWindow mainWindow;
-
-	public MenuController(MainWindow mainWindow) {
-		// TODO Auto-generated constructor stub
-		this.mainWindow = mainWindow;
-		this.mainWindow.mntmExitListener(new MenuActionListener());
-	}
-
 	class MenuActionListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 			// TODO Ask if sure to exit, when not saved
-			if ("exit".equals(arg0.getActionCommand())) {
+			if ("exit".equals(e.getActionCommand())) {
 				System.exit(0);
 			}
 		}
 
+	}
+
+	private MainWindow mainWindow;
+
+	public MenuController(MainWindow mainWindow) {
+		
+		this.mainWindow = mainWindow;
+		this.mainWindow.mntmExitListener(new MenuActionListener());
 	}
 
 }
