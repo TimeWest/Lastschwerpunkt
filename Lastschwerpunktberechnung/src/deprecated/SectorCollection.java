@@ -1,8 +1,11 @@
-package de.emutec.lastschwerpunkt.sector;
+package deprecated;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import de.emutec.lastschwerpunkt.model.Sector;
+
+@Deprecated
 public class SectorCollection {
 	private List<Sector> collectionOfSectors;
 	// TODO Create some kind of collection (List/Map/Tree) to store the created

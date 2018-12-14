@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.sector;
+package de.emutec.lastschwerpunkt.model;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;

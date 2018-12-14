@@ -1,4 +1,6 @@
-package de.emutec.lastschwerpunkt.building;
+package de.emutec.lastschwerpunkt.model;
+
+import java.awt.Point;
 
 /**
  * @author Timo.Nordhorn
@@ -7,7 +9,7 @@ package de.emutec.lastschwerpunkt.building;
 public class Building {
 
 	private boolean active;
-	private Double[] coordinates = new Double[2];
+	private Point coordinates;
 	private String description;
 	private String gebName;
 	private String gebNumber;
@@ -17,12 +19,19 @@ public class Building {
 
 	public Building() {
 		// Basic initialization of a building
+		this.setGebName("");
+		this.setGebNumber(null);
+		this.setLoad(0d);
+		this.setGlf(0d);
+		this.setActive(false);
+		this.coordinates = new Point();
+		this.setDescription("");
 	}
 
 	/**
 	 * @return the coordinates
 	 */
-	public Double[] getCoordinates() {
+	public Point getCoordinates() {
 		return coordinates;
 	}
 
@@ -84,9 +93,10 @@ public class Building {
 	 * @param coordinates
 	 *            the coordinates to set
 	 */
-	public void setCoordinates(double x, double y) {
-		this.coordinates[0] = x;
-		this.coordinates[1] = y;
+	public void setCoordinates(Point p) {
+//		this.coordinates.setLocation(p);
+		this.coordinates.x = (int) p.getX();
+		this.coordinates.y = (int) p.getY();
 	}
 
 	/**

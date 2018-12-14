@@ -1,7 +1,5 @@
-package de.emutec.lastschwerpunkt.workwindow;
+package de.emutec.lastschwerpunkt.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,12 +8,18 @@ import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import de.emutec.lastschwerpunkt.view.MainWindow;
+
 public class MapController {
 
-	class ToolbarListener implements ActionListener {
+	private String currentPath = null;
 
-		@Override
-		public void actionPerformed(ActionEvent a) {
+	private BufferedImage image = null;
+	private MainWindow mainWindow;
+
+	public MapController(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+		this.mainWindow.btnChooseImage(a -> {
 			if (a.getActionCommand().equals("addImage")) {
 				JFileChooser chooser = new JFileChooser(currentPath);
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
@@ -33,18 +37,7 @@ public class MapController {
 					}
 				}
 			}
-
-		}
-	}
-
-	private String currentPath = null;
-	private BufferedImage image = null;
-
-	private MainWindow mainWindow;
-
-	public MapController(MainWindow mainWindow) {
-		this.mainWindow = mainWindow;
-		this.mainWindow.btnChooseImage(new ToolbarListener());
+		});
 	}
 
 	/**

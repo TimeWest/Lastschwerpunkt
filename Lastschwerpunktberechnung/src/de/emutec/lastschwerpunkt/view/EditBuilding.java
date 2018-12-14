@@ -1,7 +1,8 @@
-package de.emutec.lastschwerpunkt.building;
+package de.emutec.lastschwerpunkt.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -13,8 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
-import de.emutec.lastschwerpunkt.EditingWindow;
-
 @SuppressWarnings("serial")
 public class EditBuilding extends EditingWindow {
 
@@ -24,14 +23,14 @@ public class EditBuilding extends EditingWindow {
 	private JCheckBox chkbxIsActive;
 	private JSpinner spinnerSector;
 	
-	private JTextField txtName;
 	private JTextField txtGebudeNummer;
-	private JTextField txtLoad;
 	private JTextField txtGLF;
-	private JTextField txtXcoordinate;
-	private JTextField txtYcoordinate;
-	
+	private JTextField txtLoad;
+	private JTextField txtName;
 	private JTextArea txtrBeschreibung;
+	private JTextField txtXcoordinate;
+	
+	private JTextField txtYcoordinate;
 
 	public EditBuilding() {
 
@@ -171,19 +170,11 @@ public class EditBuilding extends EditingWindow {
 	public String getTxtrBeschreibung() {
 		return txtrBeschreibung.getText();
 	}
-
-	/**
-	 * @return the xCoordinate of the chosen building
-	 */
-	public double getTxtXcoordinate() {
-		return Double.parseDouble(txtXcoordinate.getText().replace(',', '.'));
-	}
-
-	/**
-	 * @return the txtYcoordinate
-	 */
-	public double getTxtYcoordinate() {
-		return Double.parseDouble(txtYcoordinate.getText().replace(',', '.'));
+	
+	public Point getCoordinates() {
+		double x = Double.parseDouble(txtXcoordinate.getText().replace(',', '.'));
+		double y = Double.parseDouble(txtYcoordinate.getText().replace(',', '.'));
+		return new Point((int) x, (int) y);
 	}
 
 	/**
@@ -244,19 +235,12 @@ public class EditBuilding extends EditingWindow {
 	}
 
 	/**
-	 * @param xCoordinate
-	 *            the x-coordinate to set
+	 * @param p
+	 * 
 	 */
-	public void setTxtXcoordinate(Double xCoordinate) {
-		this.txtXcoordinate.setText(xCoordinate.toString());
-	}
-
-	/**
-	 * @param yCoordinate
-	 *            the y-coordinate to set
-	 */
-	public void setTxtYcoordinate(Double yCoordinate) {
-		this.txtXcoordinate.setText(yCoordinate.toString());
+	public void setCoordinates(Point p) {
+		this.txtXcoordinate.setText(Integer.toString((int) p.getX()));
+		this.txtYcoordinate.setText(Integer.toString((int) p.getY()));
 	}
 
 }

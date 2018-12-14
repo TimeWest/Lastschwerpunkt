@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt;
+package de.emutec.lastschwerpunkt.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -12,12 +12,30 @@ import javax.swing.WindowConstants;
 
 @SuppressWarnings("serial")
 public class EditingWindow extends JDialog {
-	
-	protected JButton btnOk;
+
+	// ********************************
+	// ***** Dialog Return Values *****
+	// ********************************
+
+	/**
+	 * Return value if cancel is chosen.
+	 */
+	public static final String CANCEL_OPTION = "CANCEL";
+
+	/**
+	 * Return value if approve (yes, ok) is chosen.
+	 */
+	public static final String APPROVE_OPTION = "OK";
+
+	/**
+	 * Return value if an error occurred.
+	 */
+	public static final String HELP_OPTION = "HELP";
+
 	protected JButton btnCancel;
 	protected JButton btnHelp;
+	protected JButton btnOk;
 	protected JPanel buttonPanel = new JPanel();
-
 	protected JPanel contentPanel = new JPanel();
 
 	public EditingWindow(String string) {
@@ -45,13 +63,13 @@ public class EditingWindow extends JDialog {
 	}
 
 	public void addButtonListener(ActionListener a) {
-		btnOk.setActionCommand("ok");
+		btnOk.setActionCommand(APPROVE_OPTION);
 		btnOk.addActionListener(a);
 
-		btnCancel.setActionCommand("cancel");
+		btnCancel.setActionCommand(CANCEL_OPTION);
 		btnCancel.addActionListener(a);
 
-		btnHelp.setActionCommand("?");
+		btnHelp.setActionCommand(HELP_OPTION);
 		btnHelp.addActionListener(a);
 	}
 

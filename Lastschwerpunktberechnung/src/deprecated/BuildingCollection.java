@@ -1,8 +1,11 @@
-package de.emutec.lastschwerpunkt.building;
+package deprecated;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import de.emutec.lastschwerpunkt.model.Building;
+
+@Deprecated
 public class BuildingCollection {
 	Building building;
 	// TODO Create some kind of collection (List/Map/Tree) to store the created
@@ -25,7 +28,7 @@ public class BuildingCollection {
 			return null;
 		}
 	}
-
+	
 	public Building removeBuilding(Building building) {
 		try {
 			return collectionOfBuildings.remove(collectionOfBuildings.indexOf(building));

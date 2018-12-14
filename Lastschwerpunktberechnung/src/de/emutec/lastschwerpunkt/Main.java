@@ -1,11 +1,14 @@
 package de.emutec.lastschwerpunkt;
 
-import de.emutec.lastschwerpunkt.sector.Collection;
-import de.emutec.lastschwerpunkt.workwindow.MainButtonController;
-import de.emutec.lastschwerpunkt.workwindow.MainWindow;
-import de.emutec.lastschwerpunkt.workwindow.MapController;
-import de.emutec.lastschwerpunkt.workwindow.MenuController;
-import de.emutec.lastschwerpunkt.workwindow.TreeController;
+import de.emutec.lastschwerpunkt.controller.ControllMain;
+import de.emutec.lastschwerpunkt.controller.MainButtonController;
+import de.emutec.lastschwerpunkt.controller.MapController;
+import de.emutec.lastschwerpunkt.controller.MenuController;
+import de.emutec.lastschwerpunkt.controller.TreeController;
+import de.emutec.lastschwerpunkt.editing.ControllEditBuilding;
+import de.emutec.lastschwerpunkt.editing.ControllEditSector;
+import de.emutec.lastschwerpunkt.model.Collection;
+import de.emutec.lastschwerpunkt.view.MainWindow;
 
 /**
  * @author Timo.Nordhorn
@@ -17,11 +20,14 @@ public class Main {
 		 * Launch the application.
 		 */
 		MainWindow mainWindow = new MainWindow();
-		Collection collection = new Collection();
-		new TreeController(mainWindow, collection);
-		new MapController(mainWindow);
-		new MenuController(mainWindow);
-		new MainButtonController(mainWindow);
+		new ControllMain(mainWindow);
+
+		// new TreeController(mainWindow, collection);
+		// new MapController(mainWindow);
+		// new MenuController(mainWindow);
+		// new MainButtonController(mainWindow);
+		// new ControllEditBuilding();
+		// new ControllEditSector();
 
 		mainWindow.setVisible(true);
 

@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.workwindow;
+package de.emutec.lastschwerpunkt.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -136,7 +136,7 @@ public class MainWindow extends JFrame {
 		btnAddImage.addActionListener(a);
 	}
 
-	public void btnListener(ActionListener a) {
+	public void buttonListener(ActionListener a) {
 		btnAddBuilding.addActionListener(a);
 		btnEditBuilding.addActionListener(a);
 		btnDelBuilding.addActionListener(a);

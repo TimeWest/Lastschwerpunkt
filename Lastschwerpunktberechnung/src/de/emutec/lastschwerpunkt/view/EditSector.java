@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.sector;
+package de.emutec.lastschwerpunkt.view;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -7,8 +7,6 @@ import java.awt.GridBagLayout;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import de.emutec.lastschwerpunkt.EditingWindow;
 
 @SuppressWarnings("serial")
 public class EditSector extends EditingWindow {

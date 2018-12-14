@@ -1,21 +1,23 @@
-package de.emutec.lastschwerpunkt.sector;
+package de.emutec.lastschwerpunkt.model;
 
 import java.awt.Color;
 
 public class Sector {
 
 	private Color color;
-	// Properties of a sector
 	private String name;
 	private int number;
 
 	public Sector() {
+		this.setName("");
+		this.setNumber(0);
+		this.setColor(new Color(0));
 	}
 
 	public Sector(String name, int number, Color color) {
-		this.name = name;
-		this.number = number;
-		this.color = color;
+		this.setName(name);
+		this.setNumber(number);
+		this.setColor(color);
 	}
 
 	/**
@@ -37,6 +39,13 @@ public class Sector {
 	 */
 	public Integer getNumber() {
 		return number;
+	}
+
+	/**
+	 * @return this
+	 */
+	public Sector getSector() {
+		return this;
 	}
 
 	/**
