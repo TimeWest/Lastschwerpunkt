@@ -1,9 +1,10 @@
-package de.emutec.lastschwerpunkt.model;
+package deprecated;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+@Deprecated
 public class Collection {
 
 	private TreePath path;

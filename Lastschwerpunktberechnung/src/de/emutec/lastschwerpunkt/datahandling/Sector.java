@@ -1,19 +1,26 @@
-package de.emutec.lastschwerpunkt.model;
+package de.emutec.lastschwerpunkt.datahandling;
 
 import java.awt.Color;
 
-public class Sector {
+public class Sector extends Data{
 
 	private Color color;
-	private String name;
-	private int number;
-
+	
+	/**
+	 * Constructor to create a new sector.
+	 */
 	public Sector() {
 		this.setName("");
 		this.setNumber(0);
 		this.setColor(new Color(0));
 	}
 
+	/**
+	 * Constructor to edit an existing sector.
+	 * @param name the name of the sector
+	 * @param number the number of the sector
+	 * @param color the color the sector shall be painted in.
+	 */
 	public Sector(String name, int number, Color color) {
 		this.setName(name);
 		this.setNumber(number);
@@ -25,20 +32,6 @@ public class Sector {
 	 */
 	public Color getColor() {
 		return color;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @return the number
-	 */
-	public Integer getNumber() {
-		return number;
 	}
 
 	/**
@@ -56,20 +49,15 @@ public class Sector {
 		this.color = color;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	/**
-	 * @param number
-	 *            the number to set
-	 */
-	public void setNumber(int number) {
-		this.number = number;
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		return false;
 	}
-
 }

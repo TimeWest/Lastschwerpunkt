@@ -3,7 +3,7 @@ package deprecated;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.emutec.lastschwerpunkt.model.Building;
+import de.emutec.lastschwerpunkt.datahandling.Building;
 
 @Deprecated
 public class BuildingCollection {

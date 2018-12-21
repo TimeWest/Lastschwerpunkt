@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.Enumeration;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,38 +24,54 @@ import javax.swing.JToolBar;
 import javax.swing.JTree;
 import javax.swing.WindowConstants;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 
-	private JButton btnAddBuilding = new JButton("Geb\u00E4ude hinzuf\u00FCgen");
-	private JButton btnAddImage = new JButton("Bild");
-	private JButton btnAddSector = new JButton("Sektor hinzufügen");
-	private JButton btnDelBuilding = new JButton("Geb\u00E4ude l\u00F6schen");
-	private JButton btnDelSector = new JButton("Sektor löschen");
-	private JButton btnEditBuilding = new JButton("Geb\u00E4ude bearbeiten");
-	private JButton btnEditSector = new JButton("Sektor bearbeiten");
+	private static final String HELP = "?";
+	private static final String NEW_PROJECT = "Neues Projekt";
+	private static final String LOAD_PROJECT = "Projekt laden";
+	private static final String SAVE_PROJECT = "Projekt speichern";
+	private static final String SAVE_PROJECT_AS = "Projekt speichern unter...";
+	private static final String EXIT = "Beenden";
+	private static final String ADD_BUILDING = "Gebäude hinzufügen";
+	private static final String EDIT_BUILDING = "Gebäude bearbeiten";
+	private static final String DELETE_BUILDING = "Gebäude löschen";
+	private static final String ADD_SECTOR = "Sektor hinzufügen";
+	private static final String EDIT_SECTOR = "Sektor bearbeiten";
+	private static final String DELETE_SECTOR = "Sektor löschen";
+	private static final String ADD_IMAGE = "Lageplan hinzufügen";
 
-	private JLabel imageLabel = new JLabel();
-	
-	private JScrollPane imageScrollPane = new JScrollPane(imageLabel);
-	
-	private JMenu menu = new JMenu("Datei");
-	private JMenuBar menuBar = new JMenuBar();
+	private JButton btnAddBuilding;
+	private JButton btnAddImage;
+	private JButton btnAddSector;
+	private JButton btnDelBuilding;
+	private JButton btnDelSector;
+	private JButton btnEditBuilding;
+	private JButton btnEditSector;
 
-	private JMenuItem mntmExit = new JMenuItem("Beenden");
-	private JMenuItem mntmHelp = new JMenuItem("?");
-	private JMenuItem mntmLoadProject = new JMenuItem("Projekt Laden");
-	private JMenuItem mntmNewProject = new JMenuItem("Neues Projekt");
-	private JMenuItem mntmSaveProject = new JMenuItem("Projekt speichern");
-	private JMenuItem mntmSaveProjectAs = new JMenuItem("Projekt speichern unter...");
-	
-	private JPanel panelMap = new JPanel();
-	private JPanel panelNavigation = new JPanel();
+	private JLabel imageLabel;
 
-	private JToolBar toolBar = new JToolBar();
-	
-	private JTree tree = new JTree();
+	private JScrollPane imageScrollPane;
+
+	private JMenu menu;
+	private JMenuBar mainMenuBar;
+
+	private JMenuItem mntmExit;
+	private JMenuItem mntmHelp;
+	private JMenuItem mntmLoadProject;
+	private JMenuItem mntmNewProject;
+	private JMenuItem mntmSaveProject;
+	private JMenuItem mntmSaveProjectAs;
+
+	private JPanel panelMap;
+	private JPanel panelNavigation;
+
+	private JToolBar toolBar;
+
+	private JTree tree;
 	private JScrollPane treeScrollPane = new JScrollPane(tree);
 
 	// Create the application
@@ -67,32 +84,96 @@ public class MainWindow extends JFrame {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		// Set the main parts of the window
-		this.setJMenuBar(menuBar);
+		mainMenuBar = new JMenuBar();
+		this.setJMenuBar(mainMenuBar);
 		this.getContentPane().setLayout(new BorderLayout(0, 0));
+
+		this.panelNavigation = new JPanel();
 		this.getContentPane().add(panelNavigation, BorderLayout.WEST);
+
+		panelMap = new JPanel();
 		this.getContentPane().add(panelMap);
 
 		// Setting up the menu bar
-		menuBar.add(menu);
-		menuBar.add(mntmHelp);
+		menu = new JMenu("Datei");
+		mainMenuBar.add(menu);
+
+		mntmHelp = new JMenuItem(HELP);
+		mntmHelp.setActionCommand(HELP);
+		mainMenuBar.add(mntmHelp);
+
+		mntmNewProject = new JMenuItem(NEW_PROJECT);
+		mntmNewProject.setActionCommand(NEW_PROJECT);
 		menu.add(mntmNewProject);
-		mntmNewProject.setActionCommand("newProject");
+
+		mntmLoadProject = new JMenuItem(LOAD_PROJECT);
+		mntmLoadProject.setActionCommand(LOAD_PROJECT);
 		menu.add(mntmLoadProject);
-		mntmLoadProject.setActionCommand("loadProject");
+
+		mntmSaveProject = new JMenuItem(SAVE_PROJECT);
+		mntmSaveProject.setActionCommand(SAVE_PROJECT);
 		menu.add(mntmSaveProject);
-		mntmSaveProject.setActionCommand("SaveProject");
+
+		mntmSaveProjectAs = new JMenuItem(SAVE_PROJECT_AS);
+		mntmSaveProjectAs.setActionCommand(SAVE_PROJECT_AS);
 		menu.add(mntmSaveProjectAs);
-		mntmSaveProjectAs.setActionCommand("newProjectAs");
+
+		mntmExit = new JMenuItem(EXIT);
+		mntmExit.setActionCommand(EXIT);
 		menu.add(mntmExit);
-		mntmExit.setActionCommand("exit");
 
 		// Left panel for tree and buttons
 		panelNavigation.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
+		tree = new JTree();
+		tree.setModel(new DefaultTreeModel(new TreeNode() {
+			
+			@Override
+			public boolean isLeaf() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public TreeNode getParent() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public int getIndex(TreeNode node) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public int getChildCount() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public TreeNode getChildAt(int childIndex) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public boolean getAllowsChildren() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public Enumeration<? extends TreeNode> children() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		}));
 		tree.setRowHeight(25);
 		tree.setShowsRootHandles(true);
-		tree.setRootVisible(false);
+		tree.setRootVisible(true);
 		tree.setEditable(true);
 
 		c.gridx = 0;
@@ -104,29 +185,43 @@ public class MainWindow extends JFrame {
 		c.weighty = 0;
 		c.gridwidth = GridBagConstraints.REMAINDER;
 
-		btnAddBuilding.setActionCommand("addBuilding");
+		btnAddBuilding = new JButton(ADD_BUILDING);
+		btnAddBuilding.setActionCommand(ADD_BUILDING);
 		panelNavigation.add(btnAddBuilding, c);
-		btnEditBuilding.setActionCommand("editBuilding");
+
+		btnEditBuilding = new JButton(EDIT_BUILDING);
+		btnEditBuilding.setActionCommand(EDIT_BUILDING);
 		panelNavigation.add(btnEditBuilding, c);
-		btnDelBuilding.setActionCommand("deleteBuilding");
+
+		btnDelBuilding = new JButton(DELETE_BUILDING);
+		btnDelBuilding.setActionCommand(DELETE_BUILDING);
 		panelNavigation.add(btnDelBuilding, c);
 
-		btnAddSector.setActionCommand("addSector");
+		btnAddSector = new JButton(ADD_SECTOR);
+		btnAddSector.setActionCommand(ADD_SECTOR);
 		panelNavigation.add(btnAddSector, c);
-		btnEditSector.setActionCommand("editSector");
+
+		btnEditSector = new JButton(EDIT_SECTOR);
+		btnEditSector.setActionCommand(EDIT_SECTOR);
 		panelNavigation.add(btnEditSector, c);
-		btnDelSector.setActionCommand("deleteSector");
+
+		btnDelSector = new JButton(DELETE_SECTOR);
+		btnDelSector.setActionCommand(DELETE_SECTOR);
 		panelNavigation.add(btnDelSector, c);
 
 		// Panel for the Map and editingToolbar
 		panelMap.setLayout(new BorderLayout());
-		panelMap.add(toolBar, BorderLayout.NORTH);
+		toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.setBackground(new Color(0, 123, 10));
+		panelMap.add(toolBar, BorderLayout.NORTH);
 
-		btnAddImage.setActionCommand("addImage");
+		btnAddImage = new JButton(ADD_IMAGE);
+		btnAddImage.setActionCommand(ADD_IMAGE);
 		toolBar.add(btnAddImage);
 
+		imageLabel = new JLabel();
+		imageScrollPane = new JScrollPane(imageLabel);
 		panelMap.add(imageScrollPane, BorderLayout.CENTER);
 
 		this.pack();

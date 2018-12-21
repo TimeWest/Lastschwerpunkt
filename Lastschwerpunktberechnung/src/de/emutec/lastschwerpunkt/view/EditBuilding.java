@@ -22,14 +22,12 @@ public class EditBuilding extends EditingWindow {
 	private JButton btnNeuSetzen;
 	private JCheckBox chkbxIsActive;
 	private JSpinner spinnerSector;
-	
-	private JTextField txtGebudeNummer;
+
 	private JTextField txtGLF;
 	private JTextField txtLoad;
-	private JTextField txtName;
 	private JTextArea txtrBeschreibung;
 	private JTextField txtXcoordinate;
-	
+
 	private JTextField txtYcoordinate;
 
 	public EditBuilding() {
@@ -61,8 +59,8 @@ public class EditBuilding extends EditingWindow {
 		contentPanel.add(new JLabel("Gebäudenummer"), gbc);
 
 		gbc.gridx = 1;
-		txtGebudeNummer = new JTextField(5);
-		contentPanel.add(txtGebudeNummer, gbc);
+		txtNumber = new JTextField(5);
+		contentPanel.add(txtNumber, gbc);
 
 		gbc.gridx = 3;
 		contentPanel.add(new JLabel("X-Koordinate"), gbc);
@@ -94,7 +92,7 @@ public class EditBuilding extends EditingWindow {
 
 		gbc.gridx = 0;
 		contentPanel.add(new JLabel("Sektor"), gbc);
-		
+
 		gbc.gridx = 1;
 		spinnerSector = new JSpinner(new SpinnerNumberModel(1, 1, SPINNER_MAX, 1));
 		contentPanel.add(spinnerSector, gbc);
@@ -137,20 +135,6 @@ public class EditBuilding extends EditingWindow {
 	}
 
 	/**
-	 * @return the name of the building
-	 */
-	public String getTxtGebudeName() {
-		return txtName.getText();
-	}
-
-	/**
-	 * @return the number of the building
-	 */
-	public String getTxtGebudeNummer() {
-		return txtGebudeNummer.getText();
-	}
-
-	/**
 	 * @return the "Gleichzeitigkeitsfaktor" (GLF)
 	 */
 	public double getTxtGLF() {
@@ -170,7 +154,7 @@ public class EditBuilding extends EditingWindow {
 	public String getTxtrBeschreibung() {
 		return txtrBeschreibung.getText();
 	}
-	
+
 	public Point getCoordinates() {
 		double x = Double.parseDouble(txtXcoordinate.getText().replace(',', '.'));
 		double y = Double.parseDouble(txtYcoordinate.getText().replace(',', '.'));
@@ -192,22 +176,6 @@ public class EditBuilding extends EditingWindow {
 	 */
 	public void setSpinnerSector(int sector) {
 		this.spinnerSector.setValue(sector);
-	}
-
-	/**
-	 * @param name
-	 *            the name of the building
-	 */
-	public void setTxtGebudeName(String name) {
-		this.txtName.setText(name);
-	}
-
-	/**
-	 * @param buildingNumber
-	 *            the number of the building (house number)
-	 */
-	public void setTxtGebudeNummer(String buildingNumber) {
-		this.txtGebudeNummer.setText(buildingNumber);
 	}
 
 	/**

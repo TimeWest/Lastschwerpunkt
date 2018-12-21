@@ -8,10 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 @SuppressWarnings("serial")
-public class EditingWindow extends JDialog {
+public abstract class EditingWindow extends JDialog {
 
 	// ********************************
 	// ***** Dialog Return Values *****
@@ -35,8 +36,10 @@ public class EditingWindow extends JDialog {
 	protected JButton btnCancel;
 	protected JButton btnHelp;
 	protected JButton btnOk;
-	protected JPanel buttonPanel = new JPanel();
-	protected JPanel contentPanel = new JPanel();
+	protected JPanel buttonPanel;
+	protected JPanel contentPanel;
+	protected JTextField txtName;
+	protected JTextField txtNumber;
 
 	public EditingWindow(String string) {
 		this.setTitle(string);
@@ -46,7 +49,11 @@ public class EditingWindow extends JDialog {
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		this.getContentPane().setLayout(new BorderLayout());
+		
+		contentPanel = new JPanel();
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
+		
+		buttonPanel = new JPanel();
 		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
 		// Setting button area
@@ -54,7 +61,7 @@ public class EditingWindow extends JDialog {
 
 		btnOk = new JButton("Ok");
 		buttonPanel.add(btnOk);
-
+		
 		btnCancel = new JButton("Abbrechen");
 		buttonPanel.add(btnCancel);
 
@@ -62,6 +69,10 @@ public class EditingWindow extends JDialog {
 		buttonPanel.add(btnHelp);
 	}
 
+	/**
+	 * 
+	 * @param a
+	 */
 	public void addButtonListener(ActionListener a) {
 		btnOk.setActionCommand(APPROVE_OPTION);
 		btnOk.addActionListener(a);
@@ -73,8 +84,44 @@ public class EditingWindow extends JDialog {
 		btnHelp.addActionListener(a);
 	}
 
+	/**
+	 * 
+	 * @param errorMessage
+	 */
 	public void displayNumberError(String errorMessage) {
 		JOptionPane.showMessageDialog(this, errorMessage);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public String getName() {
+		return txtName.getText();
+	}
+	
+	/**
+	 * @return the number of the building
+	 */
+	public String getNumber() {
+		return txtNumber.getText();
+	}
+	
+	/**
+	 * @param name
+	 *            the name of the building
+	 */
+	@Override
+	public void setName(String name) {
+		this.txtName.setText(name);
+	}
+
+	/**
+	 * @param i.toString
+	 *            the number of the building (house number)
+	 */
+	public void setNumber(int i) {
+		this.txtNumber.setText(Integer.toString(i));
 	}
 
 }

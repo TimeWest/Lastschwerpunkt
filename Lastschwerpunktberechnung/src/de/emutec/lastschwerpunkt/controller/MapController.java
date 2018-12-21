@@ -1,5 +1,6 @@
 package de.emutec.lastschwerpunkt.controller;
 
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class MapController {
 	public MapController(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 		this.mainWindow.btnChooseImage(a -> {
+
 			if (a.getActionCommand().equals("addImage")) {
 				JFileChooser chooser = new JFileChooser(currentPath);
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
@@ -30,8 +32,7 @@ public class MapController {
 					File file = chooser.getSelectedFile();
 					currentPath = file.getAbsolutePath();
 					try {
-						setImage(ImageIO.read(file));
-						mainWindow.setImage(getImage());
+						mainWindow.setImage(ImageIO.read(file));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -53,6 +54,13 @@ public class MapController {
 	 */
 	public void setImage(BufferedImage image) {
 		this.image = image;
+	}
+	
+	/**
+	 * get the cursors position on the image
+	 */
+	private Point getCursorPosition() {
+		return new Point();
 	}
 
 }

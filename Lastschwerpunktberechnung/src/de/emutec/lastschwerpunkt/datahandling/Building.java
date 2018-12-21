@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.model;
+package de.emutec.lastschwerpunkt.datahandling;
 
 import java.awt.Point;
 
@@ -6,21 +6,19 @@ import java.awt.Point;
  * @author Timo.Nordhorn
  *
  */
-public class Building {
+public class Building extends Data {
 
 	private boolean active;
 	private Point coordinates;
 	private String description;
-	private String gebName;
-	private String gebNumber;
 	private double glf;
 	private double load;
 	private int sector;
 
 	public Building() {
 		// Basic initialization of a building
-		this.setGebName("");
-		this.setGebNumber(null);
+		this.setName("");
+		this.setNumber(0);
 		this.setLoad(0d);
 		this.setGlf(0d);
 		this.setActive(false);
@@ -40,20 +38,6 @@ public class Building {
 	 */
 	public String getDescription() {
 		return description;
-	}
-
-	/**
-	 * @return the gebName
-	 */
-	public String getGebName() {
-		return gebName;
-	}
-
-	/**
-	 * @return the gebNumber
-	 */
-	public String getGebNumber() {
-		return gebNumber;
 	}
 
 	/**
@@ -94,9 +78,9 @@ public class Building {
 	 *            the coordinates to set
 	 */
 	public void setCoordinates(Point p) {
-//		this.coordinates.setLocation(p);
-		this.coordinates.x = (int) p.getX();
-		this.coordinates.y = (int) p.getY();
+		this.coordinates.setLocation(p);
+//		this.coordinates.x = (int) p.getX();
+//		this.coordinates.y = (int) p.getY();
 	}
 
 	/**
@@ -105,22 +89,6 @@ public class Building {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * @param gebName
-	 *            the gebName to set
-	 */
-	public void setGebName(String gebName) {
-		this.gebName = gebName;
-	}
-
-	/**
-	 * @param gebNumber
-	 *            the gebNumber to set
-	 */
-	public void setGebNumber(String gebNumber) {
-		this.gebNumber = gebNumber;
 	}
 
 	/**
@@ -146,5 +114,19 @@ public class Building {
 	public void setSector(int sector) {
 		this.sector = sector;
 	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
+	
+
 }

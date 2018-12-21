@@ -13,26 +13,25 @@ public class MainButtonController {
 		this.mainWindow = mainWindow;
 		this.mainWindow.buttonListener(e -> {
 
-			// TODO Auto-generated method stub
 			if (e.getActionCommand().equals("addBuilding"))
-				new ControllEditBuilding().add();
-
+				new ControllEditBuilding(EditingType.ADD);
+			
 			if (e.getActionCommand().equals("editBuilding"))
-				new ControllEditBuilding().edit();
+				new ControllEditBuilding(EditingType.EDIT);
 
 			if (e.getActionCommand().equals("deleteBuilding"))
 				// TODO get the selected Object from tree and ask if sure, then delete
-				new ControllEditBuilding().delete();
+				new ControllEditBuilding(EditingType.DELETE);
 
 			if (e.getActionCommand().equals("addSector"))
-				new ControllEditSector().add();
+				new ControllEditSector(EditingType.ADD);
 
 			if (e.getActionCommand().equals("editSector"))
-				new ControllEditSector().edit();
+				new ControllEditSector(EditingType.EDIT);
 
 			if (e.getActionCommand().equals("addSector"))
 				// TODO get the selected Sector from tree and ask if sure, then delete
-				new ControllEditSector().delete();
+				new ControllEditSector(EditingType.DELETE);
 
 		});
 	}

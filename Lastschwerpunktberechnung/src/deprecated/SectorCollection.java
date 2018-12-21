@@ -3,7 +3,7 @@ package deprecated;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.emutec.lastschwerpunkt.model.Sector;
+import de.emutec.lastschwerpunkt.datahandling.Sector;
 
 @Deprecated
 public class SectorCollection {

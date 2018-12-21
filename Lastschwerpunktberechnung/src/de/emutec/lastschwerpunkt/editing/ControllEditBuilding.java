@@ -3,66 +3,77 @@ package de.emutec.lastschwerpunkt.editing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import de.emutec.lastschwerpunkt.model.Building;
+import de.emutec.lastschwerpunkt.controller.EditingType;
+import de.emutec.lastschwerpunkt.datahandling.Building;
+import de.emutec.lastschwerpunkt.datahandling.DataCollection;
+import de.emutec.lastschwerpunkt.datahandling.DataFactory;
+import de.emutec.lastschwerpunkt.datahandling.DataType;
 import de.emutec.lastschwerpunkt.view.EditBuilding;
+import de.emutec.lastschwerpunkt.view.EditWindowFactory;
 import de.emutec.lastschwerpunkt.view.EditingWindow;
 
 public class ControllEditBuilding implements ControllEditWindows {
 
-	private Building building;
-	private EditBuilding window;
+	Building data;
+	EditBuilding window;
 
 	// Constructor for editing an existing building
-	public ControllEditBuilding() {
-		this.window = new EditBuilding();
-		this.window.addButtonListener(new ButtonListener());
-	}
+	public ControllEditBuilding(EditingType type) {
 
-	@Override
-	public void delete() {
-		// TODO Get selected building from tree and delete it after reassuring the user
-		// is sure.
+		window = (EditBuilding) EditWindowFactory.getInstance(DataType.BUILDING);
+		data = (Building) DataFactory.getInstance(DataType.BUILDING);
+		
+		switch (type) {
+		case ADD:
+			break;
+		case EDIT:
+			data = (Building) DataCollection.INSTANCE.getData();
+			edit();
+			break;
+		case DELETE:
+			delete();
+			break;
+		default:
+			break;
+		}
+
+		window.addButtonListener(new ButtonListener());
+		window.setVisible(true);
+
 	}
 
 	@Override
 	public void edit() {
 		// TODO Get the selected building from tree
-		this.building = new Building();
-		this.window.setTxtGebudeName(building.getGebName());
-		this.window.setTxtGebudeNummer(building.getGebNumber());
-		this.window.setTxtGLF(building.getGlf());
-		this.window.setTxtLoad(building.getLoad());
-		this.window.setTxtrBeschreibung(building.getDescription());
-		this.window.setCoordinates(building.getCoordinates());
-		this.window.setSpinnerSector(building.getSector());
-		this.window.setChkbxIsActive(building.isActive());
-		this.window.setVisible(true);
-	}
-
-	@Override
-	public void add() {
-		building = new Building();
-		this.window.setVisible(true);
+		window.setName(data.getName());
+		window.setNumber(data.getNumber());
+		window.setTxtGLF(data.getGlf());
+		window.setTxtLoad(data.getLoad());
+		window.setTxtrBeschreibung(data.getDescription());
+		window.setCoordinates(data.getCoordinates());
+		window.setSpinnerSector(data.getSector());
+		window.setChkbxIsActive(data.isActive());
 	}
 
 	private class ButtonListener implements ActionListener {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-		
+
 			if (e.getActionCommand().equals(EditingWindow.APPROVE_OPTION)) {
 				try {
-					building.setGebName(window.getTxtGebudeName());
-					building.setGebNumber(window.getTxtGebudeNummer());
-					building.setGlf(window.getTxtGLF());
-					building.setLoad(window.getTxtLoad());
-					building.setDescription(window.getTxtrBeschreibung());
-					building.setCoordinates(window.getCoordinates());
-					building.setSector(window.getSpinnerSector());
-					building.setActive(window.getChkbxIsActive());
+					data.setName(window.getName());
+					data.setNumber(Integer.parseInt(window.getNumber()));
+					data.setGlf(window.getTxtGLF());
+					data.setLoad(window.getTxtLoad());
+					data.setDescription(window.getTxtrBeschreibung());
+					data.setCoordinates(window.getCoordinates());
+					data.setSector(window.getSpinnerSector());
+					data.setActive(window.getChkbxIsActive());
 
 					window.removeAll();
 					window.dispose();
+					DataCollection.INSTANCE.editData(data);
 					window = null;
 					return;
 				} catch (Exception ex) {
@@ -82,7 +93,9 @@ public class ControllEditBuilding implements ControllEditWindows {
 			if (e.getActionCommand().equals(EditingWindow.HELP_OPTION)) {
 				window.displayNumberError("Hier entsteht ein Hilfefenster!\nCurrently under maintenance!");
 			}
+
 		}
+
 	}
 
 }
