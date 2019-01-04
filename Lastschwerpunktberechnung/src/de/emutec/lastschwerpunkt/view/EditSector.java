@@ -16,7 +16,7 @@ public class EditSector extends EditingWindow {
 	// Constructor
 	public EditSector() {
 
-		super("Sektor bearbeiten");
+		super(null, "Sektor bearbeiten.");
 		contentPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
@@ -57,4 +57,5 @@ public class EditSector extends EditingWindow {
 	public void setCcSectorColor(Color color) {
 		this.ccSectorColor.setColor(color);
 	}
+
 }

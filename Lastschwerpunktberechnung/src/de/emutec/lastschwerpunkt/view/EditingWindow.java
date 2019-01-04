@@ -2,6 +2,7 @@ package de.emutec.lastschwerpunkt.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -41,18 +42,18 @@ public abstract class EditingWindow extends JDialog {
 	protected JTextField txtName;
 	protected JTextField txtNumber;
 
-	public EditingWindow(String string) {
-		this.setTitle(string);
+	public EditingWindow(Frame parent, String title) {
+		super(parent, title, true);
 		this.setAlwaysOnTop(true);
 		this.setLocationByPlatform(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		this.getContentPane().setLayout(new BorderLayout());
-		
+
 		contentPanel = new JPanel();
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
-		
+
 		buttonPanel = new JPanel();
 		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -61,7 +62,7 @@ public abstract class EditingWindow extends JDialog {
 
 		btnOk = new JButton("Ok");
 		buttonPanel.add(btnOk);
-		
+
 		btnCancel = new JButton("Abbrechen");
 		buttonPanel.add(btnCancel);
 
@@ -99,14 +100,14 @@ public abstract class EditingWindow extends JDialog {
 	public String getName() {
 		return txtName.getText();
 	}
-	
+
 	/**
 	 * @return the number of the building
 	 */
 	public String getNumber() {
 		return txtNumber.getText();
 	}
-	
+
 	/**
 	 * @param name
 	 *            the name of the building
@@ -123,5 +124,4 @@ public abstract class EditingWindow extends JDialog {
 	public void setNumber(int i) {
 		this.txtNumber.setText(Integer.toString(i));
 	}
-
 }

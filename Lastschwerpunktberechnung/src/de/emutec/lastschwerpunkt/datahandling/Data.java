@@ -1,5 +1,7 @@
 package de.emutec.lastschwerpunkt.datahandling;
 
+import java.util.ArrayList;
+
 /**
  * Base class for data Objects "Building" and "Sector"
  * 
@@ -9,9 +11,8 @@ package de.emutec.lastschwerpunkt.datahandling;
 public abstract class Data {
 	String name;
 	int number;
-
-	Data() {
-	}
+	ArrayList<Data> children;
+	Data parent;
 
 	/**
 	 * @return the gebName
@@ -20,13 +21,17 @@ public abstract class Data {
 		return name;
 	}
 
+	public String toString() {
+		return (getNumber() + ": " + getName());
+	}
+
 	/**
 	 * @return the gebNumber
 	 */
 	public int getNumber() {
 		return number;
 	}
-	
+
 	/**
 	 * @param name
 	 *            the name to set
@@ -49,8 +54,8 @@ public abstract class Data {
 	public Data getInstance() {
 		return this;
 	}
-	
+
 	public abstract int hashCode();
-	
+
 	public abstract boolean equals(Object o);
 }

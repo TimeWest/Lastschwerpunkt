@@ -33,7 +33,7 @@ public class EditBuilding extends EditingWindow {
 	public EditBuilding() {
 
 		// Setting the main frame
-		super("Gebäude bearbeiten");
+		super(null, "Gebäude bearbeiten");
 		contentPanel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 

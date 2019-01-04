@@ -11,22 +11,22 @@ public class TreeController {
 
 	public TreeController(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
-		this.mainWindow.treeSelectionListener(e -> setPath(new TreePath(e.getNewLeadSelectionPath())));
+		
 	}
 
 	/**
 	 * @return the path
 	 */
 	public TreePath getPath() {
-		return (TreePath) DataCollection.INSTANCE.getCurrentObject();
+		return (TreePath) DataCollection.INSTANCE.getCurrentObjectPath();
 	}
 
-	/**
-	 * @param path
-	 *            the path to set
-	 */
-	public void setPath(TreePath path) {
-		DataCollection.INSTANCE.setCurrentObject(path);
-	}
+//	/**
+//	 * @param path
+//	 *            the path to set
+//	 */
+//	public void setPath(TreePath path) {
+//		DataCollection.INSTANCE.setCurrentObject(path.get());
+//	}
 
 }

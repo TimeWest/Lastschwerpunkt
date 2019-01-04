@@ -10,10 +10,11 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import de.emutec.lastschwerpunkt.view.MainWindow;
+import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
 public class MapController {
 
-	private String currentPath = null;
+	private String imagePath = null;
 
 	private BufferedImage image = null;
 	private MainWindow mainWindow;
@@ -22,18 +23,19 @@ public class MapController {
 		this.mainWindow = mainWindow;
 		this.mainWindow.btnChooseImage(a -> {
 
-			if (a.getActionCommand().equals("addImage")) {
-				JFileChooser chooser = new JFileChooser(currentPath);
+			if (a.getActionCommand().equals(MainWindowConstants.ADD_IMAGE)) {
+				JFileChooser chooser = new JFileChooser(imagePath);
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
 				chooser.setFileFilter(filter);
 				int returnValue = chooser.showOpenDialog(mainWindow);
 
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File file = chooser.getSelectedFile();
-					currentPath = file.getAbsolutePath();
+					imagePath = file.getAbsolutePath();
 					try {
 						mainWindow.setImage(ImageIO.read(file));
 					} catch (IOException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

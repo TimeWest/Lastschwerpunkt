@@ -3,7 +3,7 @@ package de.emutec.lastschwerpunkt;
 import de.emutec.lastschwerpunkt.controller.MainButtonController;
 import de.emutec.lastschwerpunkt.controller.MapController;
 import de.emutec.lastschwerpunkt.controller.MenuController;
-import de.emutec.lastschwerpunkt.controller.TreeController;
+import de.emutec.lastschwerpunkt.datahandling.DataCollection;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 
 /**
@@ -15,14 +15,26 @@ public class Main {
 		/**
 		 * Launch the application.
 		 */
-		MainWindow mainWindow = new MainWindow();
-		
-		new MainButtonController(mainWindow);
-		new MenuController(mainWindow);
-		new MapController(mainWindow);
-		new TreeController(mainWindow);
-		
-		mainWindow.setVisible(true);
-
+         javax.swing.SwingUtilities.invokeLater( () -> createAndShowGUI());
+        
 	}
+	
+    /**
+     * Create the GUI and show it.  For thread safety,
+     * this method should be invoked from the
+     * event-dispatching thread.
+     */
+    private static void createAndShowGUI() {
+        //Create and set up the window.
+    	MainWindow frame = new MainWindow();
+        //Create and set up the content pane.
+		new MainButtonController(frame);
+		new MenuController(frame);
+		new MapController(frame);
+		DataCollection.INSTANCE.setUpTreeAndModel();	
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+
 }
