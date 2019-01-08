@@ -15,15 +15,16 @@ public class ControllEditSector implements ControllEditWindow {
 
 	public ControllEditSector(String command, Object data) {
 		
+		window = new EditSector();
+		window.addButtonListener(new ButtonListener());
+		
 		if (command == MainWindowConstants.EDIT_DATA) {
 			this.data = (Sector) data;
 			edit();
 		} else {
 			this.data = new Sector();
 		}
-		window = new EditSector();
-
-		window.addButtonListener(new ButtonListener());
+		
 	}
 
 	@Override
@@ -44,7 +45,6 @@ public class ControllEditSector implements ControllEditWindow {
 					window.setVisible(false);
 					window.removeAll();
 					window.dispose();
-					DataCollection.INSTANCE.editData(data);
 					window = null;
 					return;
 				} catch (Exception ex) {
@@ -55,6 +55,7 @@ public class ControllEditSector implements ControllEditWindow {
 
 				window.removeAll();
 				window.dispose();
+				data = null;
 				window = null;
 				return;
 			}
@@ -67,7 +68,7 @@ public class ControllEditSector implements ControllEditWindow {
 
 	@Override
 	public void delete() {
-		// TODO Auto-generated method stub
+		// TODO later: Auto-generated method stub
 
 	}
 

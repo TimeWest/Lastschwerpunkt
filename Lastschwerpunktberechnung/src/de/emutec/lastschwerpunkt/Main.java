@@ -25,13 +25,14 @@ public class Main {
      * event-dispatching thread.
      */
     private static void createAndShowGUI() {
-        //Create and set up the window.
+    	DataCollection.INSTANCE.setUpTreeAndModel();	
+    	//Create and set up the window.
     	MainWindow frame = new MainWindow();
         //Create and set up the content pane.
 		new MainButtonController(frame);
 		new MenuController(frame);
 		new MapController(frame);
-		DataCollection.INSTANCE.setUpTreeAndModel();	
+		
         //Display the window.
         frame.pack();
         frame.setVisible(true);

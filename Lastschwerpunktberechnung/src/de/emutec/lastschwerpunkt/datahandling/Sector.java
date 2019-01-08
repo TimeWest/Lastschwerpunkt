@@ -51,13 +51,13 @@ public class Sector extends Data{
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
+		// TODO later: Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
+		// TODO later: Auto-generated method stub
 		return false;
 	}
 }

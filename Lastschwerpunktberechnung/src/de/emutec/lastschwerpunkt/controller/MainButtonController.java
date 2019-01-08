@@ -46,7 +46,7 @@ public class MainButtonController {
 			} else {
 				returnValue = -1;
 			}
-			DataCollection.INSTANCE.insertData(returnValue);
+			DataCollection.INSTANCE.insertData(returnValue, command);
 
 		});
 	}

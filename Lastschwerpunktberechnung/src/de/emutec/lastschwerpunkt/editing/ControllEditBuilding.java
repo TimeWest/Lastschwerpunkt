@@ -16,15 +16,14 @@ public class ControllEditBuilding implements ControllEditWindow {
 	// Constructor for editing an existing building
 	public ControllEditBuilding(String command, Object data) {
 		window = new EditBuilding();
-
+		window.addButtonListener(new ButtonListener());
+		
 		if (command == MainWindowConstants.EDIT_DATA) {
 			this.data = (Building) data;
 			edit();
 		} else {
 			this.data = new Building();
 		}
-
-		window.addButtonListener(new ButtonListener());
 	}
 
 	@Override
@@ -35,13 +34,13 @@ public class ControllEditBuilding implements ControllEditWindow {
 		data.setLoad(window.getTxtLoad());
 		data.setDescription(window.getTxtrBeschreibung());
 		data.setCoordinates(window.getCoordinates());
-		data.setSector(window.getSpinnerSector());
+		data.setSector(window.getSelectedSector());
 		data.setActive(window.getChkbxIsActive());
 	}
 
 	@Override
 	public void delete() {
-		// TODO Auto-generated method stub
+		// TODO later: Auto-generated method stub
 
 	}
 
@@ -53,7 +52,7 @@ public class ControllEditBuilding implements ControllEditWindow {
 		window.setTxtLoad(data.getLoad());
 		window.setTxtrBeschreibung(data.getDescription());
 		window.setCoordinates(data.getCoordinates());
-		window.setSpinnerSector(data.getSector());
+		window.setSelectedSector(data.getSector());
 		window.setChkbxIsActive(data.isActive());
 	}
 
@@ -69,19 +68,18 @@ public class ControllEditBuilding implements ControllEditWindow {
 					window.removeAll();
 					window.dispose();
 					window = null;
-					return;
 				} catch (Exception ex) {
 					window.displayNumberError("Fehler! Konnte Gebäude nicht speichern.\nBitte Eingaben überprüfen");
 				}
 			}
 
 			if (e.getActionCommand() == EditingWindow.CANCEL_OPTION) {
-				// TODO Einfügen, dass bei vorliegenden Änderungen diese wirklich verworfen
+				// TODO later: Einfügen, dass bei vorliegenden Änderungen diese wirklich verworfen
 				// werden sollen
+				data = null;
 				window.removeAll();
 				window.dispose();
 				window = null;
-				return;
 			}
 
 			if (e.getActionCommand().equals(EditingWindow.HELP_OPTION)) {

@@ -26,7 +26,7 @@
     project="Lastschwerpunktberechnung" 
     file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/datahandling/DataHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="171" width="215" x="684" y="37"/>    
+    <position height="-1" width="-1" x="1232" y="181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -37,7 +37,7 @@
     project="Lastschwerpunktberechnung" 
     file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/datahandling/DataListener.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="81" width="203" x="939" y="37"/>    
+    <position height="-1" width="-1" x="1335" y="3"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -59,7 +59,7 @@
     project="Lastschwerpunktberechnung" 
     file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/datahandling/DataCollection.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="279" width="179" x="465" y="37"/>    
+    <position height="-1" width="-1" x="982" y="220"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

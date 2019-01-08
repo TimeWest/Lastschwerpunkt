@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -34,18 +33,17 @@ public class JSonHandler {
 		for (int i = 0; i < allData.length; i++) {
 			if (allData[i] instanceof Building) {
 				buildings.add((Building) allData[i]);
-			}
-			else if (allData[i] instanceof Sector){
+			} else if (allData[i] instanceof Sector) {
 				sectors.add((Sector) allData[i]);
-			}
-			else throw new IllegalArgumentException("Unexpected type: Expected objects of class Data");
+			} else
+				throw new IllegalArgumentException("Unexpected type: Expected objects of class Data");
 		}
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(new File(getPath(), "data.txt")))) {
 			writer.write(gson.toJson(buildings));
 			writer.newLine();
 			writer.write(gson.toJson(sectors));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO handle exception
 			e.printStackTrace();
 		}
 	}
@@ -64,27 +62,21 @@ public class JSonHandler {
 	public void loadFromFile() {
 		// clear collection from previous project
 		DataCollection.INSTANCE.clearData();
+		
+		JFileChooser chooser = new JFileChooser(ProjectConstants.INSTANCE.getProjectPath());
+		File file = chooser.getSelectedFile();
+		
 
-		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
-		chooser.setFileFilter(filter);
-		int returnValue = chooser.showOpenDialog(null);
-
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File file = chooser.getSelectedFile();
-			ProjectConstants.INSTANCE.setProjectPath(file.getAbsolutePath());
-
-			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-				String s = reader.readLine();
-				addLoadedObjects(s, DataType.BUILDING);
-				s = reader.readLine();
-				addLoadedObjects(s, DataType.SECTOR);
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			System.out.println("ERFOLG!");
+		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+			String s = reader.readLine();
+			addLoadedObjects(s, DataType.BUILDING);
+			s = reader.readLine();
+			addLoadedObjects(s, DataType.SECTOR);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
+		System.out.println("ERFOLG!");
 	}
 
 	/**
@@ -127,7 +119,7 @@ public class JSonHandler {
 	 * 
 	 * @return
 	 */
-	private String getPath() {
+	private File getPath() {
 		return ProjectConstants.INSTANCE.getProjectPath();
 	}
 }

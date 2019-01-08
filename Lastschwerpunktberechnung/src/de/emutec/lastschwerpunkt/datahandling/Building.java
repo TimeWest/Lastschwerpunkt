@@ -13,7 +13,7 @@ public class Building extends Data {
 	private String description;
 	private double glf;
 	private double load;
-	private int sector;
+	private Sector sector;
 
 	public Building() {
 		// Basic initialization of a building
@@ -54,7 +54,7 @@ public class Building extends Data {
 	/**
 	 * @return the sector
 	 */
-	public int getSector() {
+	public Sector getSector() {
 		return sector;
 	}
 
@@ -108,22 +108,22 @@ public class Building extends Data {
 	}
 
 	/**
-	 * @param sector
+	 * @param  object
 	 *            the sector to set
 	 */
-	public void setSector(int sector) {
-		this.sector = sector;
+	public void setSector(Object object) {
+		this.sector = (Sector) object;
 	}
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
+		// TODO later: Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
+		// TODO later: Auto-generated method stub
 		return false;
 	}
 	

@@ -4,37 +4,45 @@ import java.io.File;
 import java.util.Properties;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public enum ProjectConstants {
 	INSTANCE;
 
 	private Properties props = new Properties();
 
-	public String getProjectPath() {
-		if (props.getProperty("path") != null) {
-			return props.getProperty("path");
+	public File getProjectPath() {
+		File file = new File(props.getProperty("path"));
+		if(file.exists()) {
+			return setProjectPath();
 		}
-		return setProjectPath();
-
-	}
-	
-	public void setProjectPath(String s) {
-		props.setProperty("path", s);
+		else{
+			return file;
+		}
 	}
 
-	public String setProjectPath() {
+	public void setProjectPath(File file) {
+		props.setProperty("path", file.getAbsolutePath());
+	}
+
+	public File setProjectPath() {
 		String path = props.getProperty("path");
 		JFileChooser chooser = new JFileChooser(path);
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Projektdateien", "txt");
+		chooser.setFileFilter(filter);
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		int returnValue = chooser.showOpenDialog(null);
-
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File folder = chooser.getSelectedFile();
-			path = folder.getAbsolutePath();
-			props.setProperty("path", path);
+			File file = chooser.getSelectedFile();
+			setProjectPath(file);
+			return file;
 		}
-		return path;
-
+		return null;
 	}
 
+	public boolean createProjectFile(File file) {
+
+		return false;
+
+	}
 }

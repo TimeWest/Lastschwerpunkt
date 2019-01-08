@@ -3,25 +3,27 @@ package de.emutec.lastschwerpunkt.view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
-import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+
+import de.emutec.lastschwerpunkt.datahandling.DataCollection;
+import de.emutec.lastschwerpunkt.datahandling.Sector;
 
 @SuppressWarnings("serial")
 public class EditBuilding extends EditingWindow {
 
-	private static final int SPINNER_MAX = 10;
-
 	private JButton btnNeuSetzen;
 	private JCheckBox chkbxIsActive;
-	private JSpinner spinnerSector;
+	private JComboBox<Object> cmbobox;
 
 	private JTextField txtGLF;
 	private JTextField txtLoad;
@@ -94,8 +96,19 @@ public class EditBuilding extends EditingWindow {
 		contentPanel.add(new JLabel("Sektor"), gbc);
 
 		gbc.gridx = 1;
-		spinnerSector = new JSpinner(new SpinnerNumberModel(1, 1, SPINNER_MAX, 1));
-		contentPanel.add(spinnerSector, gbc);
+		cmbobox = new JComboBox<>(DataCollection.INSTANCE.getObjectsOfClass(Sector.class));
+		cmbobox.addActionListener(e -> {
+			System.out.println("Ausgewähltes Item: " + cmbobox.getSelectedItem());
+		});
+		cmbobox.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				cmbobox.setSelectedItem(e.getItem());
+			}
+		});
+		contentPanel.add(cmbobox, gbc);
 
 		gbc.gridx = 0;
 		contentPanel.add(new JLabel("Gebäude aktiv"), gbc);
@@ -130,8 +143,8 @@ public class EditBuilding extends EditingWindow {
 	/**
 	 * @return the Sector the chosen building is located in
 	 */
-	public int getSpinnerSector() {
-		return (int) spinnerSector.getValue();
+	public Object getSelectedSector() {
+		return cmbobox.getSelectedItem();
 	}
 
 	/**
@@ -171,11 +184,11 @@ public class EditBuilding extends EditingWindow {
 	}
 
 	/**
-	 * @param sector
+	 * @param object
 	 *            the sector the building is located in
 	 */
-	public void setSpinnerSector(int sector) {
-		this.spinnerSector.setValue(sector);
+	public void setSelectedSector(Object object) {
+		this.cmbobox.setSelectedItem(object);
 	}
 
 	/**

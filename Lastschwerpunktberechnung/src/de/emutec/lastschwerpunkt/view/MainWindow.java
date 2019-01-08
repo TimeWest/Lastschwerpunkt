@@ -81,11 +81,9 @@ public class MainWindow extends JFrame {
 		 * mainMenuBar.add(mntmHelp);
 		 */
 
-		/*
-		 * mntmNewProject = new JMenuItem(MainWindowConstants.NEW_PROJECT);
-		 * mntmNewProject.setActionCommand(MainWindowConstants.NEW_PROJECT);
-		 * menu.add(mntmNewProject);
-		 */
+		mntmNewProject = new JMenuItem(MainWindowConstants.NEW_PROJECT);
+		mntmNewProject.setActionCommand(MainWindowConstants.NEW_PROJECT);
+		menu.add(mntmNewProject);
 
 		mntmLoadProject = new JMenuItem(MainWindowConstants.LOAD_PROJECT);
 		mntmLoadProject.setActionCommand(MainWindowConstants.LOAD_PROJECT);
@@ -106,7 +104,7 @@ public class MainWindow extends JFrame {
 		// Left panel for tree and buttons
 		panelNavigation.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		
+
 		c.gridx = 0;
 		c.fill = GridBagConstraints.BOTH;
 		c.weighty = 1;
@@ -120,7 +118,7 @@ public class MainWindow extends JFrame {
 		btnAddBuilding = new JButton(MainWindowConstants.ADD_BUILDING);
 		btnAddBuilding.setActionCommand(MainWindowConstants.ADD_BUILDING);
 		panelNavigation.add(btnAddBuilding, c);
-		
+
 		btnAddSector = new JButton(MainWindowConstants.ADD_SECTOR);
 		btnAddSector.setActionCommand(MainWindowConstants.ADD_SECTOR);
 		panelNavigation.add(btnAddSector, c);
@@ -147,7 +145,7 @@ public class MainWindow extends JFrame {
 		imageLabel = new JLabel();
 		imageScrollPane = new JScrollPane(imageLabel);
 		panelMap.add(imageScrollPane, BorderLayout.CENTER);
-		
+
 	} // End of constructor
 
 	public void btnChooseImage(ActionListener a) {
@@ -165,7 +163,7 @@ public class MainWindow extends JFrame {
 		mntmExit.addActionListener(menuActionListener);
 		// mntmHelp.addActionListener(menuActionListener);
 		mntmLoadProject.addActionListener(menuActionListener);
-		// mntmNewProject.addActionListener(menuActionListener);
+		mntmNewProject.addActionListener(menuActionListener);
 		mntmSaveProject.addActionListener(menuActionListener);
 		mntmSaveProjectAs.addActionListener(menuActionListener);
 	}

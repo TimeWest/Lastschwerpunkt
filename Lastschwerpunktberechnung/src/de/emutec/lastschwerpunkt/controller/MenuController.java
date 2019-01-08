@@ -1,6 +1,7 @@
 package de.emutec.lastschwerpunkt.controller;
 
 import de.emutec.lastschwerpunkt.datahandling.JSonHandler;
+import de.emutec.lastschwerpunkt.datahandling.ProjectConstants;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
@@ -21,7 +22,7 @@ public class MenuController {
 				converter.saveToFile();
 				converter = null;
 			}
-			if(e.getActionCommand().equals(MainWindowConstants.SAVE_PROJECT_AS)) {
+			if (e.getActionCommand().equals(MainWindowConstants.SAVE_PROJECT_AS)) {
 				converter = new JSonHandler();
 				converter.setNewPath();
 				converter.saveToFile();
@@ -33,14 +34,15 @@ public class MenuController {
 				converter = null;
 			}
 			if (e.getActionCommand().equals(MainWindowConstants.NEW_PROJECT)) {
-				// TODO
+				// TODO open JFileChooser with option to type in the name for the project
+				ProjectConstants.INSTANCE.setProjectPath();
+				System.out.println(ProjectConstants.INSTANCE.getProjectPath());
 			}
+
 			if (e.getActionCommand().equals(MainWindowConstants.HELP)) {
 				// TODO open help-dialog
 			}
 		});
 	}
-	
-	
 
 }
