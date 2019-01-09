@@ -3,7 +3,6 @@ package de.emutec.lastschwerpunkt;
 import de.emutec.lastschwerpunkt.controller.MainButtonController;
 import de.emutec.lastschwerpunkt.controller.MapController;
 import de.emutec.lastschwerpunkt.controller.MenuController;
-import de.emutec.lastschwerpunkt.datahandling.DataCollection;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 
 /**
@@ -25,7 +24,6 @@ public class Main {
      * event-dispatching thread.
      */
     private static void createAndShowGUI() {
-    	DataCollection.INSTANCE.setUpTreeAndModel();	
     	//Create and set up the window.
     	MainWindow frame = new MainWindow();
         //Create and set up the content pane.

@@ -26,28 +26,24 @@ import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 public enum DataCollection {
 	INSTANCE;
 
-	/** Collection of data */
-	private List<Data> data = new LinkedList<>();
-
-	/** Current selected data */
-	private Object currentObject;
 	private DefaultMutableTreeNode root;
 	private DefaultTreeModel treeModel;
 	private JTree tree;
+
+	{
+		treeModel = new DefaultTreeModel(new DefaultMutableTreeNode(new Sector("MSSA", 0, Color.WHITE)));
+		root = (DefaultMutableTreeNode) treeModel.getRoot();
+		treeModel.addTreeModelListener(new MyTreeModelListener());
+		tree = new JTree(treeModel);
+		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		tree.setRootVisible(false);
+	}
 
 	/**
 	 * @return the treeModel
 	 */
 	public DefaultTreeModel getTreeModel() {
 		return treeModel;
-	}
-
-	/**
-	 * @param treeModel
-	 *            the treeModel to set
-	 */
-	public void setTreeModel(DefaultTreeModel treeModel) {
-		this.treeModel = treeModel;
 	}
 
 	/**
@@ -58,43 +54,17 @@ public enum DataCollection {
 	}
 
 	/**
-	 * @return the current object
-	 */
-	public Object getCurrentObjectPath() {
-		return currentObject;
-	}
-
-	public Object getCurrentObject() {
-		return ((DefaultMutableTreeNode) getCurrentObjectPath()).getUserObject();
-	}
-
-	/**
-	 * @param o
-	 *            the o to set
-	 */
-	public void setCurrentObject(TreePath o) {
-		this.currentObject = o;
-		System.out.println(o.toString());
-	}
-
-	/**
-	 * Add data to a Collection
 	 * 
-	 * @param currentObject
-	 *            Object that triggered the Event
 	 * @param data
-	 *            element to add to Collection
-	 * @return {@code true} if element has successfully been added
 	 */
-	private boolean putData(Object data) {
-		treeModel.insertNodeInto(new DefaultMutableTreeNode(data), root, root.getChildCount());
-		return true;
-	}
-
 	private void insertSector(Object data) {
 		treeModel.insertNodeInto(new DefaultMutableTreeNode(data), root, root.getChildCount());
 	}
 
+	/**
+	 * 
+	 * @param data
+	 */
 	private void insertBuilding(Object data) {
 		Sector sector = ((Building) data).getSector();
 		boolean success = false;
@@ -114,6 +84,10 @@ public enum DataCollection {
 		}
 	}
 
+	/**
+	 * 
+	 * @param data
+	 */
 	private void reload(Object data) {
 		treeModel.reload();
 		tree.scrollPathToVisible(new TreePath(new DefaultMutableTreeNode(data).getPath()));
@@ -121,13 +95,10 @@ public enum DataCollection {
 
 	/**
 	 * 
-	 * @return the complete collection as {@code Object[]}
+	 * @param newType
+	 * @return
 	 */
-	public Object[] getDataCollection() {
-		return data.toArray();
-	}
-
-	public Object[] getObjectsOfClass(Class<?> newType) {
+	public <T> Object[] getObjectsOfClass(Class<T> newType) {
 		ArrayList<Object> returnValue = new ArrayList<>();
 		for (int i = 0; i < root.getChildCount(); i++) {
 			Object obj = ((DefaultMutableTreeNode) root.getChildAt(i)).getUserObject();
@@ -140,54 +111,33 @@ public enum DataCollection {
 	}
 
 	/**
-	 * Edit an existing element in this collection if it is contained. Else add it
-	 * to the collection.
 	 * 
-	 * @param currentObject
-	 *            Object that triggered the Event
-	 * @param d
-	 *            element to add to collection
-	 * @return {@code true} if element has successfully been added to collection.
+	 * @param data
+	 * @param command
 	 */
-	public boolean editData(Data d) {
-		boolean returnValue;
-		if (!this.data.contains(d)) {
-			returnValue = putData(d);
-		} else {
-			this.data.set(this.data.indexOf(getCurrentObjectPath()), d);
-			returnValue = true;
+	public void insertData(Object data, String command) {
+		// TODO insert returnValue from EditWindow into TreeModel
+		if (data == null) {
+			System.out.println("Abbruch");
+			return;
 		}
-		if (returnValue) {
-			DataHandler.INSTANCE.notifyListeners(new DataEvent(this, d));
+		switch (command) {
+		case MainWindowConstants.EDIT_DATA:
+			break;
+		case MainWindowConstants.ADD_BUILDING:
+			insertBuilding(data);
+			break;
+		case MainWindowConstants.ADD_SECTOR:
+			insertSector(data);
+			break;
+		case MainWindowConstants.DELETE_DATA:
+			break;
+		default:
+
+			break;
 		}
-		return returnValue;
-	}
-
-	/**
-	 * remove given data from collection
-	 * 
-	 * @param d
-	 *            data to be deleted
-	 * @return {@code true} if this collection contained the specified element
-	 */
-	public boolean removeData(Data d) {
-		return data.remove(d);
-	}
-
-	/**
-	 * removes all of the elements from the collection all entries will be lost.
-	 */
-	public void clearData() {
-		data.clear();
-	}
-
-	public void setUpTreeAndModel() {
-		treeModel = new DefaultTreeModel(new DefaultMutableTreeNode(new Sector("MSSA", 0, Color.WHITE)));
-		root = (DefaultMutableTreeNode) treeModel.getRoot();
-		treeModel.addTreeModelListener(new MyTreeModelListener());
-		tree = new JTree(treeModel);
-		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-		tree.setRootVisible(false);
+		reload(data);
+		System.out.println("Dieses Objekt kam zurück: " + data + "\nKlasse: " + data.getClass());
 	}
 
 	private class MyTreeModelListener implements TreeModelListener {
@@ -212,29 +162,5 @@ public enum DataCollection {
 
 		}
 
-	}
-
-	public void insertData(Object returnValue, String command) {
-		// TODO insert returnValue from EditWindow into TreeModel
-		if (returnValue == null) {
-			return;
-		}
-		switch (command) {
-		case MainWindowConstants.EDIT_DATA:
-			break;
-		case MainWindowConstants.ADD_BUILDING:
-			insertBuilding(returnValue);
-			break;
-		case MainWindowConstants.ADD_SECTOR:
-			insertSector(returnValue);
-			break;
-		case MainWindowConstants.DELETE_DATA:
-			break;
-		default:
-
-			break;
-		}
-		reload(returnValue);
-		System.out.println("Dieses Objekt kam zurück: " + returnValue + "\nKlasse: " + returnValue.getClass());
 	}
 }

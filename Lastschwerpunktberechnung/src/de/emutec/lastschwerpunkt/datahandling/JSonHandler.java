@@ -15,6 +15,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import de.emutec.lastschwerpunkt.view.MainWindowConstants;
+
 public class JSonHandler {
 
 	private Gson gson;
@@ -53,7 +55,7 @@ public class JSonHandler {
 	 * @return
 	 */
 	private synchronized Object[] getDataCollection() {
-		return DataCollection.INSTANCE.getDataCollection();
+		return DataCollection.INSTANCE.getObjectsOfClass(Data.class);
 	}
 
 	/**
@@ -61,7 +63,7 @@ public class JSonHandler {
 	 */
 	public void loadFromFile() {
 		// clear collection from previous project
-		DataCollection.INSTANCE.clearData();
+		
 		
 		JFileChooser chooser = new JFileChooser(ProjectConstants.INSTANCE.getProjectPath());
 		File file = chooser.getSelectedFile();
@@ -92,14 +94,14 @@ public class JSonHandler {
 			for (int i = 0; i < array.size(); i++) {
 				JsonElement buildings = array.get(i);
 				Data data = gson.fromJson(buildings, Building.class);
-				DataCollection.INSTANCE.editData(data);
+				DataCollection.INSTANCE.insertData(data, MainWindowConstants.ADD_BUILDING);
 			}
 			break;
 		case SECTOR:
 			for (int i = 0; i < array.size(); i++) {
 				JsonElement sectors = array.get(i);
 				Data data = gson.fromJson(sectors, Sector.class);
-				DataCollection.INSTANCE.editData(data);
+				DataCollection.INSTANCE.insertData(data, MainWindowConstants.ADD_SECTOR);
 			}
 			break;
 		default:
