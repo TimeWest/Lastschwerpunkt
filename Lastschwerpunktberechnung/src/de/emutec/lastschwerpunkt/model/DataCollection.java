@@ -1,18 +1,22 @@
-package de.emutec.lastschwerpunkt.datahandling;
+package de.emutec.lastschwerpunkt.model;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import de.emutec.lastschwerpunkt.model.calculation.Calculator;
+import de.emutec.lastschwerpunkt.model.data.Building;
+import de.emutec.lastschwerpunkt.model.data.Data;
+import de.emutec.lastschwerpunkt.model.data.Sector;
 import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
 /**
@@ -37,6 +41,7 @@ public enum DataCollection {
 		tree = new JTree(treeModel);
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.setRootVisible(false);
+		tree.addTreeSelectionListener(new MyTreeSelectionListener());
 	}
 
 	/**
@@ -116,7 +121,6 @@ public enum DataCollection {
 	 * @param command
 	 */
 	public void insertData(Object data, String command) {
-		// TODO insert returnValue from EditWindow into TreeModel
 		if (data == null) {
 			System.out.println("Abbruch");
 			return;
@@ -149,7 +153,16 @@ public enum DataCollection {
 
 		@Override
 		public void treeNodesInserted(TreeModelEvent e) {
-
+			DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) e.getTreePath().getLastPathComponent();
+			int index = e.getChildIndices()[0];
+			DefaultMutableTreeNode node = (DefaultMutableTreeNode) parentNode.getChildAt(index);
+			Data data = (Data) node.getUserObject();
+			
+			if (data instanceof Building) {
+				Object[] result = Calculator.calculate(parentNode);
+				System.out.println(result[0]);
+			}
+			tree.expandPath(new TreePath(parentNode.getPath()));
 		}
 
 		@Override
@@ -159,8 +172,17 @@ public enum DataCollection {
 
 		@Override
 		public void treeStructureChanged(TreeModelEvent e) {
-
 		}
 
+	}
+	
+	private class MyTreeSelectionListener implements TreeSelectionListener{
+
+		@Override
+		public void valueChanged(TreeSelectionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

@@ -22,9 +22,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="de.emutec.lastschwerpunkt.datahandling.DataHandler" 
+  <enumeration id="3" language="java" name="de.emutec.lastschwerpunkt.model.data.DataHandler" 
     project="Lastschwerpunktberechnung" 
-    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/datahandling/DataHandler.java" binary="false" 
+    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/model/data/DataHandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1232" y="181"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -33,9 +33,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <interface id="4" language="java" name="de.emutec.lastschwerpunkt.datahandling.DataListener" 
+  <interface id="4" language="java" name="de.emutec.lastschwerpunkt.model.data.DataListener" 
     project="Lastschwerpunktberechnung" 
-    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/datahandling/DataListener.java" binary="false" 
+    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/model/data/DataListener.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1335" y="3"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -44,9 +44,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="de.emutec.lastschwerpunkt.datahandling.DataEvent" 
+  <class id="5" language="java" name="de.emutec.lastschwerpunkt.model.data.DataEvent" 
     project="Lastschwerpunktberechnung" 
-    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/datahandling/DataEvent.java" binary="false" 
+    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/model/data/DataEvent.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="117" width="179" x="41" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -55,9 +55,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="6" language="java" name="de.emutec.lastschwerpunkt.datahandling.DataCollection" 
+  <enumeration id="6" language="java" name="de.emutec.lastschwerpunkt.model.DataCollection" 
     project="Lastschwerpunktberechnung" 
-    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/datahandling/DataCollection.java" binary="false" 
+    file="/Lastschwerpunktberechnung/src/de/emutec/lastschwerpunkt/model/DataCollection.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="982" y="220"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

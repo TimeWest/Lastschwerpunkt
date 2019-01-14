@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.datahandling;
+package de.emutec.lastschwerpunkt.model.data;
 
 import java.util.ArrayList;
 
@@ -9,10 +9,25 @@ import java.util.ArrayList;
  *
  */
 public abstract class Data {
+
+	public static Class<? extends Data> checkType(Data data) {
+		return data.getClass();
+	}
+
+	ArrayList<Data> children;
 	String name;
 	int number;
-	ArrayList<Data> children;
+
 	Data parent;
+
+	public abstract boolean equals(Object o);
+
+	/**
+	 * @return an instance of the data
+	 */
+	public Data getInstance() {
+		return this;
+	}
 
 	/**
 	 * @return the gebName
@@ -21,17 +36,14 @@ public abstract class Data {
 		return name;
 	}
 
-	@Override
-	public String toString() {
-		return (getNumber() + ": " + getName());
-	}
-
 	/**
 	 * @return the gebNumber
 	 */
 	public int getNumber() {
 		return number;
 	}
+
+	public abstract int hashCode();
 
 	/**
 	 * @param name
@@ -49,14 +61,8 @@ public abstract class Data {
 		this.number = number;
 	}
 
-	/**
-	 * @return an instance of the data
-	 */
-	public Data getInstance() {
-		return this;
+	@Override
+	public String toString() {
+		return (getNumber() + ": " + getName());
 	}
-
-	public abstract int hashCode();
-
-	public abstract boolean equals(Object o);
 }

@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.datahandling;
+package de.emutec.lastschwerpunkt.model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,6 +15,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import de.emutec.lastschwerpunkt.model.data.Building;
+import de.emutec.lastschwerpunkt.model.data.Data;
+import de.emutec.lastschwerpunkt.model.data.DataType;
+import de.emutec.lastschwerpunkt.model.data.Sector;
 import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
 public class JSonHandler {

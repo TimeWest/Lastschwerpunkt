@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
-import de.emutec.lastschwerpunkt.datahandling.DataCollection;
+import de.emutec.lastschwerpunkt.model.DataCollection;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {

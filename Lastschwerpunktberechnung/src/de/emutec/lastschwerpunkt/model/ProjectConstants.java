@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.datahandling;
+package de.emutec.lastschwerpunkt.model;
 
 import java.io.File;
 import java.util.Properties;

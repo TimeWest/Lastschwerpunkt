@@ -1,7 +1,7 @@
 package de.emutec.lastschwerpunkt.controller;
 
-import de.emutec.lastschwerpunkt.datahandling.JSonHandler;
-import de.emutec.lastschwerpunkt.datahandling.ProjectConstants;
+import de.emutec.lastschwerpunkt.model.JSonHandler;
+import de.emutec.lastschwerpunkt.model.ProjectConstants;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 

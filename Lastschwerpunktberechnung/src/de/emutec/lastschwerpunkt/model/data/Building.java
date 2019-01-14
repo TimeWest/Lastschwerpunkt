@@ -1,6 +1,6 @@
-package de.emutec.lastschwerpunkt.datahandling;
+package de.emutec.lastschwerpunkt.model.data;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 /**
  * @author Timo.Nordhorn
@@ -9,7 +9,7 @@ import java.awt.Point;
 public class Building extends Data {
 
 	private boolean active;
-	private Point coordinates;
+	private Point2D coordinates;
 	private String description;
 	private double glf;
 	private double load;
@@ -22,14 +22,26 @@ public class Building extends Data {
 		this.setLoad(0d);
 		this.setGlf(0d);
 		this.setActive(false);
-		this.coordinates = new Point();
+		this.coordinates = new Point2D.Double();
 		this.setDescription("");
+	}
+	
+	public Building(String name, int number, double load, Point2D coordinates, Sector sector) {
+		setName(name);
+		setNumber(number);
+		setLoad(load);
+		this.coordinates = new Point2D.Double();
+		setCoordinates(coordinates);
+		setGlf(0.8);
+		setDescription("");
+		setSector(sector);
+		setActive(true);
 	}
 
 	/**
 	 * @return the coordinates
 	 */
-	public Point getCoordinates() {
+	public Point2D getCoordinates() {
 		return coordinates;
 	}
 
@@ -43,11 +55,11 @@ public class Building extends Data {
 	/**
 	 * @return the glf
 	 */
-	public Double getGlf() {
+	public double getGlf() {
 		return glf;
 	}
 
-	public Double getLoad() {
+	public double getLoad() {
 		return load;
 	}
 
@@ -77,7 +89,7 @@ public class Building extends Data {
 	 * @param coordinates
 	 *            the coordinates to set
 	 */
-	public void setCoordinates(Point p) {
+	public void setCoordinates(Point2D p) {
 		this.coordinates.setLocation(p);
 //		this.coordinates.x = (int) p.getX();
 //		this.coordinates.y = (int) p.getY();

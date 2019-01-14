@@ -3,8 +3,7 @@ package de.emutec.lastschwerpunkt.view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Point;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.geom.Point2D;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,15 +14,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import de.emutec.lastschwerpunkt.datahandling.DataCollection;
-import de.emutec.lastschwerpunkt.datahandling.Sector;
+import de.emutec.lastschwerpunkt.model.DataCollection;
+import de.emutec.lastschwerpunkt.model.data.Sector;
 
 @SuppressWarnings("serial")
 public class EditBuilding extends EditingWindow {
 
 	private JButton btnNeuSetzen;
 	private JCheckBox chkbxIsActive;
-	private JComboBox<Object> cmbobox;
+	private JComboBox<?> cmbobox;
 
 	private JTextField txtGLF;
 	private JTextField txtLoad;
@@ -97,17 +96,6 @@ public class EditBuilding extends EditingWindow {
 
 		gbc.gridx = 1;
 		cmbobox = new JComboBox<>(DataCollection.INSTANCE.getObjectsOfClass(Sector.class));
-		cmbobox.addActionListener(e -> {
-			System.out.println("Ausgewähltes Item: " + cmbobox.getSelectedItem());
-		});
-		cmbobox.addItemListener(new ItemListener() {
-			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				cmbobox.setSelectedItem(e.getItem());
-			}
-		});
 		contentPanel.add(cmbobox, gbc);
 
 		gbc.gridx = 0;
@@ -219,9 +207,9 @@ public class EditBuilding extends EditingWindow {
 	 * @param p
 	 * 
 	 */
-	public void setCoordinates(Point p) {
-		this.txtXcoordinate.setText(Integer.toString((int) p.getX()));
-		this.txtYcoordinate.setText(Integer.toString((int) p.getY()));
+	public void setCoordinates(Point2D p) {
+		this.txtXcoordinate.setText(Double.toString(p.getX()));
+		this.txtYcoordinate.setText(Double.toString(p.getY()));
 	}
 
 }

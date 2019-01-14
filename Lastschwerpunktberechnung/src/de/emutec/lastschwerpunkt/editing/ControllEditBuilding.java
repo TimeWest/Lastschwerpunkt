@@ -3,7 +3,7 @@ package de.emutec.lastschwerpunkt.editing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import de.emutec.lastschwerpunkt.datahandling.Building;
+import de.emutec.lastschwerpunkt.model.data.Building;
 import de.emutec.lastschwerpunkt.view.EditBuilding;
 import de.emutec.lastschwerpunkt.view.EditingWindow;
 import de.emutec.lastschwerpunkt.view.MainWindowConstants;

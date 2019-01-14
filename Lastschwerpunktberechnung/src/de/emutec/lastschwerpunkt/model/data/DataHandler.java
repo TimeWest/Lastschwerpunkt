@@ -1,4 +1,4 @@
-package de.emutec.lastschwerpunkt.datahandling;
+package de.emutec.lastschwerpunkt.model.data;
 
 import javax.swing.event.EventListenerList;
 
