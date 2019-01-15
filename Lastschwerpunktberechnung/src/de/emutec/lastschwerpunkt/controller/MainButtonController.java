@@ -12,28 +12,41 @@ import de.emutec.lastschwerpunkt.model.data.Sector;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
+/**
+ * processes the actions occurred by clicking on the buttons
+ * 
+ * @author Timo.Nordhorn
+ * 
+ */
 public class MainButtonController {
 
 	private MainWindow mainWindow;
 
-	// Constructor
 	public MainButtonController(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 		this.mainWindow.buttonListener(e -> {
 
+			// define the button from the editing group that was clicked
 			String command = e.getActionCommand();
+
+			// TreePath to selected node, in case an entry shall be deleted or edited
 			TreePath selectionPath = DataCollection.INSTANCE.getTree().getSelectionPath();
+			
 			DefaultMutableTreeNode selection;
 			ControllEditWindow editController;
 			Object returnValue;
 
-			if (selectionPath == null) {
-				selection = (DefaultMutableTreeNode) DataCollection.INSTANCE.getTreeModel().getRoot();
-			} else {
+			// make sure that not nothing is selected to prevent nullPointer exception
+			if (selectionPath != null) {
 				selection = (DefaultMutableTreeNode) selectionPath.getLastPathComponent();
+			} else {
+				selection = (DefaultMutableTreeNode) DataCollection.INSTANCE.getTreeModel().getRoot();
 			}
-			Object data = selection.getUserObject();
 			
+			// object behind node that was selected
+			Object data = selection.getUserObject();
+
+			// decide what to do
 			if (command == MainWindowConstants.DELETE_DATA) {
 				System.out.println("Es soll also: " + selection + " gelöscht werden?");
 				returnValue = -1;
@@ -46,6 +59,8 @@ public class MainButtonController {
 			} else {
 				returnValue = -1;
 			}
+			
+			// process edited/created data
 			DataCollection.INSTANCE.insertData(returnValue, command);
 
 		});
