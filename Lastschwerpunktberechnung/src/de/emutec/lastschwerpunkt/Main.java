@@ -6,6 +6,9 @@ import de.emutec.lastschwerpunkt.controller.MenuController;
 import de.emutec.lastschwerpunkt.view.MainWindow;
 
 /**
+ * This is where the main method is located
+ * Creating the main-frame and top-level controller
+ * 
  * @author Timo.Nordhorn
  */
 public class Main {
@@ -26,6 +29,7 @@ public class Main {
     private static void createAndShowGUI() {
     	//Create and set up the window.
     	MainWindow frame = new MainWindow();
+   
         //Create and set up the content pane.
 		new MainButtonController(frame);
 		new MenuController(frame);
