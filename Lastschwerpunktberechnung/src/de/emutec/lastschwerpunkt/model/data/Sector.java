@@ -10,9 +10,7 @@ public class Sector extends Data{
 	 * Constructor to create a new sector.
 	 */
 	public Sector() {
-		this.setName("");
-		this.setNumber(0);
-		this.setColor(new Color(0));
+		this("", 0, new Color(0));
 	}
 
 	/**
@@ -25,6 +23,10 @@ public class Sector extends Data{
 		this.setName(name);
 		this.setNumber(number);
 		this.setColor(color);
+	}
+
+	public Sector(Sector data) {
+		this(data.getName(), data.getNumber(), data.getColor());
 	}
 
 	/**

@@ -3,7 +3,9 @@ package de.emutec.lastschwerpunkt.editing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import de.emutec.lastschwerpunkt.model.DataCollection;
 import de.emutec.lastschwerpunkt.model.data.Building;
+import de.emutec.lastschwerpunkt.model.data.Sector;
 import de.emutec.lastschwerpunkt.view.EditBuilding;
 import de.emutec.lastschwerpunkt.view.EditingWindow;
 import de.emutec.lastschwerpunkt.view.MainWindowConstants;
@@ -14,12 +16,12 @@ public class ControllEditBuilding implements ControllEditWindow {
 	EditBuilding window;
 
 	// Constructor for editing an existing building
-	public ControllEditBuilding(String command, Object data) {
+	public ControllEditBuilding(Object data) {
 		window = new EditBuilding();
 		window.addButtonListener(new ButtonListener());
-		
-		if (command == MainWindowConstants.EDIT_DATA) {
-			this.data = (Building) data;
+
+		if (data != null) {
+			this.data = new Building((Building) data);
 			edit();
 		} else {
 			this.data = new Building();
@@ -34,8 +36,19 @@ public class ControllEditBuilding implements ControllEditWindow {
 		data.setLoad(window.getTxtLoad());
 		data.setDescription(window.getTxtrBeschreibung());
 		data.setCoordinates(window.getCoordinates());
-		data.setSector(window.getSelectedSector());
+		Sector sector = getSectorObjectFromComboBox(window.getSelectedSector());
+		data.setSector(sector);
 		data.setActive(window.getChkbxIsActive());
+	}
+
+	private Sector getSectorObjectFromComboBox(Object selectedSector) {
+		for (Object sector : DataCollection.INSTANCE.getObjectsOfClass(Sector.class)) {
+			if (sector != null && sector.toString().equals(selectedSector)) {
+				return (Sector) sector;
+			}
+		}
+		return null;
+
 	}
 
 	@Override
@@ -52,7 +65,7 @@ public class ControllEditBuilding implements ControllEditWindow {
 		window.setTxtLoad(data.getLoad());
 		window.setTxtrBeschreibung(data.getDescription());
 		window.setCoordinates(data.getCoordinates());
-		window.setSelectedSector(data.getSector());
+		window.setSelectedSector(data.getSector().toString());
 		window.setChkbxIsActive(data.isActive());
 	}
 
@@ -60,6 +73,10 @@ public class ControllEditBuilding implements ControllEditWindow {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+	
+			if (e.getActionCommand().equals(EditingWindow.HELP_OPTION)) {
+				window.displayNumberError("Hier entsteht ein Hilfefenster!\nCurrently under maintenance!");
+			}
 
 			if (e.getActionCommand() == EditingWindow.APPROVE_OPTION) {
 				try {
@@ -74,16 +91,13 @@ public class ControllEditBuilding implements ControllEditWindow {
 			}
 
 			if (e.getActionCommand() == EditingWindow.CANCEL_OPTION) {
-				// TODO later: Einfügen, dass bei vorliegenden Änderungen diese wirklich verworfen
+				// TODO later: Einfügen, dass bei vorliegenden Änderungen diese wirklich
+				// verworfen
 				// werden sollen
 				data = null;
 				window.removeAll();
 				window.dispose();
 				window = null;
-			}
-
-			if (e.getActionCommand().equals(EditingWindow.HELP_OPTION)) {
-				window.displayNumberError("Hier entsteht ein Hilfefenster!\nCurrently under maintenance!");
 			}
 
 		}

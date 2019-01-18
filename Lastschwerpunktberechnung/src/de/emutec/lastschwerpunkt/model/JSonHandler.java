@@ -98,14 +98,14 @@ public class JSonHandler {
 			for (int i = 0; i < array.size(); i++) {
 				JsonElement buildings = array.get(i);
 				Data data = gson.fromJson(buildings, Building.class);
-				DataCollection.INSTANCE.insertData(data, MainWindowConstants.ADD_BUILDING);
+				DataCollection.INSTANCE.insertData(data);
 			}
 			break;
 		case SECTOR:
 			for (int i = 0; i < array.size(); i++) {
 				JsonElement sectors = array.get(i);
 				Data data = gson.fromJson(sectors, Sector.class);
-				DataCollection.INSTANCE.insertData(data, MainWindowConstants.ADD_SECTOR);
+				DataCollection.INSTANCE.insertData(data);
 			}
 			break;
 		default:

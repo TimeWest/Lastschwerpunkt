@@ -2,14 +2,15 @@ package de.emutec.lastschwerpunkt.model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -17,7 +18,6 @@ import de.emutec.lastschwerpunkt.model.calculation.Calculator;
 import de.emutec.lastschwerpunkt.model.data.Building;
 import de.emutec.lastschwerpunkt.model.data.Data;
 import de.emutec.lastschwerpunkt.model.data.Sector;
-import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
 /**
  * This Enumeration is storing data (buildings/sectors) that have been created
@@ -41,7 +41,6 @@ public enum DataCollection {
 		tree = new JTree(treeModel);
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.setRootVisible(false);
-		tree.addTreeSelectionListener(new MyTreeSelectionListener());
 	}
 
 	/**
@@ -72,13 +71,15 @@ public enum DataCollection {
 	 */
 	private void insertBuilding(Object data) {
 		Sector sector = ((Building) data).getSector();
+
 		boolean success = false;
 		Object[] sectors = getObjectsOfClass(Sector.class);
 		for (int i = 0; i < root.getChildCount(); i++) {
 
 			if (sectors[i] == sector) {
-				treeModel.insertNodeInto(new DefaultMutableTreeNode(data, false),
-						(DefaultMutableTreeNode) root.getChildAt(i), i);
+				DefaultMutableTreeNode sectorNode = (DefaultMutableTreeNode) root.getChildAt(i);
+				treeModel.insertNodeInto(new DefaultMutableTreeNode(data, false), sectorNode,
+						sectorNode.getChildCount());
 				success = true;
 				break;
 			}
@@ -86,6 +87,7 @@ public enum DataCollection {
 
 		if (!success) {
 			treeModel.insertNodeInto(new DefaultMutableTreeNode(data), root, root.getChildCount());
+			((Building) data).setSector(root.getUserObject());
 		}
 	}
 
@@ -120,27 +122,21 @@ public enum DataCollection {
 	 * @param data
 	 * @param command
 	 */
-	public void insertData(Object data, String command) {
+	public void insertData(Object data) throws IllegalArgumentException {
 		if (data == null) {
 			System.out.println("Abbruch");
 			return;
 		}
-		switch (command) {
-		case MainWindowConstants.EDIT_DATA:
-			break;
-		case MainWindowConstants.ADD_BUILDING:
-			insertBuilding(data);
-			break;
-		case MainWindowConstants.ADD_SECTOR:
-			insertSector(data);
-			break;
-		case MainWindowConstants.DELETE_DATA:
-			break;
-		default:
 
-			break;
+		if (data instanceof Building) {
+			insertBuilding(data);
+		} else if (data instanceof Sector) {
+			insertSector(data);
+		} else {
+			throw new IllegalArgumentException();
 		}
-		reload(data);
+		
+//		reload(data);
 		System.out.println("Dieses Objekt kam zurück: " + data + "\nKlasse: " + data.getClass());
 	}
 
@@ -148,16 +144,18 @@ public enum DataCollection {
 		// TODO Notification for Map and painting on it
 		@Override
 		public void treeNodesChanged(TreeModelEvent e) {
-
+			System.out.println("DataCollection: treeNodesChanged:\n" + e);
 		}
 
 		@Override
 		public void treeNodesInserted(TreeModelEvent e) {
+			System.out.println("DataCollection: treeNodesInserted:\n" + e);
+			// Expand TreePath to inserted node
 			DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) e.getTreePath().getLastPathComponent();
 			int index = e.getChildIndices()[0];
 			DefaultMutableTreeNode node = (DefaultMutableTreeNode) parentNode.getChildAt(index);
 			Data data = (Data) node.getUserObject();
-			
+
 			if (data instanceof Building) {
 				Object[] result = Calculator.calculate(parentNode);
 				System.out.println(result[0]);
@@ -167,22 +165,37 @@ public enum DataCollection {
 
 		@Override
 		public void treeNodesRemoved(TreeModelEvent e) {
-
+			System.out.println("DataCollection: treeNodesRemoved:\n" + e);
 		}
 
 		@Override
 		public void treeStructureChanged(TreeModelEvent e) {
-		}
-
-	}
-	
-	private class MyTreeSelectionListener implements TreeSelectionListener{
-
-		@Override
-		public void valueChanged(TreeSelectionEvent e) {
-			// TODO Auto-generated method stub
-			
+			System.out.println("DataCollection: treeStructureChanged:\n" + e);
 		}
 		
 	}
+
+	public void editData(Object newData, Object oldData) {
+		// TODO implement editData
+		System.out.println("TODO: implement editData");
+		Enumeration<TreeNode> e = ((DefaultMutableTreeNode) treeModel.getRoot()).breadthFirstEnumeration();
+		while (e.hasMoreElements()) {
+			DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) e.nextElement();
+			if (treeNode.toString().equals(oldData.toString())) {
+				((DefaultMutableTreeNode) treeModel.getChild(treeNode.getParent(), treeNode.getParent().getIndex(treeNode))).setUserObject(newData);
+				
+				
+				//treeModel.insertNodeInto(new DefaultMutableTreeNode(newData), (DefaultMutableTreeNode) treeNode.getParent(), treeNode.getParent().getIndex(treeNode));
+				break;
+			}
+			
+		}
+
+	}
+
+	public void deleteData(Object data) {
+		// TODO implement deleteData
+		System.out.println("TODO: implement deleteData");
+	}
+
 }

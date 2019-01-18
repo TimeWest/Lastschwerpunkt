@@ -15,27 +15,41 @@ public class Building extends Data {
 	private double load;
 	private Sector sector;
 
+	/**
+	 * default constructor creates a building without useful values to be filled
+	 */
 	public Building() {
 		// Basic initialization of a building
-		this.setName("");
-		this.setNumber(0);
-		this.setLoad(0d);
-		this.setGlf(0d);
-		this.setActive(false);
-		this.coordinates = new Point2D.Double();
-		this.setDescription("");
+		this("", 0, 0d, new Point2D.Double(), 0d, "", null, false);
 	}
-	
-	public Building(String name, int number, double load, Point2D coordinates, Sector sector) {
+
+	/**
+	 * 
+	 * @param name
+	 * @param number
+	 * @param load
+	 * @param coordinates
+	 * @param glf
+	 * @param description
+	 * @param sector
+	 * @param active
+	 * 
+	 */
+	public Building(String name, int number, double load, Point2D coordinates, double glf, String description,
+			Sector sector, boolean active) {
 		setName(name);
 		setNumber(number);
 		setLoad(load);
-		this.coordinates = new Point2D.Double();
 		setCoordinates(coordinates);
-		setGlf(0.8);
-		setDescription("");
+		setGlf(glf);
+		setDescription(description);
 		setSector(sector);
-		setActive(true);
+		setActive(active);
+	}
+
+	public Building(Building b) {
+		this(b.getName(), b.getNumber(), b.getLoad(), b.getCoordinates(), b.getGlf(), b.getDescription(), b.getSector(),
+				b.isActive());
 	}
 
 	/**
@@ -90,9 +104,7 @@ public class Building extends Data {
 	 *            the coordinates to set
 	 */
 	public void setCoordinates(Point2D p) {
-		this.coordinates.setLocation(p);
-//		this.coordinates.x = (int) p.getX();
-//		this.coordinates.y = (int) p.getY();
+		this.coordinates = new Point2D.Double(p.getX(), p.getY());
 	}
 
 	/**
@@ -120,7 +132,7 @@ public class Building extends Data {
 	}
 
 	/**
-	 * @param  object
+	 * @param object
 	 *            the sector to set
 	 */
 	public void setSector(Object object) {
@@ -138,7 +150,5 @@ public class Building extends Data {
 		// TODO later: Auto-generated method stub
 		return false;
 	}
-	
-	
 
 }

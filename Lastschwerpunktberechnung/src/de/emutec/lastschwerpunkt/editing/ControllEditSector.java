@@ -13,13 +13,13 @@ public class ControllEditSector implements ControllEditWindow {
 	EditSector window;
 	Sector data;
 
-	public ControllEditSector(String command, Object data) {
+	public ControllEditSector(Object data) {
 		
 		window = new EditSector();
 		window.addButtonListener(new ButtonListener());
 		
-		if (command == MainWindowConstants.EDIT_DATA) {
-			this.data = (Sector) data;
+		if (data != null) {
+			this.data = new Sector((Sector) data);
 			edit();
 		} else {
 			this.data = new Sector();

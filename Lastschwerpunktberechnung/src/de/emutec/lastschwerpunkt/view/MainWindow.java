@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -25,12 +26,15 @@ import de.emutec.lastschwerpunkt.model.DataCollection;
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 
-	private JButton btnAddBuilding;
 	private JButton btnAddSector;
 	private JButton btnAddImage;
 	private JButton btnDelData;
 	private JButton btnEditData;
 
+	private JButton btnAddBuilding;
+	private JButton btnScaleUp;
+	private JButton btnScaleDown;
+	
 	private JLabel imageLabel;
 
 	private JScrollPane imageScrollPane;
@@ -59,7 +63,7 @@ public class MainWindow extends JFrame {
 		this.setMinimumSize(new Dimension(800, 600));
 		this.setExtendedState(MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		
 		// Set the main parts of the window
 		mainMenuBar = new JMenuBar();
 		this.setJMenuBar(mainMenuBar);
@@ -68,8 +72,8 @@ public class MainWindow extends JFrame {
 		this.panelNavigation = new JPanel();
 		this.getContentPane().add(panelNavigation, BorderLayout.WEST);
 
-		panelMap = new JPanel();
-		this.getContentPane().add(panelMap);
+		this.panelMap = new JPanel();
+		this.getContentPane().add(panelMap, BorderLayout.CENTER);
 
 		// Setting up the menu bar
 		menu = new JMenu("Datei");
@@ -141,6 +145,14 @@ public class MainWindow extends JFrame {
 		btnAddImage = new JButton(MainWindowConstants.ADD_IMAGE);
 		btnAddImage.setActionCommand(MainWindowConstants.ADD_IMAGE);
 		toolBar.add(btnAddImage);
+		
+		btnScaleUp = new JButton("+");
+		btnScaleUp.setActionCommand("+");
+		toolBar.add(btnScaleUp);
+		
+		btnScaleDown = new JButton("-");
+		btnScaleDown.setActionCommand("-");
+		toolBar.add(btnScaleDown);
 
 		imageLabel = new JLabel();
 		imageScrollPane = new JScrollPane(imageLabel);
@@ -150,6 +162,11 @@ public class MainWindow extends JFrame {
 
 	public void btnChooseImage(ActionListener a) {
 		btnAddImage.addActionListener(a);
+	}
+	
+	public void btnScaleImage(ActionListener a) {
+		btnScaleUp.addActionListener(a);
+		btnScaleDown.addActionListener(a);
 	}
 
 	public void buttonListener(ActionListener a) {
@@ -170,6 +187,10 @@ public class MainWindow extends JFrame {
 
 	public void setImage(BufferedImage image) {
 		imageLabel.setIcon(new ImageIcon(image));
+	}
+	
+	public void mapPosition(MouseListener l) {
+		imageLabel.addMouseListener(l);
 	}
 
 }

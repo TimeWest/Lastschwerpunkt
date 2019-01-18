@@ -54,7 +54,7 @@ public class EditBuilding extends EditingWindow {
 		contentPanel.add(new JLabel("Position"), gbc);
 
 		btnNeuSetzen = new JButton("Im Lageplan markieren");
-		contentPanel.add(btnNeuSetzen, gbc);
+		contentPanel.add(btnNeuSetzen, gbc);	
 
 		gbc.gridx = 0;
 		contentPanel.add(new JLabel("Gebäudenummer"), gbc);
@@ -95,7 +95,12 @@ public class EditBuilding extends EditingWindow {
 		contentPanel.add(new JLabel("Sektor"), gbc);
 
 		gbc.gridx = 1;
-		cmbobox = new JComboBox<>(DataCollection.INSTANCE.getObjectsOfClass(Sector.class));
+		Object[] sectors = DataCollection.INSTANCE.getObjectsOfClass(Sector.class);
+		String[] strings = new String[sectors.length];
+		for (int i = 0; i < sectors.length; i++) {
+			strings[i] = sectors[i].toString();
+		}
+		cmbobox = new JComboBox<>(strings);
 		contentPanel.add(cmbobox, gbc);
 
 		gbc.gridx = 0;
@@ -175,7 +180,7 @@ public class EditBuilding extends EditingWindow {
 	 * @param object
 	 *            the sector the building is located in
 	 */
-	public void setSelectedSector(Object object) {
+	public void setSelectedSector(String object) {
 		this.cmbobox.setSelectedItem(object);
 	}
 

@@ -18,9 +18,9 @@ class CalculatorTest {
 	@Test
 	void testCalculate() {
 		Sector test = new Sector("Test", 1, Color.BLACK);
-		Building b1 = new Building("Test 1", 1, 20, new Point(10,100), test);
-		Building b2 = new Building("Test 2", 2, 10, new Point(25,7), test);
-		Building b3 = new Building("Test 3", 3, 70, new Point(102,55), test);
+		Building b1 = new Building("Test 1", 1, 20, new Point(10,100), 0, null, test, true);
+		Building b2 = new Building("Test 2", 2, 10, new Point(25,7), 0, null, test, true);
+		Building b3 = new Building("Test 3", 3, 70, new Point(102,55), 0, null, test, true);
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode(test);
 		root.add(new DefaultMutableTreeNode(b1));
 		root.add(new DefaultMutableTreeNode(b2));
