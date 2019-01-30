@@ -3,11 +3,9 @@ package de.emutec.lastschwerpunkt.editing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import de.emutec.lastschwerpunkt.model.DataCollection;
 import de.emutec.lastschwerpunkt.model.data.Sector;
 import de.emutec.lastschwerpunkt.view.EditSector;
 import de.emutec.lastschwerpunkt.view.EditingWindow;
-import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
 public class ControllEditSector implements ControllEditWindow {
 	EditSector window;

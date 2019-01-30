@@ -18,6 +18,7 @@ public class Calculator {
 	 */
 	public static Object[] calculate(DefaultMutableTreeNode sector) {
 		// zu späterem Zeitpunkt mit rekursivem Aufruf über Abfrage, ob Kindknoten vorhanden sind.
+		// machbar mit Enumeration von sector.children()
 		Point2D schwerpunkt = new Point2D.Double();
 		double loadSum = 0;
 		for (int i = 0; i < sector.getChildCount(); i++) {

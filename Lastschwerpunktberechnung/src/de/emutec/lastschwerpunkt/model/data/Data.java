@@ -1,6 +1,6 @@
 package de.emutec.lastschwerpunkt.model.data;
 
-import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  * Base class for data Objects "Building" and "Sector"
@@ -14,13 +14,26 @@ public abstract class Data {
 		return data.getClass();
 	}
 
-	ArrayList<Data> children;
 	String name;
 	int number;
 
-	Data parent;
+	DefaultMutableTreeNode parent;
 
-	public abstract boolean equals(Object o);
+/*	public abstract boolean equals(Object o);*/
+
+	/**
+	 * @return the parent
+	 */
+	public DefaultMutableTreeNode getParent() {
+		return parent;
+	}
+
+	/**
+	 * @param parent the parent to set
+	 */
+	public void setParent(DefaultMutableTreeNode parent) {
+		this.parent = parent;
+	}
 
 	/**
 	 * @return an instance of the data
@@ -43,7 +56,7 @@ public abstract class Data {
 		return number;
 	}
 
-	public abstract int hashCode();
+/*	public abstract int hashCode();*/
 
 	/**
 	 * @param name

@@ -9,7 +9,6 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
@@ -41,6 +40,7 @@ public enum DataCollection {
 		tree = new JTree(treeModel);
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		tree.setRootVisible(false);
+		ExampleData.insert(treeModel);
 	}
 
 	/**
@@ -70,14 +70,15 @@ public enum DataCollection {
 	 * @param data
 	 */
 	private void insertBuilding(Object data) {
-		Sector sector = ((Building) data).getSector();
+		DefaultMutableTreeNode sectorNode = ((Building) data).getParent();
+		Sector sector = (Sector) sectorNode.getUserObject();
 
 		boolean success = false;
 		Object[] sectors = getObjectsOfClass(Sector.class);
 		for (int i = 0; i < root.getChildCount(); i++) {
 
 			if (sectors[i] == sector) {
-				DefaultMutableTreeNode sectorNode = (DefaultMutableTreeNode) root.getChildAt(i);
+//				DefaultMutableTreeNode sectorNode = (DefaultMutableTreeNode) root.getChildAt(i);
 				treeModel.insertNodeInto(new DefaultMutableTreeNode(data, false), sectorNode,
 						sectorNode.getChildCount());
 				success = true;
@@ -87,7 +88,7 @@ public enum DataCollection {
 
 		if (!success) {
 			treeModel.insertNodeInto(new DefaultMutableTreeNode(data), root, root.getChildCount());
-			((Building) data).setSector(root.getUserObject());
+			((Building) data).setParent(root);
 		}
 	}
 
@@ -117,6 +118,7 @@ public enum DataCollection {
 		return returnValue.toArray();
 	}
 
+	
 	/**
 	 * 
 	 * @param data
@@ -178,6 +180,11 @@ public enum DataCollection {
 	public void editData(Object newData, Object oldData) {
 		// TODO implement editData
 		System.out.println("TODO: implement editData");
+		if (newData == null) {
+			System.out.println("Edit: Abbruch");
+			return;
+		}
+		
 		Enumeration<TreeNode> e = ((DefaultMutableTreeNode) treeModel.getRoot()).breadthFirstEnumeration();
 		while (e.hasMoreElements()) {
 			DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) e.nextElement();

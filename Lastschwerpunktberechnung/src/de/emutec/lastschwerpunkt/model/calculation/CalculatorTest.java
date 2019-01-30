@@ -17,15 +17,14 @@ class CalculatorTest {
 	
 	@Test
 	void testCalculate() {
-		Sector test = new Sector("Test", 1, Color.BLACK);
-		Building b1 = new Building("Test 1", 1, 20, new Point(10,100), 0, null, test, true);
-		Building b2 = new Building("Test 2", 2, 10, new Point(25,7), 0, null, test, true);
-		Building b3 = new Building("Test 3", 3, 70, new Point(102,55), 0, null, test, true);
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode(test);
-		root.add(new DefaultMutableTreeNode(b1));
-		root.add(new DefaultMutableTreeNode(b2));
-		root.add(new DefaultMutableTreeNode(b3));
-		assertArrayEquals(new Object[] {new Point2D.Double(75.9, 59.2), 100d}, Calculator.calculate(root));
+		DefaultMutableTreeNode test = new DefaultMutableTreeNode(new Sector("Test", 1, Color.BLACK));
+		DefaultMutableTreeNode b1 = new DefaultMutableTreeNode(new Building("Test 1", 1, 20, new Point(10,100), 0, null, test, true));
+		DefaultMutableTreeNode b2 = new DefaultMutableTreeNode(new Building("Test 2", 2, 10, new Point(25,7), 0, null, test, true));
+		DefaultMutableTreeNode b3 = new DefaultMutableTreeNode(new Building("Test 3", 3, 70, new Point(102,55), 0, null, test, true));
+		test.add(b1);
+		test.add(b2);
+		test.add(b3);
+		assertArrayEquals(new Object[] {new Point2D.Double(75.9, 59.2), 100d}, Calculator.calculate(test));
 	}
 
 }

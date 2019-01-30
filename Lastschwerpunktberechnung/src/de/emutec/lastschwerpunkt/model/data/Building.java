@@ -2,6 +2,8 @@ package de.emutec.lastschwerpunkt.model.data;
 
 import java.awt.geom.Point2D;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  * @author Timo.Nordhorn
  *
@@ -13,7 +15,7 @@ public class Building extends Data {
 	private String description;
 	private double glf;
 	private double load;
-	private Sector sector;
+	private DefaultMutableTreeNode sector;
 
 	/**
 	 * default constructor creates a building without useful values to be filled
@@ -36,19 +38,19 @@ public class Building extends Data {
 	 * 
 	 */
 	public Building(String name, int number, double load, Point2D coordinates, double glf, String description,
-			Sector sector, boolean active) {
+			DefaultMutableTreeNode sector, boolean active) {
 		setName(name);
 		setNumber(number);
 		setLoad(load);
 		setCoordinates(coordinates);
 		setGlf(glf);
 		setDescription(description);
-		setSector(sector);
+		setParent(sector);
 		setActive(active);
 	}
 
 	public Building(Building b) {
-		this(b.getName(), b.getNumber(), b.getLoad(), b.getCoordinates(), b.getGlf(), b.getDescription(), b.getSector(),
+		this(b.getName(), b.getNumber(), b.getLoad(), b.getCoordinates(), b.getGlf(), b.getDescription(), b.getParent(),
 				b.isActive());
 	}
 
@@ -81,7 +83,7 @@ public class Building extends Data {
 	 * @return the sector
 	 */
 	public Sector getSector() {
-		return sector;
+		return (Sector) parent.getUserObject();
 	}
 
 	/**
@@ -135,11 +137,11 @@ public class Building extends Data {
 	 * @param object
 	 *            the sector to set
 	 */
-	public void setSector(Object object) {
-		this.sector = (Sector) object;
+	public void setSector(Sector object) {
+		setParent(new DefaultMutableTreeNode(object));
 	}
 
-	@Override
+/*	@Override
 	public int hashCode() {
 		// TODO later: Auto-generated method stub
 		return 0;
@@ -149,6 +151,6 @@ public class Building extends Data {
 	public boolean equals(Object o) {
 		// TODO later: Auto-generated method stub
 		return false;
-	}
+	}*/
 
 }

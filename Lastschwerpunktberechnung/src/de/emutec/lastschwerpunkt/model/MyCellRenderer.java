@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
+@SuppressWarnings("serial")
 public class MyCellRenderer<E> extends JLabel implements ListCellRenderer<E> {
 
 	@Override

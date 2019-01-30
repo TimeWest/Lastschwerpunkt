@@ -11,18 +11,17 @@ public enum ProjectConstants {
 
 	private Properties props = new Properties();
 
-	public File getProjectPath() {
-		File file = new File(props.getProperty("path"));
-		if(file.exists()) {
+	public File getProjectFile() {
+		try {
+			return new File(props.getProperty("path"));
+		} catch (Exception e) {
 			return setProjectPath();
-		}
-		else{
-			return file;
 		}
 	}
 
-	public void setProjectPath(File file) {
+	public File setProjectPath(File file) {
 		props.setProperty("path", file.getAbsolutePath());
+		return new File(props.getProperty("path"));
 	}
 
 	public File setProjectPath() {
@@ -33,9 +32,7 @@ public enum ProjectConstants {
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		int returnValue = chooser.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File file = chooser.getSelectedFile();
-			setProjectPath(file);
-			return file;
+			return setProjectPath(chooser.getSelectedFile());
 		}
 		return null;
 	}

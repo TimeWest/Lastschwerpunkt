@@ -2,10 +2,13 @@ package de.emutec.lastschwerpunkt.model.data;
 
 public class DataFactory {
 
+	private static final String BUILDING = "building";
+	private static final String SECTOR = "sector";
+
 	private DataFactory() {
 	}
 
-	public static Data getInstance(DataType type) {
+	public static Data getInstance(String type) {
 
 		switch (type) {
 		case BUILDING:

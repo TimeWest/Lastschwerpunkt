@@ -32,14 +32,14 @@ public class MenuController {
 			// save project
 			if (e.getActionCommand().equals(MainWindowConstants.SAVE_PROJECT)) {
 				converter = new JSonHandler();
-				converter.saveToFile();
+				converter.saveToFile2();
 				converter = null;
 			}
 			// save project as
 			if (e.getActionCommand().equals(MainWindowConstants.SAVE_PROJECT_AS)) {
 				converter = new JSonHandler();
 				converter.setNewPath();
-				converter.saveToFile();
+				converter.saveToFile2();
 				converter = null;
 			}
 			// load project (from filesystem)
@@ -52,7 +52,7 @@ public class MenuController {
 			if (e.getActionCommand().equals(MainWindowConstants.NEW_PROJECT)) {
 				// TODO open JFileChooser with option to type in the name for the project
 				ProjectConstants.INSTANCE.setProjectPath();
-				System.out.println(ProjectConstants.INSTANCE.getProjectPath());
+				System.out.println(ProjectConstants.INSTANCE.getProjectFile());
 			}
 			// open help dialog/manual
 			if (e.getActionCommand().equals(MainWindowConstants.HELP)) {

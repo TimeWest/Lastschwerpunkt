@@ -8,7 +8,6 @@ import de.emutec.lastschwerpunkt.model.data.Building;
 import de.emutec.lastschwerpunkt.model.data.Sector;
 import de.emutec.lastschwerpunkt.view.EditBuilding;
 import de.emutec.lastschwerpunkt.view.EditingWindow;
-import de.emutec.lastschwerpunkt.view.MainWindowConstants;
 
 public class ControllEditBuilding implements ControllEditWindow {
 
